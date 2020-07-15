@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 const SignupForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -11,16 +13,31 @@ const SignupForm = () => {
     setInputState(event.target.value)
   }
 
-  const handleSignupFormSubmit = (event) => {
+  const handleSignupFormSubmit = async (event) => {
     event.preventDefault();
+
     const formData = {
       firstName,
       lastName,
       email,
       password,
-      confirmPassword
+      // confirmPassword
     };
-    console.log(formData)
+
+    try {
+      const res = await axios.post('/users/register', formData)
+      console.log(res)
+      localStorage.setItem('jwt', res.data.token)
+    } catch (error) {
+
+      console.error(error)
+      if (error.response.data.errors) {
+        error.response.data.errors.forEach((e) => {
+          M.toast({html: `${e.param}: ${e.msg}`, displayLength: 1000 * 60})
+        })
+      }
+    }
+
   }
 
   return (
