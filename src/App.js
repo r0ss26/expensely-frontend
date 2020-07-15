@@ -6,13 +6,11 @@ import Navbar from './components/layout/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Route exact path="/signup" component={Signupform} />
-        <Route exact path="/login" component={LoginForm} />
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Route exact path="/signup" component={Signupform} />
+      <Route exact path="/login" component={LoginForm} />
+    </BrowserRouter>
   );
 }
 
