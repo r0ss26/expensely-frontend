@@ -1,4 +1,4 @@
-//what happens in state based on reducer
+//reducer - what happens in state 
 import {
     GET_USER,
     REGISTER_SUCCESS,
@@ -35,7 +35,7 @@ export default (state, action) => {
         case LOGOUT:
         case AUTH_ERROR:
             localStorage.removeItem("token")
-            console.log("error payload", action.payload)
+            //console.log("error payload", action.payload)
             return {
                 ...state,
                 token: null,

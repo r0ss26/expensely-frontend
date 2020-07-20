@@ -10,7 +10,7 @@ const LoginForm = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push("/")
+      props.history.push("/dashboard")
     }
     if (error) {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })

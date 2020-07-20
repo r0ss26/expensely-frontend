@@ -21,7 +21,7 @@ const SignupForm = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/')
+      props.history.push('/dashboard')
     }
 
     if (error) {
