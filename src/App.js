@@ -5,17 +5,27 @@ import SignupForm from './components/Forms/SignupForm';
 import LoginForm from './components/Forms/LoginForm';
 import Home from './components/pages/Home'
 import Navbar from './components/layout/Navbar';
-import Dashboard from './components/Dashboard/Dashboard'
+import AuthState from './context/auth/AuthState'
+import PrivateRoute from './components/routing/PrivateRoute'
+import PublicRoute from './components/routing/PublicRoute'
+import Dashboard from './components/pages/Dashboard';
+
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/signup" component={Signupform} />
-      <Route exact path="/login" component={LoginForm} />
-    </BrowserRouter>
+    <AuthState>
+      <Router>
+        <Navbar />
+        <Switch>
+          <PublicRoute restricted={false} exact path="/" component={Home} />
+          <PublicRoute restricted={true} exact path="/signup" component={SignupForm} />
+          <PublicRoute restricted={true} exact path="/login" component={LoginForm} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        </Switch>
+      </Router>
+    </AuthState>
+
   );
 }
 
