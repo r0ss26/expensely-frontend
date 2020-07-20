@@ -1,7 +1,23 @@
-import React, { useState } from "react";
-import axios from 'axios'
+import React, { useState, useContext, useEffect } from "react";
+import AuthContext from '../../context/auth/authContext'
+import M from 'materialize-css/dist/js/materialize.min.js';
 
-const LoginSignup = () => {
+const LoginForm = (props) => {
+
+  const authContext = useContext(AuthContext)
+
+  const { isAuthenticated, login, error } = authContext
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/dashboard")
+    }
+    if (error) {
+      M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
+    }
+  }, [isAuthenticated, props.history, error])
+
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -9,19 +25,14 @@ const LoginSignup = () => {
     setInputState(event.target.value)
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = {
-      email,
-      password
-    }
+  const formData = {
+    email,
+    password
+  }
 
-    try {
-      const res = await axios.post('/auth/login', formData)
-      localStorage.setItem('jwt', res.data.token)
-    } catch (error) {
-      console.error(error)
-    }
+  const handleSubmit = event => {
+    event.preventDefault();
+    login(formData)
   }
 
   return (
@@ -31,13 +42,13 @@ const LoginSignup = () => {
         <form onSubmit={handleSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s12">
-              <input onChange={(event) => handleInput(event, setEmail)} value={email} id="email" type="email" className="validate" />
+              <input onChange={(event) => handleInput(event, setEmail)} value={email} name="email" type="email" className="validate" />
               <label htmlFor="email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input onChange={(event) => handleInput(event, setPassword)} value={password} id="password" type="password" className="validate" />
+              <input onChange={(event) => handleInput(event, setPassword)} value={password} name="password" type="password" className="validate" />
               <label htmlFor="password">Password</label>
             </div>
           </div>
@@ -50,4 +61,4 @@ const LoginSignup = () => {
   )
 };
 
-export default LoginSignup;
+export default LoginForm;

@@ -1,41 +1,51 @@
-import React, { useState } from "react";
-import axios from "axios";
-import M from 'materialize-css/dist/js/materialize.min.js'
+import React, { useState, useContext, useEffect } from "react";
+import AuthContext from '../../context/auth/authContext'
+// import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
-const SignupForm = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+const SignupForm = (props) => {
 
-  const handleInput = (event, setInputState) => {
-    setInputState(event.target.value)
-  }
+  const authContext = useContext(AuthContext)
 
-  const handleSignupFormSubmit = async (event) => {
+  const { register, isAuthenticated, error } = authContext
+
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const { firstName, lastName, email, password, confirmPassword } = user
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/dashboard')
+    }
+
+    if (error) {
+      M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
+    }
+  }, [isAuthenticated, props.history, error])
+
+
+  const handleInput = e => setUser({ ...user, [e.target.name]: e.target.value })
+
+  const formData = {
+    firstName,
+    lastName,
+    email,
+    password,
+  };
+
+  const handleSignupFormSubmit = event => {
     event.preventDefault();
 
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      // confirmPassword
-    };
-
-    try {
-      const res = await axios.post('/users/register', formData)
-      console.log(res)
-      localStorage.setItem('jwt', res.data.token)
-    } catch (error) {
-
-      console.error(error)
-      if (error.response.data.errors) {
-        error.response.data.errors.forEach((e) => {
-          M.toast({html: `${e.param}: ${e.msg}`, displayLength: 1000 * 60})
-        })
-      }
+    if (password !== confirmPassword) {
+      M.toast({ html: "Passwords do not match", displayLength: 4000, classes: "red" })
+    } else {
+      register(formData)
     }
 
   }
@@ -46,29 +56,29 @@ const SignupForm = () => {
         <form onSubmit={handleSignupFormSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s6">
-              <input required value={firstName} onChange={(event) => handleInput(event, setFirstName)} id="first_name" type="text" className="validate" />
-              <label htmlFor="first_name">First Name</label>
+              <label htmlFor="firstName">First Name</label>
+              <input required value={firstName} onChange={handleInput} type="text" name="firstName" className="validate" />
             </div>
             <div className="input-field col s6">
-              <input required value={lastName} onChange={(event) => handleInput(event, setLastName)} id="last_name" type="text" className="validate" />
+              <input required value={lastName} onChange={handleInput} name="lastName" type="text" className="validate" />
               <label htmlFor="last_name">Last Name</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input required value={email} onChange={(event) => handleInput(event, setEmail)} id="email" type="email" className="validate" />
+              <input required value={email} onChange={handleInput} name="email" type="email" className="validate" />
               <label htmlFor="email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input required value={password} onChange={(event) => handleInput(event, setPassword)} id="password" type="password" className="validate" />
+              <input required value={password} onChange={handleInput} name="password" type="password" className="validate" minLength='6' />
               <label htmlFor="password">Password</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input required value={confirmPassword} onChange={(event) => handleInput(event, setConfirmPassword)} id="confirm-password" type="password" className="validate" />
+              <input required value={confirmPassword} onChange={handleInput} name="confirmPassword" type="password" className="validate" />
               <label htmlFor="confirm-password">Confirm Password</label>
             </div>
           </div>
