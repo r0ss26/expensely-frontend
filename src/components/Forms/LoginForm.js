@@ -1,19 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from '../../context/auth/authContext'
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const LoginForm = (props) => {
 
   const authContext = useContext(AuthContext)
 
-  console.log("auth context in login", authContext)
-
-  const { isAuthenticated, login } = authContext
+  const { isAuthenticated, login, error } = authContext
 
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push("/")
     }
-  }, [isAuthenticated, props.history])
+    if (error) {
+      M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
+    }
+  }, [isAuthenticated, props.history, error])
 
 
   const [email, setEmail] = useState('')
@@ -30,7 +32,6 @@ const LoginForm = (props) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("formData", formData)
     login(formData)
   }
 
@@ -41,13 +42,13 @@ const LoginForm = (props) => {
         <form onSubmit={handleSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s12">
-              <input onChange={(event) => handleInput(event, setEmail)} value={email} id="email" type="email" className="validate" />
+              <input onChange={(event) => handleInput(event, setEmail)} value={email} name="email" type="email" className="validate" />
               <label htmlFor="email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input onChange={(event) => handleInput(event, setPassword)} value={password} id="password" type="password" className="validate" />
+              <input onChange={(event) => handleInput(event, setPassword)} value={password} name="password" type="password" className="validate" />
               <label htmlFor="password">Password</label>
             </div>
           </div>

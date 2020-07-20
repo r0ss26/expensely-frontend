@@ -11,7 +11,8 @@ import {
     GET_USER,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    AUTH_ERROR
+    AUTH_ERROR,
+    CLEAR_ERRORS
 } from '../types'
 
 
@@ -20,8 +21,8 @@ const AuthState = props => {
     const initialState = {
         token: localStorage.getItem("token"),
         isAuthenticated: false,
-        //loading: true,
-        //error: null,
+        loading: true,
+        error: null,
         user: null
     }
 
@@ -29,12 +30,10 @@ const AuthState = props => {
     const [state, dispatch] = useReducer(authReducer, initialState)
 
     //get user after register/login
-
     const getUser = async () => {
-        //  console.log("getUser")
 
         //load token into headers
-        console.log("token", localStorage.token)
+        //  console.log("token", localStorage.token)
         if (localStorage.token) {
             setToken(localStorage.token)
         }
@@ -59,14 +58,13 @@ const AuthState = props => {
 
         try {
             const res = await axios.post('/users/register', formData)
-            console.log(res.data)
-            // localStorage.setItem('jwt', res.data.token)
 
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
             })
 
+            //get user after register
             getUser()
 
         } catch (error) {
@@ -82,21 +80,14 @@ const AuthState = props => {
     //login user
     const login = async formData => {
 
-        // const config = {
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // }
-
         try {
             const res = await axios.post('/auth/login', formData)
-            localStorage.setItem('token', res.data.token)
-            console.log("login action", res)
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data
             })
 
+            //get user after login
             getUser()
 
         } catch (error) {
@@ -115,6 +106,12 @@ const AuthState = props => {
         })
     }
 
+    //clear errors
+    const clearErrors = () => {
+        dispatch({
+            type: CLEAR_ERRORS
+        })
+    }
 
 
     //wrap the app with the auth provider
@@ -124,11 +121,13 @@ const AuthState = props => {
             token: state.token,
             isAuthenticated: state.isAuthenticated,
             user: state.user,
-            //loading: state.loading,
+            loading: state.loading,
+            error: state.error,
             register,
             logout,
             getUser,
-            login
+            login,
+            clearErrors
         }}>
         {props.children}
     </AuthContext.Provider>

@@ -8,11 +8,13 @@ const Navbar = () => {
   const authContext = useContext(AuthContext)
 
   //console.log("navbar", authContext)
-  const { isAuthenticated, user, logout} = authContext
+  const { isAuthenticated, user, logout, getUser } = authContext
 
   useEffect(() => {
+    getUser()
     const elems = document.querySelectorAll('.sidenav');
     const instances = Sidenav.init(elems, {});
+    // eslint-disable-next-line
   }, [])
 
   const onLogout = () => {
@@ -22,7 +24,7 @@ const Navbar = () => {
   const authLinks = (
     <>
       <li>Hello {user && user.firstName}</li>
-      <li><Link className="btn" to="logout" onClick={onLogout}>Logout</Link></li>
+      <li><Link className="btn" to="/login" onClick={onLogout}>Logout</Link></li>
       {/* <i className="fas fa-sign-out-alt"></i> <span className="logout" >Logout</span> */}
     </>
   )

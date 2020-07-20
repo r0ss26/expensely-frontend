@@ -1,34 +1,32 @@
 //what happens in state based on reducer
 import {
+    GET_USER,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGOUT,
-    GET_USER,
-    AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT,
+    AUTH_ERROR,
+    CLEAR_ERRORS
 } from '../types'
 
 export default (state, action) => {
     switch (action.type) {
         case GET_USER:
-            console.log("get user payload", action.payload)
             return {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload //user data
             }
-
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
             localStorage.setItem("token", action.payload.token)
-            console.log("actionpayload", action.payload)
             return {
                 ...state,
                 //add token to state
                 ...action.payload,
                 isAuthenticated: true,
-                // loading: false
+                loading: false
             }
 
 
@@ -37,21 +35,20 @@ export default (state, action) => {
         case LOGOUT:
         case AUTH_ERROR:
             localStorage.removeItem("token")
+            console.log("error payload", action.payload)
             return {
                 ...state,
                 token: null,
                 isAuthenticated: false,
-                // loading: false,
+                loading: false,
                 user: null,
                 error: action.payload
             }
-        // case LOGOUT:
-        //     localStorage.removeItem("jwt")
-        //     return {
-        //         ...state,
-        //         isAuthenticated: false,
-        //         user: null
-        //     }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
         default:
             return state
     }
