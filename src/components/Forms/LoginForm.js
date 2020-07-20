@@ -1,7 +1,21 @@
-import React, { useState } from "react";
-import axios from 'axios'
+import React, { useState, useContext, useEffect } from "react";
+import AuthContext from '../../context/auth/authContext'
 
-const LoginSignup = () => {
+const LoginForm = (props) => {
+
+  const authContext = useContext(AuthContext)
+
+  console.log("auth context in login", authContext)
+
+  const { isAuthenticated, login } = authContext
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/")
+    }
+  }, [isAuthenticated, props.history])
+
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -9,19 +23,15 @@ const LoginSignup = () => {
     setInputState(event.target.value)
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = {
-      email,
-      password
-    }
+  const formData = {
+    email,
+    password
+  }
 
-    try {
-      const res = await axios.post('/auth/login', formData)
-      localStorage.setItem('jwt', res.data.token)
-    } catch (error) {
-      console.error(error)
-    }
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log("formData", formData)
+    login(formData)
   }
 
   return (
@@ -50,4 +60,4 @@ const LoginSignup = () => {
   )
 };
 
-export default LoginSignup;
+export default LoginForm;
