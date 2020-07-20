@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import axios from 'axios'
+import axios from 'axios';
+import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
 
 const CreateTransactionModal = () => {
-  // Set the initial transaction type to expense
+  // Default transaction type is expense
   const [transactionType, setTransactionType] = useState('expense');
 
-  const [categories, setCategories] = useState(null)
+  const [categories, setCategories] = useState([]);
 
-  const getCategories = async () => {
-    const user = await axios.get('http://localhost:5000/auth', {headers: {'Authorization': localStorage.getItem('jwt')}})
-    setCategories(user.categories)
-  }
+  // Form state
+  const [input, setInput] = useState({});
+
+  const handleInputChange = (event) =>
+    setInput({
+      ...input,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.post('/transactions', {
+        transactionType,
+        ...input,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Needed to overwrite materilize-css init, which was deleting the dynamic elements
+  useEffect(() => {
+    const select = document.querySelectorAll('select');
+    M.FormSelect.init(select);
+  }, [categories, transactionType]);
 
   useEffect(() => {
     // Required by materialize to initialize the modal
@@ -19,15 +42,31 @@ const CreateTransactionModal = () => {
     M.Modal.init(modal);
 
     // Required by materialize to initialize the DatePicker
-    const datePicker = document.querySelectorAll('.datepicker');
-    M.Datepicker.init(datePicker);
+    const datePicker = document.querySelector('.datepicker');
+    M.Datepicker.init(datePicker, {
+      onSelect: (date) => setInput({ ...input, date }),
+    });
 
-    // Required by materialize to initialize the DatePicker
+    // Required by materialize to initialize the Select
     const select = document.querySelectorAll('select');
     M.FormSelect.init(select);
 
+    const getCategories = async () => {
+      const res = await axios.get('/auth');
+      setCategories(res.data.categories);
+    };
+
     getCategories();
   }, []);
+
+  const capitalize = (string) => {
+    let splitString = string.split(' ');
+    for (let i = 0; i <= splitString.length - 1; i++) {
+      splitString[i] =
+        splitString[i].charAt(0).toUpperCase() + splitString[i].substring(1);
+    }
+    return splitString.join(' ');
+  };
 
   return (
     <>
@@ -56,31 +95,57 @@ const CreateTransactionModal = () => {
 
           <form>
             <div className="input-field col s6">
-              <input id="date" type="text" className="datepicker validate" />
+              <input
+                name="date"
+                id="date"
+                type="text"
+                className="datepicker validate"
+              />
               <label htmlFor="date">Date</label>
             </div>
 
             <div className="input-field col s6">
-              <select>
+              <select
+                name="category"
+                onChange={handleInputChange}
+                style={{ maxHeight: '50px' }}
+                size="5"
+              >
                 <option>Choose a category</option>
-                {categories && categories
-                  .filter((category) => category.type === transactionType)
-                  .map((category) => (
-                    <option value={category.name.toLowerCase()}>
-                      {category.name}
-                    </option>
-                  ))}
+                {categories &&
+                  categories
+                    .filter((category) => category.type === transactionType)
+                    .map((category) => (
+                      <option
+                        key={category._id}
+                        value={category.name.toLowerCase()}
+                      >
+                        {capitalize(category.name)}
+                      </option>
+                    ))}
               </select>
               <label>Category</label>
             </div>
 
             <div className="input-field col s6">
-              <input id="amount" type="number" className="validate" />
+              <input
+                name="amount"
+                onChange={handleInputChange}
+                id="amount"
+                type="number"
+                className="validate"
+              />
               <label htmlFor="amount">Amount ($)</label>
             </div>
 
             <div className="input-field col s6">
-              <input id="note" type="text" className="validate" />
+              <input
+                name="note"
+                onChange={handleInputChange}
+                id="note"
+                type="text"
+                className="validate"
+              />
               <label htmlFor="note">Note</label>
             </div>
           </form>
@@ -89,6 +154,7 @@ const CreateTransactionModal = () => {
           <a
             href="#!"
             className="modal-close waves-effect waves-green btn-flat"
+            onClick={handleFormSubmit}
           >
             Add Transaction
           </a>
@@ -97,10 +163,10 @@ const CreateTransactionModal = () => {
 
       <button
         style={{ position: 'absolute', bottom: '20px', right: '20px' }}
-        class="btn-floating btn-large waves-effect waves-light red modal-trigger"
+        className="btn-floating btn-large waves-effect waves-light red modal-trigger"
         data-target="modal1"
       >
-        <i class="material-icons">add</i>
+        <i className="material-icons">add</i>
       </button>
     </>
   );
