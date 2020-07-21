@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import SignupForm from './components/Forms/SignupForm';
 import LoginForm from './components/Forms/LoginForm';
 import Home from './components/pages/Home'
@@ -12,14 +12,17 @@ import Transactions from './components/pages/Transactions';
 import Categories from './components/pages/Categories';
 import Profile from './components/pages/Profile';
 import Budget from './components/pages/Budget';
+import categoryDoughnut from './components/charts/categoryDoughnut';
 
 
 function App() {
 
   return (
     <AuthState>
+
       <Router>
         <Switch>
+          <PublicRoute restricted={false} exact path='/pie' component={categoryDoughnut} />
           <PublicRoute restricted={false} exact path='/' component={Home} />
           <PublicRoute restricted={true} exact path='/signup' component={SignupForm} />
           <PublicRoute restricted={true} exact path='/login' component={LoginForm} />
