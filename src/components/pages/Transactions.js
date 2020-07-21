@@ -1,10 +1,12 @@
 import React from 'react'
 import './pageStyle.css'
+import TransactionsTable from '../TransactionsTable/TransactionsTable'
 
 const Transactions = () => {
     return (
         <div className='container-wrapper'>
-            <h1>This is show all transactions page</h1>
+            <h1 className="center-align">Your Transactions</h1>
+            <TransactionsTable />
         </div>
     )
 }
