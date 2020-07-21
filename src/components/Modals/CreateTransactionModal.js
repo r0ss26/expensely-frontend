@@ -30,7 +30,7 @@ const CreateTransactionModal = () => {
     }
   };
 
-  // Needed to overwrite materilize-css init, which was deleting the dynamic elements
+  // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
     const select = document.querySelectorAll('select');
     M.FormSelect.init(select);
@@ -51,6 +51,7 @@ const CreateTransactionModal = () => {
     const select = document.querySelectorAll('select');
     M.FormSelect.init(select);
 
+    // Store the users categories in the state
     const getCategories = async () => {
       const res = await axios.get('/auth');
       setCategories(res.data.categories);
