@@ -15,6 +15,7 @@ import {
   CLEAR_ERRORS,
   ADD_TRANSACTION_SUCCESS,
   ADD_TRANSACTION_FAIL,
+  DELETE_TRANSACTION_SUCCESS
 } from '../types';
 
 //create initial state
@@ -126,6 +127,19 @@ const AuthState = (props) => {
     }
   };
 
+  const deleteTransaction = async id => {
+    try {
+      const res = await axios.delete(`/transactions/${id}`)
+      console.log(res.data)
+      dispatch({
+        type: DELETE_TRANSACTION_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   //wrap the app with the auth provider
   return (
     <AuthContext.Provider
@@ -142,6 +156,7 @@ const AuthState = (props) => {
         login,
         clearErrors,
         addTransaction,
+        deleteTransaction
       }}
     >
       {props.children}

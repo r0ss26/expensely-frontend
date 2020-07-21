@@ -10,6 +10,7 @@ import {
   CLEAR_ERRORS,
   ADD_TRANSACTION_SUCCESS,
   ADD_TRANSACTION_FAIL,
+  DELETE_TRANSACTION_SUCCESS,
 } from '../types';
 
 export default (state, action) => {
@@ -64,6 +65,15 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
+    case DELETE_TRANSACTION_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          transactions: [...state.user.transactions.filter(transaction => transaction._id !== action.payload._id)]
+        }
+        
+      }
     default:
       return state;
   }
