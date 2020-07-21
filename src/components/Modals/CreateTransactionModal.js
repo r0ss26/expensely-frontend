@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import axios from 'axios';
 import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
 
-const CreateTransactionModal = () => {
+const CreateTransactionModal = (props) => {
+  const authContext = useContext(AuthContext);
+
+  const dateInput = useRef(null);
+
+  const { user, error, addTransaction } = authContext;
+
+  let categories = [];
+  if (user) categories = user.categories;
+
   // Default transaction type is expense
   const [transactionType, setTransactionType] = useState('expense');
 
-  const [categories, setCategories] = useState([]);
-
   // Form state
-  const [input, setInput] = useState({});
+  let initialInput = {
+    date: '',
+    category: '',
+    amount: '',
+    note: '',
+  };
+  const [input, setInput] = useState(initialInput);
 
   const handleInputChange = (event) =>
     setInput({
@@ -18,17 +31,46 @@ const CreateTransactionModal = () => {
       [event.currentTarget.name]: event.currentTarget.value,
     });
 
+  const handleDateChange = (event) => {
+    setInput({
+      ...input,
+      date: dateInput.current.value, // Get value from ref
+    });
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const res = await axios.post('/transactions', {
-        transactionType,
-        ...input,
+    if (!input.category || !input.date || !input.amount) {
+      M.toast({
+        html: 'Please enter all required fields',
+        displayLength: 4000,
+        classes: 'red',
       });
+      return;
+    }
+    try {
+      addTransaction(transactionType, input);
+  
+      M.toast({
+        html: 'Transaction Added',
+        displayLength: 4000,
+        classes: 'green',
+      });
+  
+      setInput(initialInput);
+  
+      dateInput.current.value = ''
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      console.log('error is' + error);
+      M.toast({ html: error, displayLength: 4000, classes: 'red' });
+    }
+  }, [error]);
 
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
@@ -38,27 +80,20 @@ const CreateTransactionModal = () => {
 
   useEffect(() => {
     // Required by materialize to initialize the modal
-    const modal = document.querySelectorAll('.modal');
+    const modal = document.querySelector('.modal');
     M.Modal.init(modal);
 
     // Required by materialize to initialize the DatePicker
     const datePicker = document.querySelector('.datepicker');
     M.Datepicker.init(datePicker, {
-      onSelect: (date) => setInput({ ...input, date }),
+      format: 'ddd mmm yyyy',
+      onClose: handleDateChange,
+      autoClose: true,
     });
 
     // Required by materialize to initialize the Select
     const select = document.querySelectorAll('select');
     M.FormSelect.init(select);
-
-    // Store the users categories in the state
-    const getCategories = async () => {
-      const res = await axios.get('/auth');
-      setCategories(res.data.categories);
-    };
-
-    getCategories();
-    // eslint-disable-next-line
   }, []);
 
   const capitalize = (string) => {
@@ -99,21 +134,25 @@ const CreateTransactionModal = () => {
             <div className="input-field col s6">
               <input
                 name="date"
+                ref={dateInput}
                 id="date"
                 type="text"
                 className="datepicker validate"
+                required
               />
               <label htmlFor="date">Date</label>
             </div>
 
             <div className="input-field col s6">
               <select
-                name="category"
+                value={input.category}
                 onChange={handleInputChange}
+                name="category"
                 style={{ maxHeight: '50px' }}
                 size="5"
+                required
               >
-                <option>Choose a category</option>
+                <option value="">Choose a category</option>
                 {categories &&
                   categories
                     .filter((category) => category.type === transactionType)
@@ -132,16 +171,19 @@ const CreateTransactionModal = () => {
             <div className="input-field col s6">
               <input
                 name="amount"
+                value={input.amount}
                 onChange={handleInputChange}
                 id="amount"
                 type="number"
                 className="validate"
+                required
               />
               <label htmlFor="amount">Amount ($)</label>
             </div>
 
             <div className="input-field col s6">
               <input
+                value={input.note}
                 name="note"
                 onChange={handleInputChange}
                 id="note"
@@ -155,7 +197,7 @@ const CreateTransactionModal = () => {
         <div className="modal-footer">
           <a
             href="#!"
-            className="modal-close waves-effect waves-green btn-flat"
+            className="waves-effect waves-green btn-flat"
             onClick={handleFormSubmit}
           >
             Add Transaction
