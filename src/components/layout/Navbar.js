@@ -8,8 +8,8 @@ const Nav = () => {
 
     const authContext = useContext(AuthContext)
     //console.log("navbar", authContext)
-    const { logout, user} = authContext
-  
+    const { logout, user } = authContext
+
     useEffect(() => {
         const elems = document.querySelectorAll('.sidenav');
         const instances = Sidenav.init(elems, {});

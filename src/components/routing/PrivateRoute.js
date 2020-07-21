@@ -1,11 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AuthContext from '../../context/auth/authContext'
 import { Route, Redirect } from 'react-router-dom'
 import Navbar from '../layout/Navbar'
+import AddBtn from '../layout/AddBtn'
+import "materialize-css/dist/css/materialize.min.css"
+import M from "materialize-css/dist/js/materialize.min.js"
 
 
 //pass in components 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+
+    useEffect(() => {
+        //initialize materialize JS
+        M.AutoInit()
+    })
 
     const authContext = useContext(AuthContext)
     console.log(authContext)
@@ -19,6 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         ) : (
                 <div>
                     <Navbar />
+                    <AddBtn />
                     <Component {...props} />
                 </div>
             )

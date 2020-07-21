@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import SignupForm from './components/Forms/SignupForm';
 import LoginForm from './components/Forms/LoginForm';
 import Home from './components/pages/Home'
