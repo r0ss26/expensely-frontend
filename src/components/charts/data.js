@@ -24,6 +24,12 @@ const user = {
             amount: 200,
             category: 'Entertainment',
             date: Date.now
+        },
+        {
+            transactionType: 'income',
+            amount: 2000,
+            category: 'Salary',
+            date: Date.now
         }
     ]
 }

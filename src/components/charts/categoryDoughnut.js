@@ -2,13 +2,15 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import user from './data'
 
-const categoryDoughnut = (type) => {
+const categoryDoughnut = () => {
+
+    let transactions = user.transactions.filter(item => item.transactionType === 'expense')
 
     //get unique category name and sorted
-    const uniqueCategories = [...new Set(user.transactions.map(item => item.category).sort())]
+    const uniqueCategories = [...new Set(transactions.map(item => item.category).sort())]
 
     //calculate sum for each categoriess 
-    const addCategoryAmount = [...user.transactions.reduce((r, o) => {
+    const addCategoryAmount = [...transactions.reduce((r, o) => {
         const key = o.category
         const item = r.get(key) || Object.assign({}, o, {
             amount: 0
