@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import AuthContext from '../../context/auth/authContext';
+import AuthContext from '../../../context/auth/authContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
 
@@ -16,31 +16,31 @@ const CreateTransactionModal = (props) => {
   // Default transaction type is expense
   const [transactionType, setTransactionType] = useState('expense');
 
+  const [date, setDate] = useState('')
+
   // Form state
   let initialInput = {
-    date: '',
     category: '',
     amount: '',
-    note: '',
+    comment: '',
   };
   const [input, setInput] = useState(initialInput);
 
-  const handleInputChange = (event) =>
+  const handleInputChange = (event) => {
     setInput({
       ...input,
       [event.currentTarget.name]: event.currentTarget.value,
     });
-
-  const handleDateChange = (event) => {
-    setInput({
-      ...input,
-      date: dateInput.current.value, // Get value from ref
-    });
   };
+
+  const handleDateChange = () => {
+    console.log(dateInput)
+    setDate(dateInput.current.value)
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (!input.category || !input.date || !input.amount) {
+    if (!input.category || !date || !input.amount) {
       M.toast({
         html: 'Please enter all required fields',
         displayLength: 4000,
@@ -49,19 +49,19 @@ const CreateTransactionModal = (props) => {
       return;
     }
     try {
-      addTransaction(transactionType, input);
-  
+      addTransaction(transactionType, {...input, date});
+
       M.toast({
         html: 'Transaction Added',
         displayLength: 4000,
         classes: 'green',
       });
-  
+
       setInput(initialInput);
-  
-      dateInput.current.value = ''
+
+      dateInput.current.value = '';
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -76,17 +76,17 @@ const CreateTransactionModal = (props) => {
   useEffect(() => {
     const select = document.querySelectorAll('select');
     M.FormSelect.init(select);
-  }, [categories, transactionType]);
+  }, [categories, transactionType, input]);
 
   useEffect(() => {
     // Required by materialize to initialize the modal
-    const modal = document.querySelector('.modal');
+    const modal = document.querySelector('.transactionModal');
     M.Modal.init(modal);
 
     // Required by materialize to initialize the DatePicker
     const datePicker = document.querySelector('.datepicker');
     M.Datepicker.init(datePicker, {
-      format: 'ddd mmm yyyy',
+      format: 'ddd dd mmm yyyy',
       onClose: handleDateChange,
       autoClose: true,
     });
@@ -107,7 +107,7 @@ const CreateTransactionModal = (props) => {
 
   return (
     <>
-      <div id="modal1" className="modal">
+      <div id="modal1" className="modal transactionModal">
         <div className="modal-content center-align">
           <h4>Add a Transaction</h4>
 
@@ -183,14 +183,14 @@ const CreateTransactionModal = (props) => {
 
             <div className="input-field col s6">
               <input
-                value={input.note}
-                name="note"
+                value={input.comment}
+                name="comment"
                 onChange={handleInputChange}
-                id="note"
+                id="comment"
                 type="text"
                 className="validate"
               />
-              <label htmlFor="note">Note</label>
+              <label htmlFor="comment">Comment</label>
             </div>
           </form>
         </div>
