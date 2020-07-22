@@ -3,8 +3,10 @@ import AuthContext from '../../context/auth/authContext';
 import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
 import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
 import EditTransactionModal from '../Modals/EditTransactionModal/EditTransactionModal';
+import capitalize from '../../utils/capitalize'
 import styles from './TransactionsTable.module.css';
 import Axios from 'axios';
+import moment from 'moment'
 
 const TransactionsTable = () => {
   const authContext = useContext(AuthContext);
@@ -48,9 +50,9 @@ const TransactionsTable = () => {
             {transactions &&
               transactions.map((transaction) => (
                 <tr key={transaction._id}>
-                  <td>{transaction.date}</td>
-                  <td>{transaction.transactionType}</td>
-                  <td>{transaction.category}</td>
+                  <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
+                  <td>{capitalize(transaction.transactionType)}</td>
+                  <td>{capitalize(transaction.category)}</td>
                   <td className={transaction.transactionType}>
                     {transaction.amount}
                   </td>
