@@ -58,6 +58,7 @@ const CreateTransactionModal = () => {
     };
 
     getCategories();
+    // eslint-disable-next-line
   }, []);
 
   const capitalize = (string) => {
@@ -79,7 +80,7 @@ const CreateTransactionModal = () => {
             id="expense"
             className={`waves-effect waves-light btn ${
               transactionType === 'expense' ? 'disabled' : ''
-            }`}
+              }`}
             onClick={() => setTransactionType('expense')}
           >
             <i className="material-icons right">money_off</i>Expense
@@ -88,7 +89,7 @@ const CreateTransactionModal = () => {
             id="income"
             className={`waves-effect waves-light btn ${
               transactionType === 'income' ? 'disabled' : ''
-            }`}
+              }`}
             onClick={() => setTransactionType('income')}
           >
             <i className="material-icons left">attach_money</i>Income

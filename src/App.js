@@ -12,6 +12,7 @@ import Transactions from './components/pages/Transactions';
 import Categories from './components/pages/Categories';
 import Profile from './components/pages/Profile';
 import Budget from './components/pages/Budget';
+import categoryDoughnut from './components/charts/TransactionsChart';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   return (
     <AuthState>
       <Router>
+        <PublicRoute restricted={false} exact path='/pie' component={categoryDoughnut} />
         <Switch>
           <PublicRoute restricted={false} exact path='/' component={Home} />
           <PublicRoute restricted={true} exact path='/signup' component={SignupForm} />

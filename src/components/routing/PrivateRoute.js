@@ -6,6 +6,8 @@ import AddBtn from '../layout/AddBtn'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 
+import CreateTransactionModal from '../Modals/CreateTransactionModal'
+
 
 //pass in components 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -16,20 +18,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     })
 
     const authContext = useContext(AuthContext)
-    console.log(authContext)
+    //console.log(authContext)
     const { isAuthenticated, loading } = authContext;
 
     return (
         // Show the component only when the user is authenticated
         // Otherwise, redirect the user to /login page
-        <Route {...rest} render={props => (!isAuthenticated && loading) ? (
+        <Route {...rest} render={props => (!isAuthenticated & loading) ? (
             <Redirect to='/login' />
         ) : (
-                <div>
-                    <Navbar />
+                <>
                     <AddBtn />
-                    <Component {...props} />
-                </div>
+                    <Navbar />
+                    <CreateTransactionModal />
+                    <div className="container">
+                        <Component {...props} />
+                    </div>
+                </>
             )
         }
         />
