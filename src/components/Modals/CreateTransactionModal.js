@@ -162,14 +162,6 @@ const CreateTransactionModal = () => {
           </a>
         </div>
       </div>
-
-      <button
-        style={{ position: 'absolute', bottom: '20px', right: '20px' }}
-        className="btn-floating btn-large waves-effect waves-light red modal-trigger"
-        data-target="modal1"
-      >
-        <i className="material-icons">add</i>
-      </button>
     </>
   );
 };
