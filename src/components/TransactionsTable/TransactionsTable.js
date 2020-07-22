@@ -21,13 +21,10 @@ const TransactionsTable = () => {
     deleteTransaction(id);
   };
 
-  const handleEdit = async (id, body) => {
+  const handleEdit = async (body) => {
     try {
-      editTransaction(id, body);
-
-      // setInput(initialInput);
-
-      // dateInput.current.value = '';
+      editTransaction(itemToEdit, body);
+      setItemToEdit('')
     } catch (error) {
       console.log(error);
     }
@@ -85,8 +82,9 @@ const TransactionsTable = () => {
       </div>
       <CreateTransactionModal />
       <EditTransactionModal 
-        onEdit={(body) => handleEdit(itemToEdit, body)}
-        transactionId={itemToEdit}
+        onEdit={(body) => handleEdit(body)}
+        initialState={{}}
+        // transactionId={itemToEdit}
       />
       <ConfirmationModal
         onConfirm={() => handleDelete(itemToDelete)}
