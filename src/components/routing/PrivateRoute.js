@@ -6,7 +6,7 @@ import AddBtn from '../layout/AddBtn'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 
-import CreateTransactionModal from '../Modals/CreateTransactionModal'
+import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal'
 
 
 //pass in components 
