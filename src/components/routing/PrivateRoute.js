@@ -22,13 +22,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
         // Show the component only when the user is authenticated
         // Otherwise, redirect the user to /login page
-        <Route {...rest} render={props => (!localStorage.token) ? (
+        <Route {...rest} render={props => (!isAuthenticated & loading) ? (
             <Redirect to='/login' />
         ) : (
                 <>
                     <AddBtn />
                     <Navbar />
-                    {/* <CreateTransactionModal/> */}
+                    <CreateTransactionModal />
                     <div className="container">
                         <Component {...props} />
                     </div>

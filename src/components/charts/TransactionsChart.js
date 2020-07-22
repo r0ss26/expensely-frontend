@@ -34,8 +34,7 @@ const TransactionsChart = ({ type }) => {
     //get percentage of total
     const total = sortedCategory.reduce((acc, cur) => acc + cur.amount, 0)
     const percent = sortedCategory.map(item => ((item.amount / total) * 100).toFixed(1))
-    console.log(percent)
-
+   // console.log(percent)
     //get color
     const color = sortedCategory.map(item => item.color)
 
@@ -52,6 +51,7 @@ const TransactionsChart = ({ type }) => {
         }]
     };
 
+    //customise tooltips
     const chartOptions = {
         "tooltips": {
             mode: 'label',
