@@ -11,6 +11,7 @@ import {
   ADD_TRANSACTION_SUCCESS,
   ADD_TRANSACTION_FAIL,
   DELETE_TRANSACTION_SUCCESS,
+  EDIT_TRANSACTION_SUCCESS,
 } from '../types';
 
 export default (state, action) => {
@@ -70,10 +71,28 @@ export default (state, action) => {
         ...state,
         user: {
           ...state.user,
-          transactions: [...state.user.transactions.filter(transaction => transaction._id !== action.payload._id)]
-        }
-        
-      }
+          transactions: [
+            ...state.user.transactions.filter(
+              (transaction) => transaction._id !== action.payload._id
+            ),
+          ],
+        },
+      };
+    case EDIT_TRANSACTION_SUCCESS:
+      const index = state.user.transactions.findIndex(
+        (transaction) => (transaction.id = action.payload._id)
+      );
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          transactions: [
+            ...state.user.transactions.slice(0, index),
+            action.payload,
+            ...state.user.transactions.slice(index + 1),
+          ],
+        },
+      };
     default:
       return state;
   }

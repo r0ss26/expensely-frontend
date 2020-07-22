@@ -3,26 +3,19 @@ import M from 'materialize-css';
 
 const ConfirmationModal = (props) => {
   useEffect(() => {
-    const modal = document.querySelector('.confirmationModal');
+    const modal = document.querySelectorAll('.confirmationModal');
     M.Modal.init(modal);
   }, []);
 
   return (
     <>
-      <a class="waves-effect waves-light btn modal-trigger" href="#confirmationModal">
-        Delete
-      </a>
-
       <div id="confirmationModal" className="confirmationModal modal">
         <div className="modal-content">
-          <p>{props.confirmationText} {props.transactionId}</p>
+          <p>{props.confirmationText}</p>
         </div>
         <div className="modal-footer">
           <a
-            onClick={() => {
-              console.log('clicked')
-              props.onDelete()
-            }}
+            onClick={props.onConfirm}
             className="modal-close waves-effect waves-green btn-flat"
           >
             {props.confirm}

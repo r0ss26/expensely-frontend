@@ -15,7 +15,8 @@ import {
   CLEAR_ERRORS,
   ADD_TRANSACTION_SUCCESS,
   ADD_TRANSACTION_FAIL,
-  DELETE_TRANSACTION_SUCCESS
+  DELETE_TRANSACTION_SUCCESS,
+  EDIT_TRANSACTION_SUCCESS,
 } from '../types';
 
 //create initial state
@@ -121,24 +122,37 @@ const AuthState = (props) => {
     } catch (error) {
       console.log(error.response);
       dispatch({
-          type: ADD_TRANSACTION_FAIL,
-          payload: error.response
-      })
+        type: ADD_TRANSACTION_FAIL,
+        payload: error.response,
+      });
     }
   };
 
-  const deleteTransaction = async id => {
+  const deleteTransaction = async (id) => {
     try {
-      const res = await axios.delete(`/transactions/${id}`)
-      console.log(res.data)
+      const res = await axios.delete(`/transactions/${id}`);
+      console.log(res.data);
       dispatch({
         type: DELETE_TRANSACTION_SUCCESS,
-        payload: res.data
-      })
+        payload: res.data,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const editTransaction = async (id, body) => {
+    try {
+      const res = await axios.put(`/transactions/${id}`, body);
+      console.log(res);
+      dispatch({
+        type: EDIT_TRANSACTION_SUCCESS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //wrap the app with the auth provider
   return (
@@ -156,7 +170,8 @@ const AuthState = (props) => {
         login,
         clearErrors,
         addTransaction,
-        deleteTransaction
+        deleteTransaction,
+        editTransaction
       }}
     >
       {props.children}

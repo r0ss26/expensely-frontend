@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import AuthContext from '../../../context/auth/authContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import capitalize from '../../../utils/capitalize'
-import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
+import capitalize from '../../../utils/capitalize';
+import moment from 'moment';
+import Axios from 'axios';
+// import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
 
-const CreateTransactionModal = (props) => {
+const EditTransactionModal = (props) => {
   const authContext = useContext(AuthContext);
 
   const dateInput = useRef(null);
 
-  const { user, error, addTransaction } = authContext;
+  const { user, error, editTransaction } = authContext;
 
   let categories = [];
   if (user) categories = user.categories;
@@ -17,7 +19,9 @@ const CreateTransactionModal = (props) => {
   // Default transaction type is expense
   const [transactionType, setTransactionType] = useState('expense');
 
-  const [date, setDate] = useState('')
+  const [transaction, setTransaction] = useState('');
+
+  const [date, setDate] = useState('');
 
   // Form state
   let initialInput = {
@@ -35,35 +39,7 @@ const CreateTransactionModal = (props) => {
   };
 
   const handleDateChange = () => {
-    console.log(dateInput)
-    setDate(dateInput.current.value)
-  }
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    if (!input.category || !date || !input.amount) {
-      M.toast({
-        html: 'Please enter all required fields',
-        displayLength: 4000,
-        classes: 'red',
-      });
-      return;
-    }
-    try {
-      addTransaction(transactionType, {...input, date});
-
-      M.toast({
-        html: 'Transaction Added',
-        displayLength: 4000,
-        classes: 'green',
-      });
-
-      setInput(initialInput);
-
-      dateInput.current.value = '';
-    } catch (error) {
-      console.log(error);
-    }
+    setDate(dateInput.current.value);
   };
 
   useEffect(() => {
@@ -81,11 +57,11 @@ const CreateTransactionModal = (props) => {
 
   useEffect(() => {
     // Required by materialize to initialize the modal
-    const modal = document.querySelector('.transactionModal');
+    const modal = document.querySelector('.editTransactionModal');
     M.Modal.init(modal);
 
     // Required by materialize to initialize the DatePicker
-    const datePicker = document.querySelector('.datepicker');
+    const datePicker = document.querySelectorAll('.datepicker');
     M.Datepicker.init(datePicker, {
       format: 'ddd dd mmm yyyy',
       onClose: handleDateChange,
@@ -97,16 +73,19 @@ const CreateTransactionModal = (props) => {
     M.FormSelect.init(select);
   }, []);
 
+
+
   return (
     <>
-      <div id="createTransactionModal" className="modal transactionModal">
+      <div id="editTransactionModal" className="modal editTransactionModal">
         <div className="modal-content center-align">
-          <h4>Add a Transaction</h4>
+          <h4>Edit Transaction</h4>
+
           <a
             id="expense"
             className={`waves-effect waves-light btn ${
               transactionType === 'expense' ? 'disabled' : ''
-              }`}
+            }`}
             onClick={() => setTransactionType('expense')}
           >
             <i className="material-icons right">money_off</i>Expense
@@ -115,7 +94,7 @@ const CreateTransactionModal = (props) => {
             id="income"
             className={`waves-effect waves-light btn ${
               transactionType === 'income' ? 'disabled' : ''
-              }`}
+            }`}
             onClick={() => setTransactionType('income')}
           >
             <i className="material-icons left">attach_money</i>Income
@@ -126,7 +105,7 @@ const CreateTransactionModal = (props) => {
               <input
                 name="date"
                 ref={dateInput}
-                id="date"
+                id="editDate"
                 type="text"
                 className="datepicker validate"
                 required
@@ -187,16 +166,23 @@ const CreateTransactionModal = (props) => {
         </div>
         <div className="modal-footer">
           <a
-            href="#!"
             className="waves-effect waves-green btn-flat"
-            onClick={handleFormSubmit}
+            onClick={() => props.onEdit({ transactionType, ...input, date })}
           >
-            Add Transaction
+            Save Transaction
           </a>
         </div>
       </div>
+
+      <button
+        style={{ position: 'absolute', top: '20px', right: '20px' }}
+        className="btn-floating btn-large waves-effect waves-light red modal-trigger"
+        data-target="modal1"
+      >
+        <i className="material-icons">add</i>
+      </button>
     </>
   );
 };
 
-export default CreateTransactionModal;
+export default EditTransactionModal;
