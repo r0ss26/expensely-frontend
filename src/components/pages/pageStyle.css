@@ -1,6 +1,7 @@
 .container-wrapper {
-  margin-right: 0;
-  margin-left: 200px;
+  /* margin-right: 0; */
+  /* margin-left: 150px; */
+  width: 100%;
   transition: transform 0.25s ease-in 0s;
   position: relative;
   display: block;

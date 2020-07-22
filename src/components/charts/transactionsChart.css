@@ -1,0 +1,15 @@
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: beige;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.card-action li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
