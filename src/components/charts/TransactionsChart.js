@@ -6,7 +6,7 @@ import './transactionsChart.css'
 const TransactionsChart = ({ type }) => {
 
     //display type of transaction accordin to props pass in
-    let transactions = user.transactions.filter(item => item.transactionType === type)
+    let transactions = user.transactions.filter(item => item.type === type)
 
     //get unique category name and sorted
     const uniqueCategories = [...new Set(transactions.map(item => item.category).sort())]

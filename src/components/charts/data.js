@@ -7,100 +7,110 @@ const user = {
     email: 'test_1@test.com',
     categories: [
         {
-            id: '1',
             name: "Eating Out",
-            icon: "fas fa-utensils",
+            icon: "restaurant_menu",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '2',
             name: "Apparel",
-            icon: "fas fa-tshirt",
+            icon: "style",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '3',
             name: "Entertainment",
-            icon: "fas fa-tablet-alt",
+            icon: "library_music",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '4',
             name: "Fuel",
-            icon: "fas fa-gas-pump",
+            icon: "local_gas_station",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '5',
             name: "Gifts",
-            icon: "fas fa-gift",
+            icon: "card_giftcard",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '6',
             name: "Holidays",
-            icon: "fas fa-luggage-cart",
+            icon: "flight_takeoff",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '7',
             name: "Grocery",
-            icon: "fas fa-shopping-basket",
+            icon: "add_shopping_cart",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '8',
             name: "Transportation",
-            icon: "fas fa-bus",
+            icon: "subway",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '9',
             name: "Sports",
-            icon: "fas fa-running",
+            icon: "directions_bike",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '10',
             name: "Books",
-            icon: "fas fa-book-open",
+            icon: "local_library",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '11',
             name: "Medical",
-            icon: "fas fa-notes-medical",
+            icon: "local_pharmacy",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '12',
             name: "Utilities",
-            icon: "fas fa-bolt",
+            icon: "flash_on",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '13',
+            name: "Movies",
+            icon: "local_movies",
+            color: getRandomColor(),
+            type: "expense"
+        },
+        {
+            name: "Work-related",
+            icon: "work",
+            color: getRandomColor(),
+            type: "expense"
+        },
+        {
+            name: "Pets",
+            icon: "pets",
+            color: getRandomColor(),
+            type: "expense"
+        },
+        {
+            name: "Mobile",
+            icon: "phone_iphone",
+            color: getRandomColor(),
+            type: "expense"
+        },
+        {
             name: "general expenses",
-            icon: "fas fa-tags",
+            icon: "loyalty",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            id: '14',
             name: "Salary",
-            icon: "fas fa-dollar-sign",
+            icon: "monetization_on",
             color: getRandomColor(),
             type: "income"
         },
