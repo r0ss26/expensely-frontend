@@ -17,9 +17,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         M.AutoInit()
     })
 
+    
     const authContext = useContext(AuthContext)
     //console.log(authContext)
-    const { isAuthenticated, loading } = authContext;
+    const { isAuthenticated, loading, getUser } = authContext;
+    
+    useEffect(() => {
+        // Check for token and update application state if required
+        const token = localStorage.getItem('token');
+        if (token && !isAuthenticated) {
+          getUser();
+        }
+      }, []);
 
     return (
         // Show the component only when the user is authenticated
