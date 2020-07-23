@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import capitalize from '../../utils/capitalize';
 import AuthContext from '../../context/auth/authContext';
 import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
+import EditBudgetModal from '../Modals/EditBudgetModal/EditBudgetModal'
 
 const BudgetsTable = () => {
   const authContext = useContext(AuthContext);
@@ -12,6 +13,7 @@ const BudgetsTable = () => {
   if (user) budgets = user.budgets;
 
   const [itemToDelete, setItemToDelete] = useState('');
+  const [itemToEdit, setItemToEdit] = useState('');
 
   const handleDelete = (id) => {
     deleteBudget(id);
@@ -42,7 +44,7 @@ const BudgetsTable = () => {
                     <a
                       class="waves-effect waves-light btn modal-trigger"
                       href="#edit-budget-modal"
-                      // onClick={}
+                      onClick={() => setItemToEdit(budget._id)}
                     >
                       Edit
                     </a>
@@ -61,6 +63,7 @@ const BudgetsTable = () => {
           </tbody>
         </table>
       </div>
+      <EditBudgetModal budgetId={itemToEdit} />
       <ConfirmationModal
         onConfirm={() => handleDelete(itemToDelete)}
         confirmationText="Are you sure you want to delete this item?"

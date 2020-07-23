@@ -18,7 +18,8 @@ import {
   DELETE_TRANSACTION_SUCCESS,
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
-  DELETE_BUDGET_SUCCESS
+  DELETE_BUDGET_SUCCESS,
+  EDIT_BUDGET_SUCCESS
 } from '../types';
 
 //create initial state
@@ -180,6 +181,18 @@ const AuthState = (props) => {
     }
   }
 
+  const editBudget = async (id, body) => {
+    try {
+      const res = await axios.put(`/budgets/${id}`, body )
+      dispatch({
+        type: EDIT_BUDGET_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   //wrap the app with the auth provider
   return (
     <AuthContext.Provider
@@ -199,7 +212,8 @@ const AuthState = (props) => {
         deleteTransaction,
         editTransaction,
         addBudget,
-        deleteBudget
+        deleteBudget,
+        editBudget
       }}
     >
       {props.children}

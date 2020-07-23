@@ -14,6 +14,7 @@ import {
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
   DELETE_BUDGET_SUCCESS,
+  EDIT_BUDGET_SUCCESS
 } from '../types';
 
 export default (state, action) => {
@@ -113,6 +114,21 @@ export default (state, action) => {
             ...state.user.budgets.filter(
               (budget) => budget._id !== action.payload._id
             ),
+          ],
+        },
+      };
+    case EDIT_BUDGET_SUCCESS:
+      const budget_index = state.user.budgets.findIndex(
+        (budget) => budget._id === action.payload._id
+      );
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          budgets: [
+            ...state.user.budgets.slice(0, budget_index),
+            action.payload,
+            ...state.user.budgets.slice(budget_index + 1),
           ],
         },
       };
