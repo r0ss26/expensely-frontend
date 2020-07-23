@@ -19,19 +19,25 @@ import {
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
   DELETE_BUDGET_SUCCESS,
-  EDIT_BUDGET_SUCCESS
+  EDIT_BUDGET_SUCCESS,
+  GET_CATEGORY,
+  CATEGORY_ERROR,
+  CURRENT_USER,
+  UPDATE_CATEGORY_SUCCESS
 } from '../types';
 
 //create initial state
-const AuthState = (props) => {
+const AuthState = props => {
   const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem("token"),
     isAuthenticated: false,
     loading: true,
     error: null,
     user: null,
-  };
-
+    current_category: null,
+    current_user: null,
+    categories: []
+  }
   //call and dispatch action types to reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -41,22 +47,21 @@ const AuthState = (props) => {
     //  console.log("token", localStorage.token)
     if (localStorage.token) {
       setToken(localStorage.token);
-    }
 
-    try {
-      const res = await axios.get('/auth');
+      try {
+        const res = await axios.get('/auth');
 
-      dispatch({
-        type: GET_USER,
-        payload: res.data, //user data
-      });
-    } catch (error) {
-      dispatch({
-        type: AUTH_ERROR,
-      });
-    }
-  };
-
+        dispatch({
+          type: GET_USER,
+          payload: res.data, //user data
+        });
+      } catch (error) {
+        dispatch({
+          type: AUTH_ERROR,
+        });
+      }
+    };
+  }
   //register user - to sigup user
   const register = async (formData) => {
     try {
@@ -146,7 +151,7 @@ const AuthState = (props) => {
 
   const editTransaction = async (id, transactionType, body) => {
     try {
-      const res = await axios.put(`/transactions/${id}`, {transactionType, ...body});
+      const res = await axios.put(`/transactions/${id}`, { transactionType, ...body });
       console.log(res);
       dispatch({
         type: EDIT_TRANSACTION_SUCCESS,
@@ -183,13 +188,39 @@ const AuthState = (props) => {
 
   const editBudget = async (id, body) => {
     try {
-      const res = await axios.put(`/budgets/${id}`, body )
+      const res = await axios.put(`/budgets/${id}`, body)
       dispatch({
         type: EDIT_BUDGET_SUCCESS,
         payload: res.data
       })
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getCategory = category => {
+    dispatch({
+      type: GET_CATEGORY,
+      payload: category
+    })
+  }
+
+  const updateCategory = async formData => {
+    console.log("action formdata", formData)
+    console.log("action id", formData.id)
+    try {
+      const res = await axios.put(`/categories/${formData.id}`, formData)
+      console.log("action res", res.data)
+      dispatch({
+        type: UPDATE_CATEGORY_SUCCESS,
+        payload: res.data
+      })
+
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: error.response.data.msg
+      })
     }
   }
 
@@ -203,6 +234,7 @@ const AuthState = (props) => {
         user: state.user,
         loading: state.loading,
         error: state.error,
+        current_category: state.current_category,
         register,
         logout,
         getUser,
@@ -213,12 +245,16 @@ const AuthState = (props) => {
         editTransaction,
         addBudget,
         deleteBudget,
-        editBudget
+        editBudget,
+        getCategory,
+        updateCategory
       }}
     >
       {props.children}
     </AuthContext.Provider>
   );
 };
+
+
 
 export default AuthState;

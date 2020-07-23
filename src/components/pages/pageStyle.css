@@ -10,9 +10,8 @@
 
 /* color for categories */
 .dot {
-  height: 25px;
-  width: 25px;
-  background-color: beige;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   display: inline-block;
   margin: 0 10px;

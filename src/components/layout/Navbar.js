@@ -65,7 +65,8 @@ const Nav = () => {
     return (
         <>
             <Link to="#" data-target="mobile-demo" className="sidenav-trigger"><i className="medium material-icons">menu</i></Link>
-            <div className="navigation hide-on-med-and-down">
+            <div className="navigation ">
+                {/* hide-on-med-and-down */}
                 <ul className='links'>
                     {navLinks}
                 </ul>

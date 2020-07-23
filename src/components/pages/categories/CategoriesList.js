@@ -1,10 +1,25 @@
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from "../../../context/auth/authContext"
+import CategoryContext from '../../../context/category/categoryContext'
+import '../pageStyle.css'
+import user from '../../charts/data'
+import EditCategoryModel from '../../Modals/EditCategoryModel'
+import M from 'materialize-css/dist/js/materialize.min.js';
 
-import React, { useState } from 'react';
-import AuthContext from "../../context/auth/authContext"
-import './pageStyle.css'
-import user from '../charts/data'
+const CategoriesList = () => {
 
-const Categories = () => {
+    const authContext = useContext(AuthContext)
+    const categoryContext = useContext(CategoryContext)
+    const { getCategory, user } = authContext
+
+    useEffect(() => {
+        // Required by materialize to initialize the modal
+        const modal = document.querySelectorAll('.modal');
+        M.Modal.init(modal);
+
+        setFilteredptions(sortedCategories)
+
+    }, [user])
 
     //sort category alphetically
     let sortedCategories = user.categories.sort((a, b) => {
@@ -16,8 +31,6 @@ const Categories = () => {
     const [inputValue, setInputValue] = useState('')
     const [filteredOptions, setFilteredptions] = useState(sortedCategories)
 
-    //console.log(user.categories)
-
     const handleChange = (e) => {
         console.log(e.target.value)
         setInputValue(e.target.value)
@@ -25,7 +38,6 @@ const Categories = () => {
         const filtered = sortedCategories.filter(result => {
             return result.name.toLowerCase().includes(inputValue.toLowerCase())
         })
-        console.log(filtered)
         setFilteredptions(filtered)
     }
 
@@ -75,20 +87,35 @@ const Categories = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredOptions.map((item, i) =>
+                    {filteredOptions.length > 0 ? (filteredOptions.map(item =>
                         (
-                            <tr key={i}>
-                                <td><span> <i className="material-icons left">{item.icon}</i></span>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</td>
-                                <td>{item.type.charAt(0).toUpperCase() + item.type.slice(1)}</td>
-                                <td><span className='dot' style={{ backgroundColor: `${item.color}` }}></span></td>
-                            </tr>
-                        )
-                    )}
+                            <>
+                                <tr key={item._id}>
+                                    <td><span> <i className={`${item.icon}`}></i></span>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</td>
+                                    <td>{item.type.charAt(0).toUpperCase() + item.type.slice(1)}</td>
+                                    <td><span className='dot' style={{ backgroundColor: `${item.color}` }}></span></td>
 
+                                    <td> <a
+                                        className="waves-effect waves-light btn modal-trigger"
+                                        href="#edit-category-modal"
+                                        onClick={() => getCategory(item)}
+                                    >
+                                        Edit
+                                    </a></td>
+                                    <td> <a
+                                        className="waves-effect waves-light btn"
+                                    // onClick={() => getCategory(item)}
+                                    >
+                                        Delete
+                                    </a></td>
+                                </tr>
+                            </>
+                        )
+                    )) : <p> No Category Found </p>}
                 </tbody>
             </table>
         </div>
     )
 }
 
-export default Categories
+export default CategoriesList

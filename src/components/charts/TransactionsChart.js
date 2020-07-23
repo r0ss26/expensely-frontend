@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import user from './data'
+import fakeUser from './data'
 import './transactionsChart.css'
 
-const TransactionsChart = ({ type }) => {
+const TransactionsChart = (type) => {
 
+    // console.log(fakeUser)
     //display type of transaction accordin to props pass in
-    let transactions = user.transactions.filter(item => item.type === type)
+    // let transactions = []
+    const transactions = fakeUser.transactions.filter(item => item.transactionType === type)
 
     //get unique category name and sorted
     const uniqueCategories = [...new Set(transactions.map(item => item.category).sort())]
@@ -21,10 +23,10 @@ const TransactionsChart = ({ type }) => {
         return r.set(key, item)
     }, new Map).values()]
 
-    //sort category after sum
-    const sortedCategory = addCategoryAmount.sort((a, b) => {
-        let catA = a.category.toLowerCase()
-        let catB = b.category.toLowerCase()
+    //sort category alphetically
+    let sortedCategory = addCategoryAmount.sort((a, b) => {
+        let catA = a.name.toLowerCase()
+        let catB = b.name.toLowerCase()
         return catA.localeCompare(catB)
     })
 
@@ -34,7 +36,7 @@ const TransactionsChart = ({ type }) => {
     //get percentage of total
     const total = sortedCategory.reduce((acc, cur) => acc + cur.amount, 0)
     const percent = sortedCategory.map(item => ((item.amount / total) * 100).toFixed(1))
-   // console.log(percent)
+    // console.log(percent)
     //get color
     const color = sortedCategory.map(item => item.color)
 

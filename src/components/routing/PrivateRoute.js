@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     useEffect(() => {
         //initialize materialize JS
         M.AutoInit()
-    })
+    }, [])
 
     
     const authContext = useContext(AuthContext)
@@ -39,6 +39,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 <>
                     <AddBtn />
                     <Navbar />
+                    {/* <CreateTransactionModal /> */}
+                    <EditCategoryModel />
+                    {/* <CreateCategoryModel /> */}
                     <div className="container">
                         <Component {...props} />
                     </div>
