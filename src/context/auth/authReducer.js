@@ -13,6 +13,7 @@ import {
   DELETE_TRANSACTION_SUCCESS,
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
+  DELETE_BUDGET_SUCCESS,
 } from '../types';
 
 export default (state, action) => {
@@ -102,6 +103,18 @@ export default (state, action) => {
           budgets: [...state.user.budgets, action.payload],
         },
         error: null,
+      };
+    case DELETE_BUDGET_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          budgets: [
+            ...state.user.budgets.filter(
+              (budget) => budget._id !== action.payload._id
+            ),
+          ],
+        },
       };
     default:
       return state;
