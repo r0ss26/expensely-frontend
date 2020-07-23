@@ -73,8 +73,6 @@ const EditTransactionModal = (props) => {
     M.FormSelect.init(select);
   }, []);
 
-
-
   return (
     <>
       <div id="editTransactionModal" className="modal editTransactionModal">
@@ -173,14 +171,6 @@ const EditTransactionModal = (props) => {
           </a>
         </div>
       </div>
-
-      <button
-        style={{ position: 'absolute', top: '20px', right: '20px' }}
-        className="btn-floating btn-large waves-effect waves-light red modal-trigger"
-        data-target="modal1"
-      >
-        <i className="material-icons">add</i>
-      </button>
     </>
   );
 };
