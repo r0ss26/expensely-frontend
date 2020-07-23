@@ -15,13 +15,13 @@ const CategorySelect = (props) => {
 
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
-    const select = document.querySelector('#category-select');
+    const select = document.querySelectorAll('.category-select');
     M.FormSelect.init(select);
   }, [categories]);
 
   useEffect(() => {
     // Required by materialize to initialize the Select
-    const select = document.querySelector('#category-select');
+    const select = document.querySelectorAll('.category-select');
     M.FormSelect.init(select);
   }, []);
 
@@ -38,9 +38,8 @@ const CategorySelect = (props) => {
     <>
       <select
         value={props.value}
-        id="category-select"
         onChange={(event) => props.onSelect(event.target.value)}
-        className="no-autoinit"
+        className="category-select no-autoinit"
         name="category"
         style={{ maxHeight: '50px' }}
         size="5"

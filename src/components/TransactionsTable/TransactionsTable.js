@@ -23,15 +23,6 @@ const TransactionsTable = () => {
     deleteTransaction(id);
   };
 
-  const handleEdit = async (body) => {
-    try {
-      editTransaction(itemToEdit, body);
-      setItemToEdit('')
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
       <div className="container">
@@ -62,7 +53,7 @@ const TransactionsTable = () => {
                   <td>
                     <a
                       class="waves-effect waves-light btn modal-trigger"
-                      href="#editTransactionModal"
+                      href="#edit-transaction-modal"
                       onClick={() => setItemToEdit(transaction._id)}
                     >
                       Edit
@@ -82,12 +73,7 @@ const TransactionsTable = () => {
           </tbody>
         </table>
       </div>
-      <CreateTransactionModal />
-      <EditTransactionModal 
-        onEdit={(body) => handleEdit(body)}
-        initialState={{}}
-        // transactionId={itemToEdit}
-      />
+      <EditTransactionModal transactionId={itemToEdit}/>
       <ConfirmationModal
         onConfirm={() => handleDelete(itemToDelete)}
         confirmationText="Are you sure you want to delete this item?"

@@ -80,7 +80,7 @@ export default (state, action) => {
       };
     case EDIT_TRANSACTION_SUCCESS:
       const index = state.user.transactions.findIndex(
-        (transaction) => (transaction.id = action.payload._id)
+        (transaction) => (transaction._id === action.payload._id)
       );
       return {
         ...state,

@@ -141,9 +141,9 @@ const AuthState = (props) => {
     }
   };
 
-  const editTransaction = async (id, body) => {
+  const editTransaction = async (id, transactionType, body) => {
     try {
-      const res = await axios.put(`/transactions/${id}`, body);
+      const res = await axios.put(`/transactions/${id}`, {transactionType, ...body});
       console.log(res);
       dispatch({
         type: EDIT_TRANSACTION_SUCCESS,
