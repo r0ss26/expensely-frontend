@@ -16,3 +16,17 @@
   display: inline-block;
   margin: 0 10px;
 }
+
+.collection-item {
+  display: flex;
+}
+
+.collection-item .text {
+  display: flex;
+  justify-content: space-evenly;
+  flex: 2;
+}
+
+.collection-item .icons {
+  flex: 1;
+}
