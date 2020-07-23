@@ -39,7 +39,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 <>
                     <AddBtn />
                     <Navbar />
-                    <CreateTransactionModal />
+                    {/* <CreateTransactionModal /> */}
                     <div className="container">
                         <Component {...props} />
                     </div>
