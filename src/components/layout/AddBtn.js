@@ -2,6 +2,7 @@ import React from 'react';
 
 import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
 import CategorySelect from '../CategorySelect/CategorySelect';
+import CreateBudgetModal from '../Modals/CreateBudgetModal.js/CreateBudgetModal';
 
 const AddBtn = () => {
   return (
@@ -16,7 +17,7 @@ const AddBtn = () => {
         <ul>
           <li>
             <a
-              href="#add-budget-modal"
+              href="#create-budget-modal"
               className="btn-floating orange modal-trigger"
             >
               <i className="medium material-icons">attach_money</i>
@@ -34,6 +35,7 @@ const AddBtn = () => {
         </ul>
       </div>
       <CreateTransactionModal />
+      <CreateBudgetModal />
     </>
   );
 };

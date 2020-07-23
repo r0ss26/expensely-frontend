@@ -17,6 +17,7 @@ import {
   ADD_TRANSACTION_FAIL,
   DELETE_TRANSACTION_SUCCESS,
   EDIT_TRANSACTION_SUCCESS,
+  ADD_BUDGET_SUCCESS
 } from '../types';
 
 //create initial state
@@ -154,6 +155,18 @@ const AuthState = (props) => {
     }
   };
 
+  const addBudget = async (formData) => {
+    try {
+      const res = await axios.post(`/budgets`, formData)
+      dispatch({
+        type: ADD_BUDGET_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   //wrap the app with the auth provider
   return (
     <AuthContext.Provider
@@ -171,7 +184,8 @@ const AuthState = (props) => {
         clearErrors,
         addTransaction,
         deleteTransaction,
-        editTransaction
+        editTransaction,
+        addBudget
       }}
     >
       {props.children}

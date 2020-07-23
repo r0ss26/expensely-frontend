@@ -12,6 +12,7 @@ import {
   ADD_TRANSACTION_FAIL,
   DELETE_TRANSACTION_SUCCESS,
   EDIT_TRANSACTION_SUCCESS,
+  ADD_BUDGET_SUCCESS,
 } from '../types';
 
 export default (state, action) => {
@@ -80,7 +81,7 @@ export default (state, action) => {
       };
     case EDIT_TRANSACTION_SUCCESS:
       const index = state.user.transactions.findIndex(
-        (transaction) => (transaction._id === action.payload._id)
+        (transaction) => transaction._id === action.payload._id
       );
       return {
         ...state,
@@ -92,6 +93,15 @@ export default (state, action) => {
             ...state.user.transactions.slice(index + 1),
           ],
         },
+      };
+    case ADD_BUDGET_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          budgets: [...state.user.budgets, action.payload],
+        },
+        error: null,
       };
     default:
       return state;
