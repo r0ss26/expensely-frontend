@@ -12,11 +12,8 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "materialize-css": "^1.0.0-rc.2",
-<<<<<<< HEAD
     "moment": "^2.27.0",
-=======
     "prop-types": "^15.7.2",
->>>>>>> edit function for category name
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-color": "^2.18.1",
