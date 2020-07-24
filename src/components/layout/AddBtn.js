@@ -2,7 +2,6 @@ import React from 'react';
 import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import CreateBudgetModal from '../Modals/CreateBudgetModal.js/CreateBudgetModal';
-import React from 'react'
 import CreateCategoryModel from '../Modals/CreateCategoryModel'
 
 const AddBtn = () => {
