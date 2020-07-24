@@ -18,7 +18,8 @@ import {
   CATEGORY_ERROR,
   UPDATE_CATEGORY_SUCCESS,
   ADD_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_SUCCESS
+  DELETE_CATEGORY_SUCCESS,
+  GET_CATEGORY
 } from '../types';
 
 export default (state, action) => {
@@ -182,9 +183,6 @@ export default (state, action) => {
         ...state,
         error: action.payload
       }
-    default:
-      return state
-
     default:
       return state;
   }

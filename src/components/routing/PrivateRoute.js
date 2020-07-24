@@ -40,7 +40,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     <AddBtn />
                     <Navbar />
                     {/* <CreateTransactionModal /> */}
-                    <EditCategoryModel />
+                    {/* <EditCategoryModal /> */}
                     {/* <CreateCategoryModel /> */}
                     <div className="container">
                         <Component {...props} />
