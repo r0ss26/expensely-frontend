@@ -1,6 +1,6 @@
 import getRandomColor from './getRandomColor';
 
-const user = {
+const fakeUser = {
     _id: '1',
     lastName: 'test',
     firstName: 'test_1',
@@ -8,109 +8,109 @@ const user = {
     categories: [
         {
             name: "Eating Out",
-            icon: "restaurant_menu",
+            icon: "fas fa-utensils",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Apparel",
-            icon: "style",
+            icon: "fas fa-tshirt",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Entertainment",
-            icon: "library_music",
+            icon: "fas fa-tablet-alt",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Fuel",
-            icon: "local_gas_station",
+            icon: "fas fa-gas-pump",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Gifts",
-            icon: "card_giftcard",
+            icon: "fas fa-gift",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Holidays",
-            icon: "flight_takeoff",
+            icon: "fas fa-luggage-cart",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Grocery",
-            icon: "add_shopping_cart",
+            icon: "fas fa-shopping-basket",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Transportation",
-            icon: "subway",
+            icon: "fas fa-bus",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Sports",
-            icon: "directions_bike",
+            icon: "fas fa-running",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Books",
-            icon: "local_library",
+            icon: "fas fa-book-open",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Medical",
-            icon: "local_pharmacy",
+            icon: "fas fa-notes-medical",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Utilities",
-            icon: "flash_on",
+            icon: "fas fa-bolt",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Movies",
-            icon: "local_movies",
+            icon: 'fas fa-film',
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Work-related",
-            icon: "work",
+            icon: "fas fa-briefcase",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Pets",
-            icon: "pets",
+            icon: "fas fa-paw",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Mobile",
-            icon: "phone_iphone",
+            icon: "fas fa-mobile-alt",
             color: getRandomColor(),
             type: "expense"
         },
         {
-            name: "general expenses",
-            icon: "loyalty",
+            name: "General expenses",
+            icon: "fas fa-tags",
             color: getRandomColor(),
             type: "expense"
         },
         {
             name: "Salary",
-            icon: "monetization_on",
+            icon: "fas fa-money-bill-wave",
             color: getRandomColor(),
             type: "income"
         },
@@ -186,4 +186,4 @@ const user = {
 
 
 
-export default user
+export default fakeUser

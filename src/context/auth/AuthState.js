@@ -19,19 +19,25 @@ import {
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
   DELETE_BUDGET_SUCCESS,
-  EDIT_BUDGET_SUCCESS
+  EDIT_BUDGET_SUCCESS,
+  GET_CATEGORY,
+  CATEGORY_ERROR,
+  UPDATE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_SUCCESS
 } from '../types';
 
 //create initial state
-const AuthState = (props) => {
+const AuthState = props => {
   const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem("token"),
     isAuthenticated: false,
     loading: true,
     error: null,
     user: null,
-  };
-
+    current_category: null,
+    current_user: null,
+    categories: []
+  }
   //call and dispatch action types to reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -41,22 +47,21 @@ const AuthState = (props) => {
     //  console.log("token", localStorage.token)
     if (localStorage.token) {
       setToken(localStorage.token);
-    }
 
-    try {
-      const res = await axios.get('/auth');
+      try {
+        const res = await axios.get('/auth');
 
-      dispatch({
-        type: GET_USER,
-        payload: res.data, //user data
-      });
-    } catch (error) {
-      dispatch({
-        type: AUTH_ERROR,
-      });
-    }
-  };
-
+        dispatch({
+          type: GET_USER,
+          payload: res.data, //user data
+        });
+      } catch (error) {
+        dispatch({
+          type: AUTH_ERROR,
+        });
+      }
+    };
+  }
   //register user - to sigup user
   const register = async (formData) => {
     try {
@@ -146,7 +151,7 @@ const AuthState = (props) => {
 
   const editTransaction = async (id, transactionType, body) => {
     try {
-      const res = await axios.put(`/transactions/${id}`, {transactionType, ...body});
+      const res = await axios.put(`/transactions/${id}`, { transactionType, ...body });
       console.log(res);
       dispatch({
         type: EDIT_TRANSACTION_SUCCESS,
@@ -183,7 +188,7 @@ const AuthState = (props) => {
 
   const editBudget = async (id, body) => {
     try {
-      const res = await axios.put(`/budgets/${id}`, body )
+      const res = await axios.put(`/budgets/${id}`, body)
       dispatch({
         type: EDIT_BUDGET_SUCCESS,
         payload: res.data
@@ -191,6 +196,68 @@ const AuthState = (props) => {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const getCategory = category => {
+    dispatch({
+      type: GET_CATEGORY,
+      payload: category
+    })
+  }
+
+  const updateCategory = async formData => {
+
+    try {
+      const res = await axios.put(`/categories/${formData.id}`, formData)
+
+      dispatch({
+        type: UPDATE_CATEGORY_SUCCESS,
+        payload: res.data
+      })
+
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: error.response.data.msg
+      })
+    }
+  }
+
+  const addCategory = async formData => {
+
+    try {
+      const res = await axios.post('/categories', formData)
+      dispatch({
+        type: ADD_CATEGORY_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: error.response.data.msg
+      })
+
+    }
+
+  }
+
+  const deleteCategory = async id => {
+
+    try {
+      await axios.delete(`/categories/${id}`)
+      dispatch({
+        type: DELETE_CATEGORY_SUCCESS,
+        payload: id
+      })
+
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_ERROR,
+        payload: error.response.data.msg
+      })
+
+    }
+
   }
 
   //wrap the app with the auth provider
@@ -203,6 +270,7 @@ const AuthState = (props) => {
         user: state.user,
         loading: state.loading,
         error: state.error,
+        current_category: state.current_category,
         register,
         logout,
         getUser,
@@ -213,7 +281,11 @@ const AuthState = (props) => {
         editTransaction,
         addBudget,
         deleteBudget,
-        editBudget
+        editBudget,
+        getCategory,
+        addCategory,
+        updateCategory,
+        deleteCategory
       }}
     >
       {props.children}
@@ -221,4 +293,5 @@ const AuthState = (props) => {
   );
 };
 
-export default AuthState;
+export default AuthState
+

@@ -14,7 +14,11 @@ import {
   EDIT_TRANSACTION_SUCCESS,
   ADD_BUDGET_SUCCESS,
   DELETE_BUDGET_SUCCESS,
-  EDIT_BUDGET_SUCCESS
+  EDIT_BUDGET_SUCCESS,
+  CATEGORY_ERROR,
+  UPDATE_CATEGORY_SUCCESS,
+  ADD_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_SUCCESS
 } from '../types';
 
 export default (state, action) => {
@@ -132,7 +136,58 @@ export default (state, action) => {
           ],
         },
       };
+    case GET_CATEGORY:
+      return {
+        ...state,
+        current_category: action.payload
+      }
+
+    case UPDATE_CATEGORY_SUCCESS:
+      // console.log("cat reducer", action.payload)
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          categories: state.user.categories.map(cat => {
+            if (cat._id === action.payload._id) {
+              return action.payload
+            } else {
+              return cat
+            }
+          })
+        },
+
+      }
+    case ADD_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          categories: [...state.user.categories, action.payload]
+        }
+      }
+
+    case DELETE_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          categories: state.user.categories.filter(item =>
+            item._id !== action.payload
+          )
+        }
+      }
+    case CATEGORY_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      }
+    default:
+      return state
+
     default:
       return state;
   }
 };
+
+
