@@ -1,14 +1,17 @@
 import React from 'react'
 import './pageStyle.css'
-import CategorySelect from '../CategorySelect/CategorySelect'
+import EditProfileForm from '../Forms/EditProfileForm'
 
 const Profile = () => {
+
+    
+
     return (
         <div className='container-wrapper'>
-            <h1>This is profile page</h1>
-            {/* <CategorySelect transactionType="expense" /> */}
+            <p>This is profile page</p>
+            <EditProfileForm />
         </div>
-)
+    )
 }
 
 export default Profile

@@ -3,6 +3,7 @@ import AuthContext from '../../context/auth/authContext'
 import { Route, Redirect } from 'react-router-dom'
 import Navbar from '../layout/Navbar'
 import AddBtn from '../layout/AddBtn'
+import EditCategoryModel from '../Modals/EditCategoryModel'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 
@@ -17,18 +18,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         M.AutoInit()
     }, [])
 
-    
+
     const authContext = useContext(AuthContext)
     //console.log(authContext)
     const { isAuthenticated, loading, getUser } = authContext;
-    
+
     useEffect(() => {
         // Check for token and update application state if required
         const token = localStorage.getItem('token');
         if (token && !isAuthenticated) {
-          getUser();
+            getUser();
         }
-      }, []);
+    }, []);
 
     return (
         // Show the component only when the user is authenticated

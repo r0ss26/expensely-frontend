@@ -15,6 +15,7 @@ import {
   ADD_BUDGET_SUCCESS,
   DELETE_BUDGET_SUCCESS,
   EDIT_BUDGET_SUCCESS,
+  GET_CATEGORY,
   CATEGORY_ERROR,
   UPDATE_CATEGORY_SUCCESS,
   ADD_CATEGORY_SUCCESS,
@@ -185,8 +186,6 @@ export default (state, action) => {
     default:
       return state
 
-    default:
-      return state;
   }
 };
 

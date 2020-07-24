@@ -22,6 +22,7 @@ import {
   EDIT_BUDGET_SUCCESS,
   GET_CATEGORY,
   CATEGORY_ERROR,
+  ADD_CATEGORY_SUCCESS,
   UPDATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS
 } from '../types';
@@ -206,7 +207,6 @@ const AuthState = props => {
   }
 
   const updateCategory = async formData => {
-
     try {
       const res = await axios.put(`/categories/${formData.id}`, formData)
 
@@ -236,9 +236,7 @@ const AuthState = props => {
         type: CATEGORY_ERROR,
         payload: error.response.data.msg
       })
-
     }
-
   }
 
   const deleteCategory = async id => {
@@ -258,6 +256,12 @@ const AuthState = props => {
 
     }
 
+  }
+
+  const updateProfile = formData => {
+
+    console.log(formData)
+    //const res = axios.put('/users/:')
   }
 
   //wrap the app with the auth provider
@@ -285,7 +289,8 @@ const AuthState = props => {
         getCategory,
         addCategory,
         updateCategory,
-        deleteCategory
+        deleteCategory,
+        updateProfile
       }}
     >
       {props.children}

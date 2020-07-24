@@ -2,7 +2,6 @@ import React from 'react';
 import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import CreateBudgetModal from '../Modals/CreateBudgetModal.js/CreateBudgetModal';
-import React from 'react'
 import CreateCategoryModel from '../Modals/CreateCategoryModel'
 
 const AddBtn = () => {
@@ -25,22 +24,7 @@ const AddBtn = () => {
             </a>
           </li>
           <li>
-            <a href="#add-budget-modal" className="btn-floating orange modal-trigger">
-              <i className="medium material-icons">attach_money</i>
-            </a>
-          </li>
-
-          <li>
-            <a href="#category-modal" className="btn-floating green modal-trigger">
-              <i className="medium material-icons">storage</i>
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#add-category-modal"
-              className="btn-floating green modal-trigger"
-            >
+            <a href="#create-category-modal" className="btn-floating green modal-trigger">
               <i className="medium material-icons">storage</i>
             </a>
           </li>
