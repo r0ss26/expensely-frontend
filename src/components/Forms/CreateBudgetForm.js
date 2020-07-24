@@ -73,7 +73,7 @@ const CreateTransactionForm = () => {
           <label htmlFor="amount">Amount ($)</label>
         </div>
 
-        <div class="input-field col s12">
+        <div className="input-field col s12">
           <select
             value={timePeriod}
             name="budget-time-period"

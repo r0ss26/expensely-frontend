@@ -1,14 +1,26 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import './pageStyle.css'
-import CategorySelect from '../CategorySelect/CategorySelect'
+import EditProfileForm from '../Forms/EditProfileForm'
+import AuthContext from '../../context/auth/authContext'
 
 const Profile = () => {
+
+    // const authContext = useContext(AuthContext);
+
+    // const { user, getUser} = authContext
+
+    // useEffect(() => {
+    //     getUser()
+    // })
+  
+    
+
     return (
         <div className='container-wrapper'>
-            <h1>This is profile page</h1>
-            {/* <CategorySelect transactionType="expense" /> */}
+            <p>This is profile page</p>
+            <EditProfileForm />
         </div>
-)
+    )
 }
 
 export default Profile

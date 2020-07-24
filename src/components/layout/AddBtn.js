@@ -24,13 +24,11 @@ const AddBtn = () => {
               <i className="medium material-icons">attach_money</i>
             </a>
           </li>
-
           <li>
             <a href="#create-category-modal" className="btn-floating green modal-trigger">
               <i className="medium material-icons">storage</i>
             </a>
           </li>
-
         </ul>
       </div>
       <CreateCategoryModel />

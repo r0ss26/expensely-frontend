@@ -22,9 +22,11 @@ import {
   EDIT_BUDGET_SUCCESS,
   GET_CATEGORY,
   CATEGORY_ERROR,
+  ADD_CATEGORY_SUCCESS,
   UPDATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
-  ADD_CATEGORY_SUCCESS
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL
 } from '../types';
 
 //create initial state
@@ -207,7 +209,6 @@ const AuthState = props => {
   }
 
   const updateCategory = async formData => {
-
     try {
       const res = await axios.put(`/categories/${formData.id}`, formData)
 
@@ -227,7 +228,9 @@ const AuthState = props => {
   const addCategory = async formData => {
 
     try {
-      const res = await axios.post('/categories', formData)
+      const res = await axios.post('/categories', formData,
+
+      )
       dispatch({
         type: ADD_CATEGORY_SUCCESS,
         payload: res.data
@@ -237,9 +240,7 @@ const AuthState = props => {
         type: CATEGORY_ERROR,
         payload: error.response.data.msg
       })
-
     }
-
   }
 
   const deleteCategory = async id => {
@@ -259,6 +260,22 @@ const AuthState = props => {
 
     }
 
+  }
+
+  const updateProfile = async (formData, id) => {
+
+    try {
+      const res = await axios.put(`/users/${id}`, formData)
+      dispatch({
+        type: UPDATE_PROFILE_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PROFILE_FAIL,
+        payload: error.response.data.msg
+      })
+    }
   }
 
   //wrap the app with the auth provider
@@ -286,7 +303,8 @@ const AuthState = props => {
         getCategory,
         addCategory,
         updateCategory,
-        deleteCategory
+        deleteCategory,
+        updateProfile
       }}
     >
       {props.children}

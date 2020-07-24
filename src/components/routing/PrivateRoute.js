@@ -3,11 +3,10 @@ import AuthContext from '../../context/auth/authContext'
 import { Route, Redirect } from 'react-router-dom'
 import Navbar from '../layout/Navbar'
 import AddBtn from '../layout/AddBtn'
+import EditCategoryModel from '../Modals/EditCategoryModel'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 import EditCategoryModel from '../Modals/EditCategoryModel'
-
-import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal'
 
 
 //pass in components 

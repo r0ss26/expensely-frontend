@@ -47,3 +47,7 @@
   margin: 0;
   width: 0;
 }
+
+.profile-img img {
+  width: 100px;
+}
