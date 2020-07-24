@@ -1,33 +1,84 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
-import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
+import M from 'materialize-css';
 import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
 import EditTransactionModal from '../Modals/EditTransactionModal/EditTransactionModal';
-import capitalize from '../../utils/capitalize'
+import capitalize from '../../utils/capitalize';
 import styles from './TransactionsTable.module.css';
-import Axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
 
 const TransactionsTable = () => {
   const authContext = useContext(AuthContext);
 
-  const { user, deleteTransaction, editTransaction } = authContext;
+  const { user, deleteTransaction } = authContext;
 
   const [itemToDelete, setItemToDelete] = useState('');
   const [itemToEdit, setItemToEdit] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
+  const [transactions, setTransactions] = useState([]);
+  const dateInput = useRef(null);
 
-  const [dateFilter, setDateFilter] = useState('')
+  // Sort transactions by most recent date
+  useEffect(() => {
+    if (user)
+      setTransactions(
+        user.transactions.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateB - dateA;
+        })
+      );
+  }, [user]);
 
-  let transactions = [];
-  if (user) transactions = user.transactions;
+  useEffect(() => {
+    if (dateFilter) {
+      const filteredTransactions = transactions.filter((transaction) => {
+        console.log(moment(transaction.date).format('ddd DD MMM YYYY'));
+        console.log(dateFilter);
+        return (
+          moment(transaction.date).format('ddd DD MMM YYYY') === dateFilter
+        );
+      });
+      setTransactions(filteredTransactions);
+    } else {
+      setTransactions(user.transactions)
+    }
+  }, [dateFilter]);
 
-  const handleDelete = (id) => {
-    deleteTransaction(id);
-  };
+  useEffect(() => {
+    // Required by materialize to initialize the DatePicker
+    const datePicker = document.querySelector('#transaction-table-date');
+    M.Datepicker.init(datePicker, {
+      format: 'ddd dd mmm yyyy',
+      onClose: () => setDateFilter(dateInput.current.value),
+      autoClose: true,
+    });
+  }, []);
 
   return (
     <>
       <div className="container">
+        <div className="input-field col s6">
+          <input
+            name="date"
+            ref={dateInput}
+            id="transaction-table-date"
+            type="text"
+            className="datepicker no-autoinit"
+          />
+          <label htmlFor="date">Date</label>
+        </div>
+
+        <a
+          class="waves-effect waves-light btn modal-trigger"
+          onClick={() => {
+            setDateFilter('')
+            dateInput.current.value = ''
+          }}
+        >
+          All
+        </a>
+
         <table className="striped responsive-table">
           <thead>
             <tr>
@@ -75,9 +126,9 @@ const TransactionsTable = () => {
           </tbody>
         </table>
       </div>
-      <EditTransactionModal transactionId={itemToEdit}/>
+      <EditTransactionModal transactionId={itemToEdit} />
       <ConfirmationModal
-        onConfirm={() => handleDelete(itemToDelete)}
+        onConfirm={() => deleteTransaction(itemToDelete)}
         confirmationText="Are you sure you want to delete this item?"
         confirm="Delete"
         decline="Keep"

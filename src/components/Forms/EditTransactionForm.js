@@ -130,7 +130,7 @@ const EditTransactionForm = (props) => {
             name="amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            id="amount"
+            id="edit-amount"
             type="number"
             className="validate"
             required
