@@ -19,12 +19,17 @@ import {
   CATEGORY_ERROR,
   UPDATE_CATEGORY_SUCCESS,
   ADD_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_SUCCESS
+  DELETE_CATEGORY_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL
 } from '../types';
 
 export default (state, action) => {
+
   switch (action.type) {
+
     case GET_USER:
+      console.log(action.payload.firstName)
       return {
         ...state,
         isAuthenticated: true,
@@ -183,9 +188,16 @@ export default (state, action) => {
         ...state,
         error: action.payload
       }
+    case UPDATE_PROFILE_SUCCESS:
+      // console.log("in reducer", action.payload)
+      return Object.assign({}, state.user, { user: action.payload })
+    case UPDATE_PROFILE_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      }
     default:
       return state
-
   }
 };
 

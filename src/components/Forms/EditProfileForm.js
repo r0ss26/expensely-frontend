@@ -4,31 +4,30 @@ import M from 'materialize-css';
 
 const EditProfileForm = () => {
 
+    // console.log(user)
     const authContext = useContext(AuthContext);
 
     const { user, updateProfile } = authContext
-    console.log(user._id)
-    // Form state
+
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
-    const [imageFile, setImageFile] = useState('');
+    const [profileImage, setProfileImage] = useState('');
     const [id, setId] = useState('')
-
+    const [image, setImage] = useState('')
 
     useEffect(() => {
         if (user) setLastName(user.lastName)
         if (user) setFirstName(user.firstName)
         if (user) setEmail(user.email)
-        if (user) setImageFile(user.profileImage)
+        if (user) setProfileImage(user.profileImage)
         if (user) setId(user._id)
     }, [user])
 
 
-    const handleFormSubmit = async (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-        //  console.log('saved');
-        if (!lastName || !firstName || !email) {
+        if (!email || !firstName || !lastName) {
             M.toast({
                 html: 'Please enter all required fields',
                 displayLength: 4000,
@@ -37,13 +36,28 @@ const EditProfileForm = () => {
             return;
         }
         try {
-            updateProfile({ lastName, firstName, email, imageFile ,id});
+            const formData = new FormData()
+
+            if (image) formData.append('profileImage', image)
+            formData.append('lastName', lastName)
+            formData.append('firstName', firstName)
+            formData.append('email', email)
+
+            updateProfile(formData, id);
 
             M.toast({
                 html: 'Profile Saved',
                 displayLength: 4000,
                 classes: 'green',
             });
+            //clear form
+            // setLastName('')
+            // setFirstName('')
+            // setEmail('')
+            // setProfileImage('')
+            // setId('')
+            setImage('')
+
         } catch (error) {
             console.log(error);
         }
@@ -60,7 +74,7 @@ const EditProfileForm = () => {
                             type="text"
                             className="validate"
                             value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            onChange={e => setFirstName(e.target.value)}
                         />
                         <label htmlFor="first_name">First Name</label>
                     </div>
@@ -70,7 +84,7 @@ const EditProfileForm = () => {
                             type="text"
                             className="validate"
                             value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            onChange={e => setLastName(e.target.value)}
                         />
                         <label htmlFor="last_name">Last Name</label>
                     </div>
@@ -80,22 +94,23 @@ const EditProfileForm = () => {
                             type="email"
                             className="validate"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                         <label htmlFor="email">Email</label>
                     </div>
                     <div className='row'>
                         <div className="file-field input-field">
                             <div className="btn">
-                                <span>Upload Profile Image</span>
+                                <span>Upload Image</span>
                                 <input
                                     type="file"
-                                    name={imageFile}
-                                    onChange={e => setImageFile(e.target.files[0])}
+                                    name=''
+                                    onChange={e => setImage(e.target.files[0])}
+                                // setProfileImage(e.target)}
                                 />
                             </div>
                             <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" />
+                                <input className="file-path validate" type='text' />
                             </div>
                         </div>
                     </div>
@@ -109,7 +124,13 @@ const EditProfileForm = () => {
                         </button>
                     </div>
                 </form>
+                <div className='profile-img'>
+                    <img src={profileImage ? `${profileImage}` : `${`https://via.placeholder.com/200?text=Upload+your+profile+image`}`} alt="profile" style={{ width: '200' }} />
+                </div>
             </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Change Password
+            <i class="material-icons right">lock</i>
+            </button>
         </div>
     )
 }

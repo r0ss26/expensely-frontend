@@ -7,8 +7,6 @@ import EditCategoryModel from '../Modals/EditCategoryModel'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 
-import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal'
-
 
 //pass in components 
 const PrivateRoute = ({ component: Component, ...rest }) => {

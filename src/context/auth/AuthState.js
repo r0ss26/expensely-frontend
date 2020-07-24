@@ -24,7 +24,9 @@ import {
   CATEGORY_ERROR,
   ADD_CATEGORY_SUCCESS,
   UPDATE_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_SUCCESS
+  DELETE_CATEGORY_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL
 } from '../types';
 
 //create initial state
@@ -226,7 +228,9 @@ const AuthState = props => {
   const addCategory = async formData => {
 
     try {
-      const res = await axios.post('/categories', formData)
+      const res = await axios.post('/categories', formData,
+
+      )
       dispatch({
         type: ADD_CATEGORY_SUCCESS,
         payload: res.data
@@ -258,10 +262,20 @@ const AuthState = props => {
 
   }
 
-  const updateProfile = formData => {
+  const updateProfile = async (formData, id) => {
 
-    console.log(formData)
-    //const res = axios.put('/users/:')
+    try {
+      const res = await axios.put(`/users/${id}`, formData)
+      dispatch({
+        type: UPDATE_PROFILE_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PROFILE_FAIL,
+        payload: error.response.data.msg
+      })
+    }
   }
 
   //wrap the app with the auth provider

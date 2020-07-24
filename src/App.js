@@ -12,8 +12,12 @@ import Transactions from './components/pages/Transactions';
 import CategoriesList from './components/pages/categories/CategoriesList';
 import Profile from './components/pages/Profile';
 import Budget from './components/pages/Budget';
-import categoryDoughnut from './components/charts/TransactionsChart';
-import CreateCategoryModel from './components/Modals/CreateCategoryModel';
+import setToken from "./utils/setToken"
+
+
+// if (localStorage.token) {
+//   setToken(localStorage.token)
+// }
 
 
 function App() {
