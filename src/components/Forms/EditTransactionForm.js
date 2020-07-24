@@ -33,7 +33,7 @@ const EditTransactionForm = (props) => {
       setAmount(transaction.amount);
       setComment(transaction.comment);
       setTransactionType(transaction.transactionType);
-      dateInput.current.value=(moment(transaction.date).format('DD MMM YYYY'));
+      dateInput.current.value=(moment(transaction.date).format('ddd DD MMM YYYY'));
       handleDateChange()
       setCategory(transaction.category);
     }

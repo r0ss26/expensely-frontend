@@ -16,6 +16,8 @@ const TransactionsTable = () => {
   const [itemToDelete, setItemToDelete] = useState('');
   const [itemToEdit, setItemToEdit] = useState('');
 
+  const [dateFilter, setDateFilter] = useState('')
+
   let transactions = [];
   if (user) transactions = user.transactions;
 
