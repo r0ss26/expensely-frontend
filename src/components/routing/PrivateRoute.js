@@ -6,6 +6,7 @@ import AddBtn from '../layout/AddBtn'
 import EditCategoryModel from '../Modals/EditCategoryModel'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
+import EditCategoryModel from '../Modals/EditCategoryModel'
 
 
 //pass in components 
@@ -39,7 +40,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     <AddBtn />
                     <Navbar />
                     {/* <CreateTransactionModal /> */}
-                    <EditCategoryModel />
+                    {/* <EditCategoryModal /> */}
                     {/* <CreateCategoryModel /> */}
                     <div className="container">
                         <Component {...props} />

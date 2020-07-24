@@ -3,6 +3,7 @@ import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTrans
 import CategorySelect from '../CategorySelect/CategorySelect';
 import CreateBudgetModal from '../Modals/CreateBudgetModal.js/CreateBudgetModal';
 import CreateCategoryModel from '../Modals/CreateCategoryModel'
+import EditCategoryModel from '../Modals/EditCategoryModel';
 
 const AddBtn = () => {
   return (
@@ -32,6 +33,7 @@ const AddBtn = () => {
       </div>
       <CreateCategoryModel />
       <CreateTransactionModal />
+      <EditCategoryModel />
       <CreateBudgetModal />
     </>
   );

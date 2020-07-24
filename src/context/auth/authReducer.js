@@ -22,6 +22,7 @@ import {
   DELETE_CATEGORY_SUCCESS,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL
+
 } from '../types';
 
 export default (state, action) => {
