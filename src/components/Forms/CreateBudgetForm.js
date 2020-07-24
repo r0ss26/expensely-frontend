@@ -25,7 +25,7 @@ const CreateTransactionForm = () => {
       return;
     }
     try {
-      addBudget({name, amount, timePeriod, category});
+      addBudget({ name, amount, timePeriod, category });
 
       M.toast({
         html: 'Budget Added',
@@ -73,26 +73,31 @@ const CreateTransactionForm = () => {
           <label htmlFor="amount">Amount ($)</label>
         </div>
 
-        <div className="input-field col s6">
-          <input
+        <div class="input-field col s12">
+          <select
             value={timePeriod}
             name="budget-time-period"
             onChange={(e) => setTimePeriod(e.target.value)}
             id="budget-time-period"
             type="text"
             className="validate"
-          />
-          <label htmlFor="comment">Time Period</label>
+          >
+            <option value="" disabled selected>
+              Choose your option
+            </option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+          <label>Time Period</label>
         </div>
 
         <div className="input-field col s6">
           <CategorySelect
-            transactionType='expense'
+            transactionType="expense"
             value={category}
             onSelect={setCategory}
           />
         </div>
-
       </form>
       <div className="modal-footer">
         <a

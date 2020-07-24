@@ -10,7 +10,7 @@ const CategorySelect = (props) => {
   let categories = [];
   if (user)
     categories = user.categories.filter(
-      (category) => category.type === props.transactionType
+      (category) => category.transactionType === props.transactionType
     );
 
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
@@ -30,7 +30,7 @@ const CategorySelect = (props) => {
     console.log('type changed');
     if (user)
       categories = user.categories.filter(
-        (category) => category.type === props.transactionType
+        (category) => category.transactiontType === props.transactionType
       );
   }, [props.transactionType]);
 

@@ -26,7 +26,7 @@ const TransactionsTable = () => {
   return (
     <>
       <div className="container">
-        <table className="striped">
+        <table className="striped responsive-table">
           <thead>
             <tr>
               <th>Date</th>
