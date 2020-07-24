@@ -1,15 +1,14 @@
-import React from 'react'
-import './pageStyle.css'
-
+import React from 'react';
+import './pageStyle.css';
+import BudgetsTable from '../BudgetsTable/BudgetsTable';
 
 const Budget = () => {
-    return (
-        <div className='container-wrapper'>
+  return (
+    <div className="container-wrapper">
+      <h1>This is show all budget page</h1>
+      <BudgetsTable />
+    </div>
+  );
+};
 
-            <h1>This is show all budget page</h1>
-
-        </div>
-    )
-}
-
-export default Budget
+export default Budget;

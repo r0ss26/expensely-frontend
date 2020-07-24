@@ -6,7 +6,7 @@ import AddBtn from '../layout/AddBtn'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
 
-import CreateTransactionModal from '../Modals/CreateTransactionModal'
+import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal'
 
 
 //pass in components 
@@ -39,7 +39,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 <>
                     <AddBtn />
                     <Navbar />
-                    <CreateTransactionModal />
                     <div className="container">
                         <Component {...props} />
                     </div>
