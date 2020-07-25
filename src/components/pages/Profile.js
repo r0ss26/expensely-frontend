@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
+import React from 'react'
 import './pageStyle.css'
 import EditProfileForm from '../Forms/EditProfileForm'
 import AuthContext from '../../context/auth/authContext'
 
 const Profile = () => {
-
 
     const authContext = useContext(AuthContext);
 
@@ -15,7 +15,6 @@ const Profile = () => {
     useEffect(() => {
         if (user) setImage(user.profileImage)
     })
-
 
 
     return (

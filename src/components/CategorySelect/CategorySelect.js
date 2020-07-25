@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import capitalize from '../../utils/capitalize';
 import M from 'materialize-css';
+import './categorySelectStyles.css'
 
 const CategorySelect = (props) => {
   const authContext = useContext(AuthContext);
@@ -12,7 +13,8 @@ const CategorySelect = (props) => {
     categories = user.categories.filter(
       (category) => category.transactionType === props.transactionType
     );
-
+    //console.log(categories)
+  // console.log(categories)
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
     const select = document.querySelectorAll('.category-select');
@@ -35,12 +37,15 @@ const CategorySelect = (props) => {
         size="5"
         required
       >
-        <option value="">Choose a category</option>
+        <option value="" className="colorIcon">Choose a category</option>
         {categories &&
           categories.map((category) => (
-            <option key={category._id} value={category.name}>
-              {capitalize(category.name)}
-            </option>
+            <>
+              <option key={category._id} value={category.name} data-color={category.color} data-icon="/square-regular.svg" style={{ backgroundColor: `${category.color}` }}>
+                {capitalize(category.name)}
+                {/* <span className='dot' style={{ backgroundColor: `${category.color}` }}></span> */}
+              </option>
+            </>
           ))}
       </select>
       <label>Category</label>

@@ -19,10 +19,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const authContext = useContext(AuthContext)
     //console.log(authContext)
-    const { isAuthenticated, loading, getUser } = authContext;
+    const { isAuthenticated, loading, getUser, user } = authContext;
 
     useEffect(() => {
-        // Check for token and update application state if required
+        //Check for token and update application state if required
         const token = localStorage.getItem('token');
         if (token && !isAuthenticated) {
             getUser();
