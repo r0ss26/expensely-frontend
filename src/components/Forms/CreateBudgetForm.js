@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import M from 'materialize-css';
 import CategorySelect from '../CategorySelect/CategorySelect';

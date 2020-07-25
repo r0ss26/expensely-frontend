@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 import { Sidenav } from 'materialize-css/dist/js/materialize.min.js'
@@ -13,7 +13,7 @@ const Nav = () => {
 
     useEffect(() => {
         const elems = document.querySelectorAll('.sidenav');
-        const instances = Sidenav.init(elems, {});
+        Sidenav.init(elems, {});
         // eslint-disable-next-line
     }, [])
 

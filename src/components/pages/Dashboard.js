@@ -1,7 +1,7 @@
-
 import React, { useContext, useEffect } from 'react';
 import AuthContext from "../../context/auth/authContext"
 import TransactionsChart from '../Charts/TransactionsChart';
+
 
 const Dashboard = () => {
 

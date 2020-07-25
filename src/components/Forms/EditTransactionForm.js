@@ -26,7 +26,7 @@ const EditTransactionForm = (props) => {
         (transaction) => transaction._id === props.transactionId
       )
     );
-  }, [props.transactionId]);
+  }, [props.transactionId, user.transactions]);
 
   useEffect(() => {
     if (transaction) {
@@ -85,7 +85,7 @@ const EditTransactionForm = (props) => {
   return (
     <>
       <h4>Edit Transaction</h4>
-      <a
+      <button
         id="expense"
         className={`waves-effect waves-light btn ${
           transactionType === 'expense' ? 'disabled' : ''
@@ -93,8 +93,8 @@ const EditTransactionForm = (props) => {
         onClick={() => setTransactionType('expense')}
       >
         <i className="material-icons right">money_off</i>Expense
-      </a>
-      <a
+      </button>
+      <button
         id="income"
         className={`waves-effect waves-light btn ${
           transactionType === 'income' ? 'disabled' : ''
@@ -102,7 +102,7 @@ const EditTransactionForm = (props) => {
         onClick={() => setTransactionType('income')}
       >
         <i className="material-icons left">attach_money</i>Income
-      </a>
+      </button>
 
       <form>
         <div className="input-field col s6">

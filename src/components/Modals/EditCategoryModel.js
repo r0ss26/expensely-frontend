@@ -3,7 +3,8 @@ import AuthContext from "../../context/auth/authContext"
 import M from 'materialize-css/dist/js/materialize.min.js';
 import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
 import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
-import { CirclePicker, ChromePicker, SliderPicker } from 'react-color';
+import { SliderPicker } from 'react-color';
+// import { CirclePicker, ChromePicker, SliderPicker } from 'react-color';
 // import FontIconPicker from '@fonticonpicker/react-fonticonpicker';
 // import iconsDB from './icons'
 
@@ -64,7 +65,7 @@ const EditCategoryModel = () => {
             <div id="edit-category-modal" className="modal">
                 <div className="modal-content center-align">
                     <h4>Edit Category</h4>
-                    <a
+                    <button
                         id="expense"
                         className={`waves-effect waves-light btn ${
                             transactionType === 'expense' ? 'disabled' : ''
@@ -72,8 +73,8 @@ const EditCategoryModel = () => {
                         onClick={() => setTransactionType('expense')}
                     >
                         <i className="material-icons right">money_off</i>Expense
-                    </a>
-                    <a
+                    </button>
+                    <button
                         id="income"
                         className={`waves-effect waves-light btn ${
                             transactionType === 'income' ? 'disabled' : ''
@@ -81,7 +82,7 @@ const EditCategoryModel = () => {
                         onClick={() => setTransactionType('income')}
                     >
                         <i className="material-icons left">attach_money</i>Income
-                    </a>
+                    </button>
 
                     <form>
                         <div className="input-field col s6">

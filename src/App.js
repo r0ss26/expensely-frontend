@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import SignupForm from './components/Forms/SignupForm';
 import LoginForm from './components/Forms/LoginForm';
 import Home from './components/Pages/Home'
@@ -15,25 +15,29 @@ import Budget from './components/Pages/Budget';
 import setToken from "./utils/setToken"
 
 
-// if (localStorage.token) {
-//   setToken(localStorage.token)
-// }
-
-
 function App() {
-
   return (
     <AuthState>
       <Router>
         <Switch>
-          <PublicRoute restricted={false} exact path='/' component={Home} />
-          <PublicRoute restricted={true} exact path='/signup' component={SignupForm} />
-          <PublicRoute restricted={true} exact path='/login' component={LoginForm} />
-          <PrivateRoute exact path='/dashboard' component={Dashboard} />
-          <PrivateRoute exact path='/transactions' component={Transactions} />
-          <PrivateRoute exact path='/categories' component={CategoriesList} />
-          <PrivateRoute exact path='/profile' component={Profile} />
-          <PrivateRoute exact path='/budget' component={Budget} />
+          <PublicRoute restricted={false} exact path="/" component={Home} />
+          <PublicRoute
+            restricted={true}
+            exact
+            path="/signup"
+            component={SignupForm}
+          />
+          <PublicRoute
+            restricted={true}
+            exact
+            path="/login"
+            component={LoginForm}
+          />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/transactions" component={Transactions} />
+          <PrivateRoute exact path="/categories" component={CategoriesList} />
+          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/budget" component={Budget} />
         </Switch>
       </Router>
     </AuthState>

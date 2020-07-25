@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (token && !isAuthenticated) {
             getUser();
         }
-    }, []);
+    }, [isAuthenticated, getUser]);
 
     return (
         // Show the component only when the user is authenticated

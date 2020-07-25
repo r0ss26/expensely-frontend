@@ -4,7 +4,7 @@ import M from 'materialize-css';
 import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
 import EditTransactionModal from '../Modals/EditTransactionModal/EditTransactionModal';
 import capitalize from '../../utils/capitalize';
-import styles from './TransactionsTable.module.css';
+import './TransactionsTable.module.css';
 import moment from 'moment';
 
 const TransactionsTable = () => {
@@ -43,7 +43,7 @@ const TransactionsTable = () => {
     } else {
       setTransactions(user.transactions)
     }
-  }, [dateFilter]);
+  }, [dateFilter, transactions, user.transactions]);
 
   useEffect(() => {
     // Required by materialize to initialize the DatePicker
@@ -69,7 +69,7 @@ const TransactionsTable = () => {
           <label htmlFor="date">Date</label>
         </div>
 
-        <a
+        <button
           class="waves-effect waves-light btn modal-trigger"
           onClick={() => {
             setDateFilter('')
@@ -77,7 +77,7 @@ const TransactionsTable = () => {
           }}
         >
           All
-        </a>
+        </button>
 
         <table className="striped responsive-table">
           <thead>
