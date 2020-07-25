@@ -61,7 +61,7 @@ const CreateTransactionForm = () => {
   return (
     <>
       <h4>Add a Transaction</h4>
-      <a
+      <button
         id="expense"
         className={`waves-effect waves-light btn ${
           transactionType === 'expense' ? 'disabled' : ''
@@ -69,8 +69,8 @@ const CreateTransactionForm = () => {
         onClick={() => setTransactionType('expense')}
       >
         <i className="material-icons right">money_off</i>Expense
-      </a>
-      <a
+      </button>
+      <button
         id="income"
         className={`waves-effect waves-light btn ${
           transactionType === 'income' ? 'disabled' : ''
@@ -78,7 +78,7 @@ const CreateTransactionForm = () => {
         onClick={() => setTransactionType('income')}
       >
         <i className="material-icons left">attach_money</i>Income
-      </a>
+      </button>
 
       <form>
         <div className="input-field col s6">
@@ -93,7 +93,7 @@ const CreateTransactionForm = () => {
           <label htmlFor="date">Date</label>
         </div>
 
-        <div className="input-field col s6">
+        <div className="input-field col s6" >
           <CategorySelect transactionType={transactionType} value={category} onSelect={setCategory} />
         </div>
 

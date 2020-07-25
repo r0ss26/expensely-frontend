@@ -1,7 +1,7 @@
-import React, {useContext, useEffect} from 'react'
+import React from 'react'
 import './pageStyle.css'
 import EditProfileForm from '../Forms/EditProfileForm'
-import AuthContext from '../../context/auth/authContext'
+// import AuthContext from '../../context/auth/authContext'
 
 const Profile = () => {
 

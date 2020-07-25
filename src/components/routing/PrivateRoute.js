@@ -5,7 +5,6 @@ import Navbar from '../layout/Navbar'
 import AddBtn from '../layout/AddBtn'
 import "materialize-css/dist/css/materialize.min.css"
 import M from "materialize-css/dist/js/materialize.min.js"
-import EditCategoryModel from '../Modals/EditCategoryModel'
 
 
 //pass in components 
@@ -27,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (token && !isAuthenticated) {
             getUser();
         }
-    }, []);
+    }, [isAuthenticated, getUser]);
 
     return (
         // Show the component only when the user is authenticated

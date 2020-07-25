@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import M from 'materialize-css';
 import CategorySelect from '../CategorySelect/CategorySelect';
-import moment from 'moment';
 
 const EditBudgetForm = (props) => {
   const authContext = useContext(AuthContext);
@@ -20,7 +19,7 @@ const EditBudgetForm = (props) => {
 
   useEffect(() => {
     setBudget(user.budgets.find((budget) => budget._id === props.budgetId));
-  }, [props.budgetId]);
+  }, [user.budgets, props.budgetId]);
 
   useEffect(() => {
     if (budget) {

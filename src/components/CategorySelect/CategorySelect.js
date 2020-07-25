@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import capitalize from '../../utils/capitalize';
 import M from 'materialize-css';
@@ -25,15 +25,6 @@ const CategorySelect = (props) => {
     M.FormSelect.init(select);
   }, []);
 
-  // update the categories when the transactionType changes
-  useEffect(() => {
-    console.log('type changed');
-    if (user)
-      categories = user.categories.filter(
-        (category) => category.transactiontType === props.transactionType
-      );
-  }, [props.transactionType]);
-
   return (
     <>
       <select
@@ -41,7 +32,6 @@ const CategorySelect = (props) => {
         onChange={(event) => props.onSelect(event.target.value)}
         className="category-select no-autoinit"
         name="category"
-        style={{ maxHeight: '50px' }}
         size="5"
         required
       >
