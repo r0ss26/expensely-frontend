@@ -128,8 +128,8 @@ const EditProfileForm = () => {
                     <img src={profileImage ? `${profileImage}` : `${`https://via.placeholder.com/200?text=Upload+your+profile+image`}`} alt="profile" style={{ width: '200' }} />
                 </div>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Change Password
-            <i class="material-icons right">lock</i>
+            <button className="btn waves-effect waves-light" type="submit" name="action">Change Password
+            <i className="material-icons right">lock</i>
             </button>
         </div>
     )

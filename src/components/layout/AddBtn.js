@@ -9,10 +9,7 @@ const AddBtn = () => {
   return (
     <>
       <div className="fixed-action-btn">
-        <a
-          href="#create-transaction-modal"
-          className="btn-floating btn-large blue darken-2 modal-trigger"
-        >
+        <a className="btn-floating btn-large red darken-2 modal-trigger">
           <i className="large material-icons">add</i>
         </a>
         <ul>
@@ -28,6 +25,12 @@ const AddBtn = () => {
             <a href="#create-category-modal" className="btn-floating green modal-trigger">
               <i className="medium material-icons">storage</i>
             </a>
+          </li>
+          <li
+            href="#create-transaction-modal"
+            className="btn-floating btn-medium blue darken-2 modal-trigger"
+          >
+            <i className="medium material-icons">insert_chart</i>
           </li>
         </ul>
       </div>
