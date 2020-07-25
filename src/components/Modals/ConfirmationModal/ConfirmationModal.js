@@ -14,18 +14,18 @@ const ConfirmationModal = (props) => {
           <p>{props.confirmationText}</p>
         </div>
         <div className="modal-footer">
-          <a
+          <button
             onClick={props.onConfirm}
             className="modal-close waves-effect waves-green btn-flat"
           >
             {props.confirm}
-          </a>
-          <a
+          </button>
+          <button
             href="#!"
             className="modal-close waves-effect waves-green btn-flat"
           >
             {props.decline}
-          </a>
+          </button>
         </div>
       </div>
     </>

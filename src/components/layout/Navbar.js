@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 import { Sidenav } from 'materialize-css/dist/js/materialize.min.js'
@@ -8,13 +8,13 @@ const Nav = () => {
 
     const authContext = useContext(AuthContext)
     //console.log("navbar", authContext)
-    const { logout, user, getUser } = authContext
+    const { logout, user } = authContext
 
-    const [image, setImage] = useState()
+    // const [image, setImage] = useState()
 
     useEffect(() => {
         const elems = document.querySelectorAll('.sidenav');
-        const instances = Sidenav.init(elems, {});
+        Sidenav.init(elems, {});
         // eslint-disable-next-line
         // getUser()
         // if (user) setImage(user.profileImage)

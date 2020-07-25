@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import fakeUser from './data'
 import './transactionsChart.css'
@@ -21,7 +21,7 @@ const TransactionsChart = (type) => {
         })
         item.amount += o.amount
         return r.set(key, item)
-    }, new Map).values()]
+    }, new Map()).values()]
 
     //sort category alphetically
     let sortedCategory = addCategoryAmount.sort((a, b) => {

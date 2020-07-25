@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import AuthContext from '../../../context/auth/authContext';
+import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import capitalize from '../../../utils/capitalize';
-import styles from './CreateTransactionModal.module.css'; // Override materialize dropdown height
+import './CreateTransactionModal.module.css'
 import CreateTransactionForm from '../../Forms/CreateTransactionForm';
 
 const CreateTransactionModal = (props) => {
