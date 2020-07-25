@@ -5,8 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:5000';
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('jwt')}`;
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 ReactDOM.render(
   <React.StrictMode>
