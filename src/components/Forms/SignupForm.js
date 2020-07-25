@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import AuthContext from '../../context/auth/authContext'
 // import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import './formStyle.css'
+import { Link } from 'react-router-dom'
 
 const SignupForm = (props) => {
 
@@ -51,8 +53,9 @@ const SignupForm = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="auth-form-container">
       <div className="row">
+        <h2>Account Register </h2>
         <form onSubmit={handleSignupFormSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s6">
@@ -82,10 +85,11 @@ const SignupForm = (props) => {
               <label htmlFor="confirm-password">Confirm Password</label>
             </div>
           </div>
-          <button className="btn waves-effect waves-light" name="action">Signup
+          <button className="btn waves-effect waves-light right" name="action">Signup
             <i className="material-icons right">send</i>
           </button>
         </form>
+        <h5 className="right">Already registered? Login <Link to="/login">here</Link></h5>
       </div>
     </div>
   )

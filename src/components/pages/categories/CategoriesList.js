@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../../../context/auth/authContext';
-import '../pageStyle.css';
-// import user from '../../charts/data';
+import AuthContext from "../../../context/auth/authContext"
+import '../pageStyle.css'
+
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const CategoriesList = () => {

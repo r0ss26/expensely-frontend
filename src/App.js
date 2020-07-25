@@ -3,15 +3,17 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import SignupForm from './components/Forms/SignupForm';
 import LoginForm from './components/Forms/LoginForm';
-import Home from './components/pages/Home';
-import AuthState from './context/auth/AuthState';
-import PrivateRoute from './components/routing/PrivateRoute';
-import PublicRoute from './components/routing/PublicRoute';
-import Dashboard from './components/pages/Dashboard';
-import Transactions from './components/pages/Transactions';
-import CategoriesList from './components/pages/categories/CategoriesList';
-import Profile from './components/pages/Profile';
-import Budget from './components/pages/Budget';
+import Home from './components/Pages/Home'
+import AuthState from './context/auth/AuthState'
+import PrivateRoute from './components/Routing/PrivateRoute'
+import PublicRoute from './components/Routing/PublicRoute'
+import Dashboard from './components/Pages/Dashboard';
+import Transactions from './components/Pages/Transactions';
+import CategoriesList from './components/Pages/Categories/CategoriesList';
+import Profile from './components/Pages/Profile';
+import Budget from './components/Pages/Budget';
+import setToken from "./utils/setToken"
+
 
 function App() {
   return (

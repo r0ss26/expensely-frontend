@@ -11,43 +11,80 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: aliceblue;
 }
 
-.links .icon-wrapper {
+.navigation .links .icon-wrapper {
   display: flex;
   flex-direction: column;
+  margin: 5px 0px;
 }
 
-.links .icon-wrapper p {
+.navigation .links .icon-wrapper p {
   margin: 0;
   line-height: 1;
 }
 
-.links {
+.navigation .links {
   text-align: center;
 }
 
-.links .icon-wrapper a {
+.navigation .links .icon-wrapper a {
   margin: 5px 0;
+}
+
+.profile-img img {
+  width: 100px;
+}
+
+.logo-img img {
+  width: 120px;
+}
+
+.logout {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.logout p {
+  margin: 0;
+  line-height: 1;
+}
+
+/* sidenav */
+.col {
+  margin: 10px;
 }
 
 .sidenav {
   width: 150px;
-  max-height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aliceblue;
+  /* //justify-content: space-between; */
 }
 
-.sidenav .icon-wrapper {
+.sidenav .icon-wrapper a {
+  margin: 5px 0px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidenav .icon-wrapper p {
+  margin: 0;
+  line-height: 1;
 }
 
 .sidenav li > a > i.material-icons {
   float: none;
   margin: 0;
   width: 0;
+  text-align: center;
 }
 
-.profile-img img {
-  width: 100px;
+.sidenav .logout {
+  margin-top: 80px;
 }
