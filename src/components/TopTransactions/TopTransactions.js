@@ -20,53 +20,60 @@ const TopTransactions = () => {
   const [timePeriod, setTimePeriod] = useState('all');
 
   useEffect(() => {
-    let allTransactions = [];
-    if (timePeriod === 'all') {
-      allTransactions = user.transactions;
-    } else if (timePeriod === 'month') {
-      allTransactions = getCurrentMonthsTransactions(user.transactions);
-    } else {
-      allTransactions = getCurrentWeekTransactions(user.transactions);
-    }
-    const categoryAmounts = {};
-    allTransactions.forEach((transaction) => {
-      if (categoryAmounts[transaction.category]) {
-        categoryAmounts[transaction.category] += transaction.amount;
+    if (user) {
+      let allTransactions = [];
+      if (timePeriod === 'all') {
+        allTransactions = user.transactions;
+      } else if (timePeriod === 'month') {
+        allTransactions = getCurrentMonthsTransactions(user.transactions);
       } else {
-        categoryAmounts[transaction.category] = transaction.amount;
+        allTransactions = getCurrentWeekTransactions(user.transactions);
       }
-    });
+      const categoryAmounts = {};
+      allTransactions.forEach((transaction) => {
+        if (categoryAmounts[transaction.category]) {
+          categoryAmounts[transaction.category] += transaction.amount;
+        } else {
+          categoryAmounts[transaction.category] = transaction.amount;
+        }
+      });
 
-    let categoryArray = [];
-    Object.keys(categoryAmounts).forEach((category) => {
-      categoryArray.push({ name: category, amount: categoryAmounts[category] });
-    });
+      let categoryArray = [];
+      Object.keys(categoryAmounts).forEach((category) => {
+        categoryArray.push({
+          name: category,
+          amount: categoryAmounts[category],
+        });
+      });
 
-    categoryArray.sort((a, b) => {
-      return b.amount - a.amount;
-    });
+      categoryArray.sort((a, b) => {
+        return b.amount - a.amount;
+      });
 
-    setTopCategories(categoryArray.slice(0, 5));
-  }, [isAmount, user.transactions, timePeriod]);
+      setTopCategories(categoryArray.slice(0, 5));
+    }
+  }, [isAmount, user, timePeriod]);
 
   useEffect(() => {
-    let allTransactions = [];
-    if (timePeriod === 'all') {
-      allTransactions = user.transactions;
-    } else if (timePeriod === 'month') {
-      allTransactions = getCurrentMonthsTransactions(user.transactions);
-    } else {
-      allTransactions = getCurrentWeekTransactions(user.transactions);
-    }
+    if (user) {
+      let allTransactions = [];
+      if (timePeriod === 'all') {
+        allTransactions = user.transactions;
+      } else if (timePeriod === 'month') {
+        allTransactions = getCurrentMonthsTransactions(user.transactions);
+      } else {
+        allTransactions = getCurrentWeekTransactions(user.transactions);
+      }
 
-    setTopTransactions(
-      allTransactions
-        .sort((a, b) => {
-          return b.amount - a.amount;
-        })
-        .slice(0, 5)
-    );
-  }, [isAmount, timePeriod, user.transactions]);
+      setTopTransactions(
+        allTransactions
+          .sort((a, b) => {
+            return b.amount - a.amount;
+          })
+          .slice(0, 5)
+      );
+    }
+  }, [isAmount, timePeriod, user]);
 
   return (
     <div style={{ maxWidth: '500px' }} className="card  center-align">
