@@ -13,7 +13,7 @@ const CategorySelect = (props) => {
     categories = user.categories.filter(
       (category) => category.transactionType === props.transactionType
     );
-    //console.log(categories)
+  //console.log(categories)
   // console.log(categories)
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
@@ -41,7 +41,7 @@ const CategorySelect = (props) => {
         {categories &&
           categories.map((category) => (
             <>
-              <option key={category._id} value={category.name} data-color={category.color} data-icon="/square-regular.svg" style={{ backgroundColor: `${category.color}` }}>
+              <option key={category._id} value={category._id} style={{ backgroundColor: `${category.color}` }}>
                 {capitalize(category.name)}
                 {/* <span className='dot' style={{ backgroundColor: `${category.color}` }}></span> */}
               </option>

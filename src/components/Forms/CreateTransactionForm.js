@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext'
-import M from 'materialize-css'
+import M from 'materialize-css/dist/js/materialize.min.js';
 import CategorySelect from '../CategorySelect/CategorySelect';
 
 const CreateTransactionForm = () => {

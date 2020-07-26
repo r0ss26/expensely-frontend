@@ -3,8 +3,8 @@ import AuthContext from '../../context/auth/authContext'
 import { Route, Redirect } from 'react-router-dom'
 import Navbar from '../Layout/Navbar'
 import AddBtn from '../Layout/AddBtn'
-import "materialize-css/dist/css/materialize.min.css"
-import M from "materialize-css/dist/js/materialize.min.js"
+import M from 'materialize-css/dist/js/materialize.min.js'
+import "materialize-css/dist/css/materialize.min.css";
 
 
 

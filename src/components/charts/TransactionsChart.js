@@ -5,7 +5,7 @@ import AuthContext from '../../context/auth/authContext';
 import './transactionsChart.css'
 import { sortCategory } from '../../utils/helper'
 
-const TransactionsChart = ({ transactions, type }) => {
+const TransactionsChart = ({ type }) => {
     // console.log("type", type)
     const authContext = useContext(AuthContext);
     const { user } = authContext
@@ -18,10 +18,11 @@ const TransactionsChart = ({ transactions, type }) => {
 
 
     useEffect(() => {
+        if (user) setAllTransactions(user.transactions)
         //display type of transaction accordin to props pass in
-        setAllTransactions(transactions.filter(item => item.transactionType === type))
+        allTransactions.filter(item => item.transactionType === type)
 
-    }, [transactions])
+    }, [allTransactions])
 
     //const transaction = fakeUser.transactions.filter(item => item.transactionType === 'expense')
     console.log(allTransactions)
@@ -29,37 +30,46 @@ const TransactionsChart = ({ transactions, type }) => {
     useEffect(() => {
         let newObj = {}
         allTransactions.forEach(function (item) {
-            console.log("item", item)
-            if (newObj.hasOwnProperty(item.category)) {
-                newObj[item.category] = newObj[item.category] + item.amount
-            } else {
-                newObj[item.category] = item.amount
+            for (let i in item.category[0]) {
+                
+                newObj['name'] = item.category[0]['name']
+                newObj['color'] = item.category[0]['color']
+                newObj['amount'] = item.amount
             }
-        })
-        console.log(newObj)
-        let total = []
-        for (let prop in newObj) {
-            total.push({ category: prop, amount: newObj[prop] })
-        }
-        total.sort((a, b) => {
-            let catA = a.category.toLowerCase()
-            let catB = b.category.toLowerCase()
-            return (catA < catB) ? -1 : (catA > catB) ? 1 : 0;
-        })
+        })  // }
 
-        setCategories(total.map(item => item.category))
-        setAmountCategory(total.map(item => item.amount))
-        let sum = total.reduce((acc, cur) => acc + cur.amount, 0)
-        setPercent(total.map(item => ((item.amount / sum) * 100).toFixed(1)))
-        setColor()
+        setCategories(newObj)
+        // console.log(newObj)
+        // if (newObj.hasOwnProperty(item.category)) {
+        //     newObj[item.category.amount] = newObj[item.category.amount] + item.amount
+        // } else {
+        //     newObj[item.category.amount] = item.amount
+        // }
+        // console.log(newObj)
+        // console.log(newObj)
+        // let total = []
+        // for (let prop in newObj) {
+        //     total.push({ category: prop, amount: newObj[prop] })
+        // }
+        // total.sort((a, b) => {
+        //     let catA = a.category.toLowerCase()
+        //     let catB = b.category.toLowerCase()
+        //     return (catA < catB) ? -1 : (catA > catB) ? 1 : 0;
+        // })
+
+        // setCategories(total.map(item => item.category))
+        // setAmountCategory(total.map(item => item.amount))
+        // let sum = total.reduce((acc, cur) => acc + cur.amount, 0)
+        // setPercent(total.map(item => ((item.amount / sum) * 100).toFixed(1)))
+        // setColor()
 
 
     }, [allTransactions])
 
     // console.log("sum", sum)
     console.log(categories)
-    console.log(amountCategory)
-    console.log(percent)
+    // console.log(amountCategory)
+    // console.log(percent)
 
 
 

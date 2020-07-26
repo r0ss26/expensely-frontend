@@ -33,8 +33,8 @@ const TransactionsTable = () => {
   useEffect(() => {
     if (dateFilter) {
       const filteredTransactions = transactions.filter((transaction) => {
-        console.log(moment(transaction.date).format('ddd DD MMM YYYY'));
-        console.log(dateFilter);
+        // console.log(moment(transaction.date).format('ddd DD MMM YYYY'));
+        // console.log(dateFilter);
         return (
           moment(transaction.date).format('ddd DD MMM YYYY') === dateFilter
         );
@@ -43,6 +43,7 @@ const TransactionsTable = () => {
     } else {
       setTransactions(user.transactions)
     }
+    // console.log(transactions)
   }, [dateFilter, transactions, user.transactions]);
 
   useEffect(() => {
@@ -96,7 +97,7 @@ const TransactionsTable = () => {
                 <tr key={transaction._id}>
                   <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                   <td>{capitalize(transaction.transactionType)}</td>
-                  <td>{capitalize(transaction.category)}</td>
+                  <td>{capitalize(transaction.category[0].name)}</td>
                   <td className={transaction.transactionType}>
                     {transaction.amount}
                   </td>

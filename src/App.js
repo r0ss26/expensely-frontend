@@ -12,7 +12,7 @@ import Transactions from './components/Pages/Transactions';
 import CategoriesList from './components/Pages/Categories/CategoriesList';
 import Profile from './components/Pages/Profile';
 import Budget from './components/Pages/Budget';
-import TransactionsChart from './components/Charts/TransactionsChart';
+// import TransactionsChart from './components/Charts/TransactionsChart';
 
 
 function App() {
