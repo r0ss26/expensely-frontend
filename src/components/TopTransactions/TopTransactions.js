@@ -2,7 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import moment from 'moment';
 import capitalize from '../../utils/capitalize';
-import M from 'materialize-css';
+import {
+  getCurrentMonthsTransactions,
+  getCurrentWeekTransactions,
+} from './../../utils/helper';
+import 'materialize-css';
 
 const TopTransactions = () => {
   const authContext = useContext(AuthContext);
@@ -13,10 +17,19 @@ const TopTransactions = () => {
 
   const [topTransactions, setTopTransactions] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
+  const [timePeriod, setTimePeriod] = useState('all');
 
   useEffect(() => {
+    let allTransactions = [];
+    if (timePeriod === 'all') {
+      allTransactions = user.transactions;
+    } else if (timePeriod === 'month') {
+      allTransactions = getCurrentMonthsTransactions(user.transactions);
+    } else {
+      allTransactions = getCurrentWeekTransactions(user.transactions);
+    }
     const categoryAmounts = {};
-    user.transactions.forEach((transaction) => {
+    allTransactions.forEach((transaction) => {
       if (categoryAmounts[transaction.category]) {
         categoryAmounts[transaction.category] += transaction.amount;
       } else {
@@ -34,29 +47,63 @@ const TopTransactions = () => {
     });
 
     setTopCategories(categoryArray.slice(0, 5));
-  }, [isAmount, user.transactions]);
+  }, [isAmount, user.transactions, timePeriod]);
 
   useEffect(() => {
+    let allTransactions = [];
+    if (timePeriod === 'all') {
+      allTransactions = user.transactions;
+    } else if (timePeriod === 'month') {
+      allTransactions = getCurrentMonthsTransactions(user.transactions);
+    } else {
+      allTransactions = getCurrentWeekTransactions(user.transactions);
+    }
+
     setTopTransactions(
-      user.transactions
+      allTransactions
         .sort((a, b) => {
           return b.amount - a.amount;
         })
         .slice(0, 5)
     );
-  }, [isAmount, user.transactions]);
+  }, [isAmount, timePeriod, user.transactions]);
 
   return (
     <div style={{ maxWidth: '500px' }} className="card  center-align">
-      <div class="card-tabs">
-        <ul class="tabs tabs-fixed-width">
-          <li onClick={() => setIsAmount(true)} class="tab">
-            <a class="active" href="#top-transactions-amount">
+      <div className="card-tabs">
+        <ul className="tabs tabs-fixed-width">
+          <li onClick={() => setIsAmount(true)} className="tab">
+            <a className="active" href="#top-transactions-amount">
               Amount
             </a>
           </li>
-          <li onClick={() => setIsAmount(false)} class="tab">
+          <li onClick={() => setIsAmount(false)} className="tab">
             <a href="#top-transactions-categories">Category</a>
+          </li>
+        </ul>
+      </div>
+      <div className="card-tabs">
+        <ul className="tabs tabs-fixed-width">
+          <li className="tab">
+            <a
+              onClick={() => setTimePeriod('all')}
+              className="active"
+              href="#top-transactions-weekly"
+            >
+              All Time
+            </a>
+          </li>
+          <li className="tab">
+            <a
+              onClick={() => setTimePeriod('month')}
+              className="active"
+              href="#top-transactions-weekly"
+            >
+              This Month
+            </a>
+          </li>
+          <li onClick={() => setTimePeriod('week')} className="tab">
+            <a href="#top-transactions-monthly">This Week</a>
           </li>
         </ul>
       </div>
