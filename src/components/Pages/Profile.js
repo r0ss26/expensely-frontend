@@ -8,13 +8,13 @@ const Profile = () => {
 
     const authContext = useContext(AuthContext);
 
-    const { user, getUser } = authContext
+    const { user } = authContext
 
     const [image, setImage] = useState('')
 
     useEffect(() => {
         if (user) setImage(user.profileImage)
-    })
+    }, [user])
 
 
 
@@ -30,7 +30,7 @@ const Profile = () => {
                                     alt="profile" style={{ width: '200' }} />
                             </div>
                             <div class="card-content">
-                            <span class="card-title">Your profile info</span>
+                                <span class="card-title">Your profile info</span>
                                 <p>First Name: {user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)} </p>
                                 <p>Last Name: {user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}</p>
                                 <p>Email: {user.email}</p>
