@@ -1,14 +1,29 @@
 /* login Signup */
 
 .auth-form-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 2rem auto;
   overflow: hidden;
   padding: 0 2rem;
 }
 
-.auth-form-container h1,
-h2,
-h3 {
+.auth-form-container h2 {
   text-align: center;
+}
+
+.auth-form-container .row .col.s12 {
+  width: 98%;
+}
+
+.auth-form-container .row .col.s6 {
+  width: 48%;
+}
+
+/* edit form */
+#edit-profile-form {
+  /* margin-left: 0; */
+  max-width: 600px;
+  margin: 2rem auto;
+  overflow: hidden;
+  padding: 0 2rem;
 }

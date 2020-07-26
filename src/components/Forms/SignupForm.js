@@ -54,8 +54,8 @@ const SignupForm = (props) => {
 
   return (
     <div className="auth-form-container">
+      <h2>Account Register </h2>
       <div className="row">
-        <h2>Account Register </h2>
         <form onSubmit={handleSignupFormSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s6">

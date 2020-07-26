@@ -26,7 +26,9 @@ import {
   UPDATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
   UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL
+  UPDATE_PROFILE_FAIL,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAIL
 } from '../types';
 
 //create initial state
@@ -39,7 +41,8 @@ const AuthState = props => {
     user: null,
     current_category: null,
     current_user: null,
-    categories: []
+    categories: [],
+    message: null
   }
   //call and dispatch action types to reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -278,6 +281,22 @@ const AuthState = props => {
     }
   }
 
+  const changePassword = async (formData, id) => {
+    console.log("form", formData, id)
+    try {
+      const res = axios.put(`/auth/reset/${id}`, formData)
+      dispatch({
+        type: CHANGE_PASSWORD_SUCCESS,
+        payload: res.data
+      })
+    } catch (error) {
+      dispatch({
+        type: CHANGE_PASSWORD_FAIL,
+        payload: error.response.data.msg
+      })
+    }
+  }
+
   //wrap the app with the auth provider
   return (
     <AuthContext.Provider
@@ -304,7 +323,8 @@ const AuthState = props => {
         addCategory,
         updateCategory,
         deleteCategory,
-        updateProfile
+        updateProfile,
+        changePassword
       }}
     >
       {props.children}

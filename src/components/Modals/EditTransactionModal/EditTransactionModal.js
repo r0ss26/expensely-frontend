@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import EditTransactionForm from '../../Forms/EditTransactionForm';
 
@@ -12,7 +12,7 @@ const EditTransactionModal = (props) => {
   return (
     <div id="edit-transaction-modal" className="modal editTransactionModal">
       <div className="modal-content center-align">
-        <EditTransactionForm 
+        <EditTransactionForm
           transactionId={props.transactionId}
         />
       </div>

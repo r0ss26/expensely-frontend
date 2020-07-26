@@ -38,10 +38,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 <>
                     <AddBtn />
                     <div className="row">
-                        <div className="col s3">
+                        <div className="col s2">
                             <Navbar />
                         </div>
-                        <div className="col s9 offset-s3">
+                        <div className="col s10 offset-s2">
                             <Component {...props} />
                         </div>
                     </div>
