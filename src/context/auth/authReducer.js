@@ -21,8 +21,9 @@ import {
   ADD_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
   UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL
-
+  UPDATE_PROFILE_FAIL,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAIL
 } from '../types';
 
 export default (state, action) => {
@@ -197,6 +198,25 @@ export default (state, action) => {
         ...state,
         error: action.payload
       }
+    case CHANGE_PASSWORD_SUCCESS:
+      // localStorage.removeItem('token');
+      console.log("changed success payload", action.payload)
+      // return Object.assign({}, state.user, { user: action.payload })
+
+        return {
+          ...state,
+          user: {
+            ...state.user
+          }
+        }
+    case CHANGE_PASSWORD_FAIL:
+      console.log("changed fail payload", action.payload)
+      return {
+        ...state,
+        error: action.payload
+      };
+
+
     default:
       return state
   }
