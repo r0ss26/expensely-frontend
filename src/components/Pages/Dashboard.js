@@ -8,14 +8,8 @@ const Dashboard = () => {
   return (
     <>
       <h1>This is dashboard</h1>
-<<<<<<< HEAD:src/components/pages/Dashboard.js
       <TransactionsChart type='expense' />
       <TransactionsChart type='income' />
-=======
-      <TopTransactions />
-       {/* <TransactionsChart type='expense' />  */}
-      {/* <TransactionsChart type='income' />  */}
->>>>>>> master:src/components/Pages/Dashboard.js
     </>
   );
 };

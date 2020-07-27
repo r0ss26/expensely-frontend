@@ -43,12 +43,8 @@ const TransactionsTable = () => {
     } else {
       setTransactions(user.transactions)
     }
-<<<<<<< HEAD
     // console.log(transactions)
   }, [dateFilter, transactions, user.transactions]);
-=======
-  }, [dateFilter, user, transactions]);
->>>>>>> master
 
   useEffect(() => {
     // Required by materialize to initialize the DatePicker
@@ -84,12 +80,12 @@ const TransactionsTable = () => {
           All
         </button>
 
-        {/* <table className="striped responsive-table">
+        <table className="striped responsive-table">
           <thead>
             <tr>
               <th>Date</th>
               <th>Type</th>
-              {/* <th>Category</th> */}
+              <th>Category</th>
               <th>Amount</th>
               <th>Comment</th>
             </tr>
@@ -129,7 +125,7 @@ const TransactionsTable = () => {
                 </tr>
               ))}
           </tbody>
-        </table> */}
+        </table>
       </div>
       <EditTransactionModal transactionId={itemToEdit} />
       <ConfirmationModal
