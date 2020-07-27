@@ -7,13 +7,13 @@ const Profile = () => {
 
     const authContext = useContext(AuthContext);
 
-    const { user, getUser } = authContext
+    const { user } = authContext
 
     const [image, setImage] = useState('')
 
     useEffect(() => {
         if (user) setImage(user.profileImage)
-    })
+    }, [user])
 
 
     return (
