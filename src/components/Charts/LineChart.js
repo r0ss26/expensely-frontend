@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import AuthContext from '../../context/auth/authContext';
 import { getPrevious30DaysTotals } from '../../utils/helper';
@@ -15,7 +15,7 @@ const LineChart = () => {
     )
     .reverse();
 
-  const data = {
+  const initialChartData = {
     labels: prev30Days,
     datasets: [
       {
@@ -42,9 +42,19 @@ const LineChart = () => {
     ],
   };
 
+  const [data, setData] = useState(initialChartData)
+
   useEffect(() => {
     if (user) {
-      data.datasets[0].data = getPrevious30DaysTotals(user.transactions);
+      setData({
+        ...data,
+        datasets: [
+          {
+            ...data.datasets[0],
+            data: getPrevious30DaysTotals(user.transactions)
+          }
+        ]
+      })
     }
   }, [user]);
 
