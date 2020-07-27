@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext'
-import M from 'materialize-css'
+import M from 'materialize-css/dist/js/materialize.min.js';
 import CategorySelect from '../CategorySelect/CategorySelect';
 
 const CreateTransactionForm = () => {
@@ -41,7 +41,7 @@ const CreateTransactionForm = () => {
       return;
     }
     try {
-      addTransaction(transactionType, { date, amount, comment, category});
+      addTransaction(transactionType, { date, amount, comment, category });
 
       M.toast({
         html: 'Transaction Added',
@@ -65,7 +65,7 @@ const CreateTransactionForm = () => {
         id="expense"
         className={`waves-effect waves-light btn ${
           transactionType === 'expense' ? 'disabled' : ''
-        }`}
+          }`}
         onClick={() => setTransactionType('expense')}
       >
         <i className="material-icons right">money_off</i>Expense
@@ -74,7 +74,7 @@ const CreateTransactionForm = () => {
         id="income"
         className={`waves-effect waves-light btn ${
           transactionType === 'income' ? 'disabled' : ''
-        }`}
+          }`}
         onClick={() => setTransactionType('income')}
       >
         <i className="material-icons left">attach_money</i>Income

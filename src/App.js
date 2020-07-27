@@ -12,13 +12,14 @@ import Transactions from './components/Pages/Transactions';
 import CategoriesList from './components/Pages/Categories/CategoriesList';
 import Profile from './components/Pages/Profile';
 import Budget from './components/Pages/Budget';
-import setToken from "./utils/setToken"
+// import TransactionsChart from './components/Charts/TransactionsChart';
 
 
 function App() {
   return (
     <AuthState>
       <Router>
+
         <Switch>
           <PublicRoute restricted={false} exact path="/" component={Home} />
           <PublicRoute

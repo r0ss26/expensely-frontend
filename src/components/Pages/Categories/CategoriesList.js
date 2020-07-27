@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from "../../../context/auth/authContext"
-import '../pageStyle.css'
+import AuthContext from '../../../context/auth/authContext';
+import '../pageStyle.css';
+import M from 'materialize-css/dist/js/materialize.min.js'
+// import user from '../../charts/data';
 
-import M from 'materialize-css/dist/js/materialize.min.js';
 
 const CategoriesList = () => {
   const authContext = useContext(AuthContext);
@@ -140,8 +141,8 @@ const CategoriesList = () => {
       {filteredOptions.length === 0 ? (
         <p>No categories found</p>
       ) : (
-        showCategories
-      )}
+          showCategories
+        )}
     </>
   );
 };

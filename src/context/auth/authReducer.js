@@ -31,7 +31,7 @@ export default (state, action) => {
   switch (action.type) {
 
     case GET_USER:
-      console.log(action.payload.firstName)
+      // console.log(action.payload.firstName)
       return {
         ...state,
         isAuthenticated: true,

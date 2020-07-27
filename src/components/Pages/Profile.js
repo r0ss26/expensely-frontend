@@ -5,7 +5,6 @@ import AuthContext from '../../context/auth/authContext'
 
 const Profile = () => {
 
-
     const authContext = useContext(AuthContext);
 
     const { user } = authContext
@@ -15,7 +14,6 @@ const Profile = () => {
     useEffect(() => {
         if (user) setImage(user.profileImage)
     }, [user])
-
 
 
     return (

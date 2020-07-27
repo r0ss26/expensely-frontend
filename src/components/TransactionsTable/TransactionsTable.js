@@ -33,8 +33,8 @@ const TransactionsTable = () => {
   useEffect(() => {
     if (dateFilter) {
       const filteredTransactions = transactions.filter((transaction) => {
-        console.log(moment(transaction.date).format('ddd DD MMM YYYY'));
-        console.log(dateFilter);
+        // console.log(moment(transaction.date).format('ddd DD MMM YYYY'));
+        // console.log(dateFilter);
         return (
           moment(transaction.date).format('ddd DD MMM YYYY') === dateFilter
         );
@@ -43,7 +43,12 @@ const TransactionsTable = () => {
     } else {
       setTransactions(user.transactions)
     }
+<<<<<<< HEAD
+    // console.log(transactions)
+  }, [dateFilter, transactions, user.transactions]);
+=======
   }, [dateFilter, user, transactions]);
+>>>>>>> master
 
   useEffect(() => {
     // Required by materialize to initialize the DatePicker
@@ -84,7 +89,7 @@ const TransactionsTable = () => {
             <tr>
               <th>Date</th>
               <th>Type</th>
-              <th>Category</th>
+              {/* <th>Category</th> */}
               <th>Amount</th>
               <th>Comment</th>
             </tr>
@@ -96,7 +101,7 @@ const TransactionsTable = () => {
                 <tr key={transaction._id}>
                   <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                   <td>{capitalize(transaction.transactionType)}</td>
-                  <td>{capitalize(transaction.category)}</td>
+                  <td>{transaction.category}</td>
                   <td className={transaction.transactionType}>
                     {transaction.amount}
                   </td>

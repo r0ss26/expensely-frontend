@@ -212,6 +212,7 @@ const AuthState = props => {
   }
 
   const updateCategory = async formData => {
+    console.log(formData, "edit cat form data")
     try {
       const res = await axios.put(`/categories/${formData.id}`, formData)
 
