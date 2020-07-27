@@ -85,7 +85,7 @@ const TransactionsTable = () => {
             <tr>
               <th>Date</th>
               <th>Type</th>
-              <th>Category</th>
+              {/* <th>Category</th> */}
               <th>Amount</th>
               <th>Comment</th>
             </tr>
@@ -97,7 +97,7 @@ const TransactionsTable = () => {
                 <tr key={transaction._id}>
                   <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                   <td>{capitalize(transaction.transactionType)}</td>
-                  <td>{capitalize(transaction.category[0].name)}</td>
+                  <td>{transaction.category}</td>
                   <td className={transaction.transactionType}>
                     {transaction.amount}
                   </td>
