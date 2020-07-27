@@ -27,7 +27,6 @@ const TransactionsChart = (props) => {
     }, [user, allTransactions, props.type])
 
     useEffect(() => {
-
         let newObj = {}
         let result = []
         type.forEach(item => {
@@ -65,7 +64,7 @@ const TransactionsChart = (props) => {
     //data for chart
     const data = {
 
-        // labels: categories,
+        labels: categories,
         datasets: [{
             data: amount, categories,
             percentage: percent,
