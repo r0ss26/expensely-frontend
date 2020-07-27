@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from "../../context/auth/authContext"
 import TransactionsChart from '../Charts/TransactionsChart';
 import TopTransactions from '../TopTransactions/TopTransactions'
+import BudgetExpenseBar from '../Charts/ProgressBar/BudgetExpenseBar';
 
 const Dashboard = () => {
 
@@ -11,6 +12,7 @@ const Dashboard = () => {
       <TopTransactions />
       <TransactionsChart type='expense' />
       <TransactionsChart type='income' />
+      <BudgetExpenseBar />
     </>
   );
 };

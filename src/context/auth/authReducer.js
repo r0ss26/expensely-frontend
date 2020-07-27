@@ -23,7 +23,8 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL
+  CHANGE_PASSWORD_FAIL,
+  GET_DAY
 } from '../types';
 
 export default (state, action) => {
@@ -203,12 +204,12 @@ export default (state, action) => {
       console.log("changed success payload", action.payload)
       // return Object.assign({}, state.user, { user: action.payload })
 
-        return {
-          ...state,
-          user: {
-            ...state.user
-          }
+      return {
+        ...state,
+        user: {
+          ...state.user
         }
+      }
     case CHANGE_PASSWORD_FAIL:
       console.log("changed fail payload", action.payload)
       return {
@@ -216,7 +217,11 @@ export default (state, action) => {
         error: action.payload
       };
 
-
+    case GET_DAY:
+      return {
+        ...state,
+        currentDay: action.payload
+      }
     default:
       return state
   }

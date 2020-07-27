@@ -1,0 +1,31 @@
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: beige;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.card-action li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  position: relative;
+  height: 20px;
+  width: 350px;
+  border-radius: 50px;
+  border: 1px solid #333;
+  margin: 20px 0;
+}
+
+.filler {
+  background: #1da598;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.2s ease-in;
+}
