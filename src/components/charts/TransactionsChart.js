@@ -10,6 +10,7 @@ const TransactionsChart = (props) => {
     const { user } = authContext
 
     const [allTransactions, setAllTransactions] = useState([]);
+    const [type, setType] = useState([])
     const [allCategories, setAllCategories] = useState([])
     const [categoryItems, setCategoryItems] = useState([])
     const [categories, setCategories] = useState([])
@@ -20,17 +21,16 @@ const TransactionsChart = (props) => {
     useEffect(() => {
         if (user) setAllTransactions(user.transactions)
         if (user) setAllCategories(user.categories)
-        allTransactions.filter(item => item.transactionType === props.type)
-        //     //display type of transaction accordin to props pass in
+
+        const type = allTransactions.filter(item => item.transactionType === props.type)
+        setType(type)
     }, [user, allTransactions, props.type])
 
-    //console.log(allTransactions)
-
     useEffect(() => {
-       
+
         let newObj = {}
         let result = []
-        allTransactions.forEach(item => {
+        type.forEach(item => {
             allCategories.forEach(cat => {
                 if (item.category == cat._id) {
                     if (newObj.hasOwnProperty(cat.name)) {
@@ -60,7 +60,7 @@ const TransactionsChart = (props) => {
         setAmount(result.map(item => item.amount))
         setPercent(result.map(item => ((item.amount / sum) * 100).toFixed(1)))
 
-    }, [allTransactions, props.type])
+    }, [type])
 
     //data for chart
     const data = {
