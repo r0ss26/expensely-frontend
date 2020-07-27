@@ -8,6 +8,7 @@ const Dashboard = () => {
   return (
     <>
       <h1>This is dashboard</h1>
+      <TopTransactions />
       <TransactionsChart type='expense' />
       <TransactionsChart type='income' />
     </>

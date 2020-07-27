@@ -94,7 +94,9 @@ const TransactionsChart = (props) => {
                     <div className="card white darken-1">
                         <div className="card-content black-text">
                             <span className="card-title">{props.type.charAt(0).toUpperCase() + props.type.slice(1)}</span>
-                            <Doughnut data={data} options={chartOptions} />
+                            {categoryItems.length === 0 ? 'No data available' : <Doughnut data={data} options={chartOptions} />}
+
+
                         </div>
                         <div className="card-action">
                             {categoryItems.map((item, i) =>
