@@ -25,7 +25,7 @@ export const getPrevious30DaysTotals = (transactions) => {
 
   transactions.forEach((transaction) => {
     const daysSinceTransaction = moment().diff(transaction.date, 'days');
-    if (daysSinceTransaction <= 30) {
+    if (daysSinceTransaction <= 30 && transaction.transactionType === 'expense') {
       if (previous30DaysTotals[daysSinceTransaction]) {
         previous30DaysTotals[daysSinceTransaction] += transaction.amount
       } else {
