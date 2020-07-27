@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from "../../context/auth/authContext"
+import React, { useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import TransactionsChart from '../Charts/TransactionsChart';
-import TopTransactions from '../TopTransactions/TopTransactions'
+import TopTransactions from '../TopTransactions/TopTransactions';
+import LineChart from '../Charts/LineChart';
 
 const Dashboard = () => {
 
@@ -10,6 +11,8 @@ const Dashboard = () => {
       <h1>This is dashboard</h1>
       <TransactionsChart type='expense' />
       <TransactionsChart type='income' />
+      <TopTransactions />
+      <LineChart />
     </>
   );
 };

@@ -19,3 +19,19 @@ export const getCurrentWeekTransactions = (transactions) => {
   });
   return currentWeekTransactions;
 };
+
+export const getPrevious30DaysTotals = (transactions) => {
+  const previous30DaysTotals = Array(30);
+
+  transactions.forEach((transaction) => {
+    const daysSinceTransaction = moment().diff(transaction.date, 'days');
+    if (daysSinceTransaction <= 30) {
+      if (previous30DaysTotals[daysSinceTransaction]) {
+        previous30DaysTotals[daysSinceTransaction] += transaction.amount
+      } else {
+        previous30DaysTotals[daysSinceTransaction] = transaction.amount
+      }
+    }
+  });
+  return Array.from(previous30DaysTotals, item => item || 0).reverse();
+};
