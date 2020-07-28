@@ -68,7 +68,7 @@ const BudgetExpenseBar = () => {
 
         setItems(result)
 
-    }, [allCategories, allBudgets, allExpenses])
+    }, [allCategories, allBudgets, allExpenses, currentDay])
 
     return (
         <>

@@ -4,10 +4,9 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 
 const ChangePasswordForm = (props) => {
 
-    console.log(props)
     const authContext = useContext(AuthContext)
 
-    const { error, changePassword, logout } = authContext
+    const { error, changePassword } = authContext
 
     const [currentPassword, setCurrentPassword] = useState('')
     const [password, setPassword] = useState('')
@@ -41,7 +40,7 @@ const ChangePasswordForm = (props) => {
             M.toast({ html: "Passwords do not match", displayLength: 4000, classes: "red" })
         } else {
             changePassword(formData, id)
-           // logout()
+            // logout()
             // register(formData)
             // if (!error) {
             //     logout()

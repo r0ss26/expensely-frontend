@@ -58,7 +58,7 @@ const TransactionsChart = (props) => {
         setAmount(result.map(item => item.amount))
         setPercent(result.map(item => ((item.amount / sum) * 100).toFixed(1)))
 
-    }, [type])
+    }, [type, allCategories])
 
     //data for chart
     const data = {

@@ -30,7 +30,9 @@ const SignupForm = (props) => {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
     }
     clearErrors()
-  }, [isAuthenticated, props.history, error])
+    // eslint-disable-next-line
+
+  }, [isAuthenticated, props.history, error, clearErrors])
 
 
   const handleInput = e => setUser({ ...user, [e.target.name]: e.target.value })

@@ -62,7 +62,7 @@ const Nav = () => {
             <div className="navigation hide-on-med-and-down">
 
                 <ul className='links'>
-                    <li className="logo-img"><img src={logo} /></li>
+                    <li className="logo-img"><img src={logo} alt="logo" /></li>
                     <li>Hello {user && user.firstName}</li>
                     {navLinks}
                 </ul>
@@ -75,7 +75,7 @@ const Nav = () => {
             </div>
             <div className="sidenav-navigation">
                 <ul className="sidenav sidenav-close" id="mobile-demo">
-                    <li className="logo-img"><img src={logo} /></li>
+                    <li className="logo-img"><img src={logo} alt="logo" /></li>
                     <li>Hello {user && user.firstName}</li>
                     {navLinks}
                     <li></li>

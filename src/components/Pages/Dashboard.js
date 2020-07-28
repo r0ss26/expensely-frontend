@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import AuthContext from '../../context/auth/authContext';
+import React from 'react';
 import TransactionsChart from '../Charts/TransactionsChart';
 import TopTransactions from '../TopTransactions/TopTransactions'
 import BudgetExpenseBar from '../Charts/ProgressBar/BudgetExpenseBar';

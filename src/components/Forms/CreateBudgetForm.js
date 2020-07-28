@@ -6,7 +6,7 @@ import CategorySelect from '../CategorySelect/CategorySelect';
 const CreateTransactionForm = () => {
   const authContext = useContext(AuthContext);
 
-  const { addBudget, getDay } = authContext;
+  const { addBudget } = authContext;
 
   // Form state
   const [name, setName] = useState('');
@@ -29,8 +29,7 @@ const CreateTransactionForm = () => {
     }
     try {
       addBudget({ name, amount, timePeriod, category });
-      // console.log(day)
-      // getDay(day)
+  
 
       M.toast({
         html: 'Budget Added',
