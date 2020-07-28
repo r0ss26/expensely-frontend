@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import AuthContext from '../../context/auth/authContext';
-import './chartStyle.css'
-
+import './chartStyle.css';
 
 const TransactionsChart = (props) => {
+
     const authContext = useContext(AuthContext);
     const { user } = authContext
 
@@ -85,33 +85,85 @@ const TransactionsChart = (props) => {
                 }
             }
         }
-    }
-    return (
-        <>
-            <div className="row">
-                <div className="col s12 m6">
-                    <div className="card white darken-1">
-                        <div className="card-content black-text">
-                            <span className="card-title">{props.type.charAt(0).toUpperCase() + props.type.slice(1)}</span>
-                            {categoryItems.length === 0 ? 'No data available' : <Doughnut data={data} options={chartOptions} />}
+      });
+    });
 
+    result.sort((a, b) => {
+      let catA = a.name.toLowerCase();
+      let catB = b.name.toLowerCase();
+      return catA < catB ? -1 : catA > catB ? 1 : 0;
+    });
 
-                        </div>
-                        <div className="card-action">
-                            {categoryItems.map((item, i) =>
-                                (<li key={i}><span className='dot' style={{ backgroundColor: `${item.color}` }}></span><span>
-                                    {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
-                                    {" "}${item.amount}
-                                </span></li>)
-                            )}
+    let sum = result.reduce((acc, cur) => acc + cur.amount, 0);
+    setCategoryItems(result);
+    setCategories(
+      result.map(
+        (item) => item.name.charAt(0).toUpperCase() + item.name.slice(1)
+      )
+    );
+    setColor(result.map((item) => item.color));
+    setAmount(result.map((item) => item.amount));
+    setPercent(result.map((item) => ((item.amount / sum) * 100).toFixed(1)));
+  }, [type]);
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+  //data for chart
+  const data = {
+    labels: categories,
+    datasets: [
+      {
+        data: amount,
+        categories,
+        percentage: percent,
+        backgroundColor: color,
+        hoverBackgroundColor: color,
+      },
+    ],
+  };
 
-}
+  //customise tooltips
+  const chartOptions = {
+    tooltips: {
+      mode: 'label',
+      callbacks: {
+        title: function (tooltipItem, data) {
+          return data.labels[tooltipItem[0].index];
+        },
+        label: function (tooltipItem, data) {
+          return (
+            data.datasets[tooltipItem.datasetIndex].percentage[
+              tooltipItem.index
+            ] + '%'
+          );
+        },
+      },
+    },
+  };
+  return (
+    <>
+      <div className="card white darken-1">
+        <div className="card-content black-text">
+          <span className="card-title">
+            {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
+          </span>
+          <Doughnut data={data} options={chartOptions} />
+        </div>
+        <div className="card-action">
+          {categoryItems.map((item, i) => (
+            <li key={i}>
+              <span
+                className="dot"
+                style={{ backgroundColor: `${item.color}` }}
+              ></span>
+              <span>
+                {item.name.charAt(0).toUpperCase() + item.name.slice(1)} $
+                {item.amount}
+              </span>
+            </li>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default TransactionsChart
+export default TransactionsChart;

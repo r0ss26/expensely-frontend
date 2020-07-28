@@ -1,14 +1,14 @@
-import React from 'react'
-import './pageStyle.css'
-import TransactionsTable from '../TransactionsTable/TransactionsTable'
+import React from 'react';
+import './pageStyle.css';
+import TransactionsTable from '../TransactionsTable/TransactionsTable';
 
 const Transactions = () => {
-    return (
-        <div className='container-wrapper'>
-            <h1 className="center-align">Your Transactions</h1>
-            <TransactionsTable />
-        </div>
-    )
-}
+  return (
+    <>
+      <h4 className="center-align">Transactions</h4>
+      <TransactionsTable />
+    </>
+  );
+};
 
-export default Transactions
+export default Transactions;
