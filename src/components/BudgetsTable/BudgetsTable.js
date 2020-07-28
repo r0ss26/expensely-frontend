@@ -48,7 +48,8 @@ const BudgetsTable = () => {
                     if (item._id === budget.category) {
                       return capitalize(item.name)
                     }
-                  })}</td>
+                  }
+                  )}</td>
                 </td>
                 <td>
                   <a

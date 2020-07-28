@@ -35,7 +35,8 @@ export default (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload, //user data
+        user: action.payload,
+        loading: false //user data
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -200,7 +201,7 @@ export default (state, action) => {
       }
     case CHANGE_PASSWORD_SUCCESS:
       // localStorage.removeItem('token');
-      console.log("changed success payload", action.payload)
+      // console.log("changed success payload", action.payload)
       // return Object.assign({}, state.user, { user: action.payload })
 
       return {
@@ -210,7 +211,7 @@ export default (state, action) => {
         }
       }
     case CHANGE_PASSWORD_FAIL:
-      console.log("changed fail payload", action.payload)
+     // console.log("changed fail payload", action.payload)
       return {
         ...state,
         error: action.payload
