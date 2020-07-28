@@ -41,7 +41,7 @@ const TransactionsTable = () => {
       });
       setTransactions(filteredTransactions);
     } else {
-      setTransactions(user.transactions)
+      setTransactions(user.transactions);
     }
     // console.log(transactions)
   }, [dateFilter, transactions, user.transactions]);
@@ -58,75 +58,73 @@ const TransactionsTable = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="input-field col s6">
-          <input
-            name="date"
-            ref={dateInput}
-            id="transaction-table-date"
-            type="text"
-            className="datepicker no-autoinit"
-          />
-          <label htmlFor="date">Date</label>
-        </div>
-
-        <button
-          class="waves-effect waves-light btn modal-trigger"
-          onClick={() => {
-            setDateFilter('')
-            dateInput.current.value = ''
-          }}
-        >
-          All
-        </button>
-
-        <table className="striped responsive-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Category</th>
-              <th>Amount</th>
-              <th>Comment</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {transactions &&
-              transactions.map((transaction) => (
-                <tr key={transaction._id}>
-                  <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
-                  <td>{capitalize(transaction.transactionType)}</td>
-                  <td>{transaction.category}</td>
-                  <td className={transaction.transactionType}>
-                    {transaction.amount}
-                  </td>
-                  <td style={{ maxWidth: '50px', wordBreak: 'break-all' }}>
-                    {transaction.comment && transaction.comment.slice(0, 50)}
-                  </td>
-                  <td>
-                    <a
-                      class="waves-effect waves-light btn modal-trigger"
-                      href="#edit-transaction-modal"
-                      onClick={() => setItemToEdit(transaction._id)}
-                    >
-                      Edit
-                    </a>
-                  </td>
-                  <td>
-                    <a
-                      class="waves-effect waves-light btn modal-trigger"
-                      href="#confirmationModal"
-                      onClick={() => setItemToDelete(transaction._id)}
-                    >
-                      Delete
-                    </a>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+      <div className="input-field col s6">
+        <input
+          name="date"
+          ref={dateInput}
+          id="transaction-table-date"
+          type="text"
+          className="datepicker no-autoinit"
+        />
+        <label htmlFor="date">Date</label>
       </div>
+
+      <button
+        class="waves-effect waves-light btn modal-trigger"
+        onClick={() => {
+          setDateFilter('');
+          dateInput.current.value = '';
+        }}
+      >
+        All
+      </button>
+
+      <table className="striped responsive-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {transactions &&
+            transactions.map((transaction) => (
+              <tr key={transaction._id}>
+                <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
+                <td>{capitalize(transaction.transactionType)}</td>
+                <td>{transaction.category}</td>
+                <td className={transaction.transactionType}>
+                  {transaction.amount}
+                </td>
+                <td style={{ maxWidth: '50px', wordBreak: 'break-all' }}>
+                  {transaction.comment && transaction.comment.slice(0, 50)}
+                </td>
+                <td>
+                  <a
+                    class="waves-effect waves-light btn modal-trigger"
+                    href="#edit-transaction-modal"
+                    onClick={() => setItemToEdit(transaction._id)}
+                  >
+                    Edit
+                  </a>
+                </td>
+                <td>
+                  <a
+                    class="waves-effect waves-light btn modal-trigger"
+                    href="#confirmationModal"
+                    onClick={() => setItemToDelete(transaction._id)}
+                  >
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
       <EditTransactionModal transactionId={itemToEdit} />
       <ConfirmationModal
         onConfirm={() => deleteTransaction(itemToDelete)}
