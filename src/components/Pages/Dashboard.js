@@ -4,7 +4,8 @@ import TransactionsChart from '../Charts/TransactionsChart';
 import TopTransactions from '../TopTransactions/TopTransactions'
 import BudgetExpenseBar from '../Charts/ProgressBar/BudgetExpenseBar';
 import LineChart from '../Charts/LineChart';
-
+import Quotes from '../Quotes/Quotes';
+// import styles from './Dashboad.module.css'
 
 const Dashboard = () => {
 
@@ -19,7 +20,7 @@ const Dashboard = () => {
 
       <TopTransactions />
       <LineChart />
-
+      <Quotes />
     </>
   );
 };
