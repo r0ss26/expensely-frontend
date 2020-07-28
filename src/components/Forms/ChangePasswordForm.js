@@ -62,7 +62,7 @@ const ChangePasswordForm = (props) => {
                                 className="validate"
                                 onChange={(event) => handleInput(event, setCurrentPassword)} value={currentPassword}
                             />
-                            <label for="password">Enter Old password</label>
+                            <label htmlFor="password">Enter Old password</label>
                         </div>
                     </div>
                     <div className="row">
@@ -74,7 +74,7 @@ const ChangePasswordForm = (props) => {
                                 onChange={(event) => handleInput(event, setPassword)}
                                 value={password}
                             />
-                            <label for="password">Enter New password</label>
+                            <label htmlFor="password">Enter New password</label>
                         </div>
                     </div>
                     <div className="row">

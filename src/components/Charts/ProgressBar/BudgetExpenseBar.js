@@ -73,11 +73,10 @@ const BudgetExpenseBar = () => {
     return (
         <>
             {items.map(item => (
-                <>
-                    <div className="bar-wrapper">
-                        <ProgressBar items={item} />
-                    </div>
-                </>
+                <div key={item.name} className="bar-wrapper">
+                    <ProgressBar items={item} />
+                </div>
+
             ))}
 
         </>
