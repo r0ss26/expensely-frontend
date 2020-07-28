@@ -3,7 +3,7 @@ import Filler from './Filler'
 import '../chartStyle.css'
 
 const ProgressBar = (props) => {
-    console.log(props, "progressbar")
+   
     return (
         <div className='progress-bar' >
             <Filler items={props.items} />

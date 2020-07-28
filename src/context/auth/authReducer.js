@@ -24,7 +24,6 @@ import {
   UPDATE_PROFILE_FAIL,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAIL,
-  GET_DAY
 } from '../types';
 
 export default (state, action) => {
@@ -148,7 +147,7 @@ export default (state, action) => {
     case GET_CATEGORY:
       return {
         ...state,
-        current_category: action.payload
+        currentCategory: action.payload
       }
 
     case UPDATE_CATEGORY_SUCCESS:
@@ -217,11 +216,6 @@ export default (state, action) => {
         error: action.payload
       };
 
-    case GET_DAY:
-      return {
-        ...state,
-        currentDay: action.payload
-      }
     default:
       return state
   }

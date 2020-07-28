@@ -2,7 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../../context/auth/authContext';
 import '../pageStyle.css';
 import M from 'materialize-css/dist/js/materialize.min.js'
-// import user from '../../charts/data';
+import EditCategoryModel from '../../Modals/EditCategoryModel';
+import capitalize from '../../../utils/capitalize';
+import ConfirmationModal from '../../Modals/ConfirmationModal'
 
 
 const CategoriesList = () => {
@@ -10,30 +12,24 @@ const CategoriesList = () => {
   const { getCategory, user, deleteCategory } = authContext;
 
   const [inputValue, setInputValue] = useState('');
-  const [filteredOptions, setFilteredptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [toDelete, setToDelete] = useState('')
 
   useEffect(() => {
     // Required by materialize to initialize the modal
     const modal = document.querySelectorAll('.modal');
     M.Modal.init(modal);
-
-    setFilteredptions(user.categories);
+    if (user) setFilteredOptions(user.categories);
   }, [user]);
 
-  // useEffect(() => {
-  //     // Required by materialize to initialize the modal
-
-  // }, [])
-
-  // console.log(user.categories)
   const handleChange = (e) => {
-    // console.log(e.target.value)
+
     setInputValue(e.target.value);
 
     const filtered = user.categories.filter((result) => {
       return result.name.toLowerCase().includes(inputValue.toLowerCase());
     });
-    setFilteredptions(filtered);
+    setFilteredOptions(filtered);
   };
 
   const handleKeyUp = (e) => {
@@ -44,105 +40,135 @@ const CategoriesList = () => {
 
   const handleType = (e) => {
     const type = e.target.getAttribute('data-tag');
-    console.log(type);
-    setFilteredptions(
+    //console.log(type);
+    setFilteredOptions(
       user.categories.filter((item) => item.transactionType === type)
     );
   };
 
   const handleReset = () => {
     setInputValue('');
-    setFilteredptions(user.categories);
+    setFilteredOptions(user.categories);
   };
 
   const handleDelete = (id) => {
     deleteCategory(id);
   };
 
+  const handleSort = () => {
+    let sorted = []
+    sorted = user.categories.slice().sort((a, b) => {
+      if (a.name < b.name) { return -1 }
+      if (a.name > b.name) { return 1 }
+      return 0
+    })
+    setFilteredOptions(sorted)
+  }
+  // console.log("sot", sorted)
+  // setFilteredOptions(sorted)
+
+
   const showCategories = (
-    <ul className="collection with-header">
-      <li className="collection-header">
-        <h4>Categories</h4>
-      </li>
-      {filteredOptions.map((item) => (
-        <li key={item._id} className="collection-item row">
-          <div className="text col s9">
-            <span className="col s3">
-              {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
-            </span>
-            <span className="col s3">
-              {item.transactionType.charAt(0).toUpperCase() +
-                item.transactionType.slice(1)}
-            </span>
-            <span
-              className="dot"
-              style={{ backgroundColor: `${item.color}` }}
-            ></span>
-          </div>
-          <div className="icons">
-            <a
-              href="#edit-category-modal"
-              className="secondary-content modal-trigger"
-              onClick={() => getCategory(item)}
-            >
-              <i className="material-icons green-text">edit</i>
+    <>
+      <table className="striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredOptions.map((item) => (
+            <tr key={item._id}>
+              <td>{capitalize(item.name)}</td>
+              <td> {capitalize(item.transactionType)}</td>
+              <td> <span className="dot" style={{ backgroundColor: `${item.color}` }}></span></td>
+              <td>
+                <a
+                  className="waves-effect waves-light btn modal-trigger"
+                  href="#edit-category-modal"
+                  onClick={() => getCategory(item)}
+                >
+                  Edit
             </a>
-            <a
-              href="#!"
-              className="secondary-content"
-              onClick={() => handleDelete(item._id)}
-            >
-              <i className="material-icons red-text">delete</i>
+              </td>
+              <td>
+                <a
+                  href="#!"
+                  className="waves-effect waves-light btn modal-trigger"
+                  onClick={() => setToDelete(item._id)}
+                >
+                  Delete
             </a>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <EditCategoryModel />
+      <ConfirmationModal
+        onConfirm={() => handleDelete(toDelete)}
+        confirmationText="Are you sure you want to delete this item?"
+        confirm="Delete"
+        decline="Keep"
+      />
+    </>
+  )
+
+
   return (
     <>
-      <form>
-        <div className="input-field">
-          <input
-            id="search"
-            type="search"
-            value={inputValue}
-            onChange={handleChange}
-            onKeyUp={(e) => handleKeyUp(e)}
-          />
-          <label className="label-icon" htmlFor="search">
-            <i className="material-icons">search</i>
-          </label>
-          <i className="material-icons">close</i>
+      <div className="container">
+        <form>
+          <div className="input-field">
+            <input
+              id="search"
+              type="search"
+              value={inputValue}
+              onChange={handleChange}
+              onKeyUp={(e) => handleKeyUp(e)}
+            />
+            <label className="label-icon" htmlFor="search">
+              <i className="material-icons">search</i>
+            </label>
+            <i className="material-icons">close</i>
+          </div>
+        </form>
+
+        <div>
+          <button
+            className="waves-effect waves-light btn"
+            data-tag="expense"
+            onClick={(e) => handleType(e)}
+          >
+            Expense
+        </button>
+          <button
+            className="waves-effect waves-light btn"
+            data-tag="income"
+            onClick={(e) => handleType(e)}
+          >
+            Income
+        </button>
+
+          <button className="btn" onClick={() => handleReset()}>
+            Reset
+        </button>
+          <button
+            className="waves-effect waves-light btn"
+            onClick={() => handleSort()}
+          >
+            Sort A-Z
+        </button>
         </div>
-      </form>
 
-      <div>
-        <button
-          className="waves-effect waves-light btn"
-          data-tag="expense"
-          onClick={handleType}
-        >
-          Expense
-        </button>
-        <button
-          className="waves-effect waves-light btn"
-          data-tag="income"
-          onClick={handleType}
-        >
-          Income
-        </button>
-        {/* sort name */}
-        <button className="btn" onClick={() => handleReset()}>
-          Reset
-        </button>
+        {filteredOptions.length === 0 ? (
+          <p>No categories found</p>
+        ) : (
+            showCategories
+          )}
       </div>
-
-      {filteredOptions.length === 0 ? (
-        <p>No categories found</p>
-      ) : (
-          showCategories
-        )}
     </>
   );
 };
