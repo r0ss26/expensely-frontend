@@ -30,7 +30,7 @@ const TransactionsChart = (props) => {
         let result = []
         type.forEach(item => {
             allCategories.forEach(cat => {
-                if (item.category == cat._id) {
+                if (item.category === cat._id) {
                     if (newObj.hasOwnProperty(cat.name)) {
                         result[newObj[cat.name]].amount += Number(item.amount)
                     } else {

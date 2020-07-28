@@ -18,9 +18,7 @@ const CreateTransactionForm = () => {
 
     event.preventDefault();
 
-    let newDate = new Date()
-    let day = newDate.getDay()
-
+  
     if (!name || !amount || !timePeriod || !category) {
       M.toast({
         html: 'Please enter all required fields',
@@ -31,8 +29,8 @@ const CreateTransactionForm = () => {
     }
     try {
       addBudget({ name, amount, timePeriod, category });
-      console.log(day)
-      getDay(day)
+      // console.log(day)
+      // getDay(day)
 
       M.toast({
         html: 'Budget Added',

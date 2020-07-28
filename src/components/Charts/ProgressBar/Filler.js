@@ -2,12 +2,14 @@ import React from 'react'
 import '../chartStyle.css'
 
 
-const Filler = (props) => {
-    console.log(props)
+const Filler = ({ items }) => {
+    console.log(items, "filler")
     return (
-        <div className="filler" style={{ width: `${props.items}%` }}>
-
-        </div>
+        <>
+          
+                <div className="filler" style={{ width: `${items.percentLeft * 100}%`, background: `${items.color}` }}>
+                </div>
+        </>
     )
 }
 

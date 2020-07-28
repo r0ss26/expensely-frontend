@@ -145,7 +145,6 @@ const AuthState = props => {
   const deleteTransaction = async (id) => {
     try {
       const res = await axios.delete(`/transactions/${id}`);
-      console.log(res.data);
       dispatch({
         type: DELETE_TRANSACTION_SUCCESS,
         payload: res.data,
