@@ -83,7 +83,6 @@ const BudgetExpenseBar = () => {
     )
 }
 
-
 export default BudgetExpenseBar
 
 
