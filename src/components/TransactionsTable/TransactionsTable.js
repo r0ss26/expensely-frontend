@@ -16,6 +16,7 @@ const TransactionsTable = () => {
   const [itemToEdit, setItemToEdit] = useState('');
   const [dateFilter, setDateFilter] = useState('');
   const [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState([])
   const dateInput = useRef(null);
 
   // Sort transactions by most recent date
@@ -28,7 +29,8 @@ const TransactionsTable = () => {
           return dateB - dateA;
         })
       );
-  }, [user, transactions]);
+    if (user) setCategories(user.categories)
+  }, [user, transactions, categories]);
 
   useEffect(() => {
     if (dateFilter) {
@@ -100,7 +102,11 @@ const TransactionsTable = () => {
                   <tr key={transaction._id}>
                     <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                     <td>{capitalize(transaction.transactionType)}</td>
-                    <td>{capitalize(user.categories.find(category => category._id === transaction.category).name) || ''}</td>
+                    <td>{categories.map(item => {
+                      if (item._id === transaction.category) {
+                        return capitalize(item.name)
+                      }
+                    })}</td>
                     <td className={transaction.transactionType}>
                       {transaction.amount}
                     </td>

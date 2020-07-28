@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import capitalize from '../../utils/capitalize';
 import AuthContext from '../../context/auth/authContext';
 import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
@@ -14,6 +14,11 @@ const BudgetsTable = () => {
 
   const [itemToDelete, setItemToDelete] = useState('');
   const [itemToEdit, setItemToEdit] = useState('');
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    if (user) setCategories(user.categories)
+  }, [user, categories])
 
   const handleDelete = (id) => {
     deleteBudget(id);
@@ -38,7 +43,13 @@ const BudgetsTable = () => {
                 <td>{capitalize(budget.name)}</td>
                 <td>{budget.amount}</td>
                 <td>{capitalize(budget.timePeriod)}</td>
-                <td>{capitalize(budget.category)}</td>
+                <td>
+                  <td>{categories.map(item => {
+                    if (item._id === budget.category) {
+                      return capitalize(item.name)
+                    }
+                  })}</td>
+                </td>
                 <td>
                   <a
                     class="waves-effect waves-light btn modal-trigger"

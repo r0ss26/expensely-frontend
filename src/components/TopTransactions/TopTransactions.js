@@ -18,6 +18,7 @@ const TopTransactions = () => {
   const [topTransactions, setTopTransactions] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [timePeriod, setTimePeriod] = useState('all');
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     if (user) {
@@ -51,8 +52,9 @@ const TopTransactions = () => {
       });
 
       setTopCategories(categoryArray.slice(0, 5));
+      setCategories(user.categories)
     }
-  }, [isAmount, user, timePeriod]);
+  }, [isAmount, user, timePeriod, categories]);
 
   useEffect(() => {
     if (user) {
@@ -133,13 +135,11 @@ const TopTransactions = () => {
                   <tr key={transaction._id}>
                     <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                     <td>{capitalize(transaction.transactionType)}</td>
-                    <td>
-                      {capitalize(
-                        user.categories.find(
-                          (category) => category._id === transaction.category
-                        ).name
-                      ) || ''}
-                    </td>
+                    <td>{categories.map(item => {
+                      if (item._id === transaction.category) {
+                        return capitalize(item.name)
+                      }
+                    })}</td>
                     <td className={transaction.transactionType}>
                       {transaction.amount}
                     </td>
@@ -149,27 +149,27 @@ const TopTransactions = () => {
             </>
           )
         ) : (
-          <>
-            <thead>
-              <tr>
-                <th>Category</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {topCategories.map((categoryObj) => (
+            <>
+              <thead>
                 <tr>
-                  <td>{capitalize(
-                        user.categories.find(
-                          (category) => category._id === categoryObj.id
-                        ).name
-                      ) || ''}</td>
-                  <td>{categoryObj.amount}</td>
+                  <th>Category</th>
+                  <th>Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </>
-        )}
+              </thead>
+              <tbody>
+                {topCategories.map((categoryObj) => (
+                  <tr>
+                    <td>{capitalize(
+                      user.categories.find(
+                        (category) => category._id === categoryObj.id
+                      ).name
+                    ) || ''}</td>
+                    <td>{categoryObj.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          )}
       </table>
     </div>
   );
