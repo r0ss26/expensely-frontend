@@ -28,7 +28,8 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL
+  CHANGE_PASSWORD_FAIL,
+  GET_DAY
 } from '../types';
 
 //create initial state
@@ -40,9 +41,8 @@ const AuthState = props => {
     error: null,
     user: null,
     current_category: null,
-    current_user: null,
-    categories: [],
-    message: null
+    message: null,
+    currentDay: null
   }
   //call and dispatch action types to reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -145,7 +145,6 @@ const AuthState = props => {
   const deleteTransaction = async (id) => {
     try {
       const res = await axios.delete(`/transactions/${id}`);
-      console.log(res.data);
       dispatch({
         type: DELETE_TRANSACTION_SUCCESS,
         payload: res.data,
@@ -283,9 +282,9 @@ const AuthState = props => {
   }
 
   const changePassword = async (formData, id) => {
-    console.log("form", formData, id)
+    //console.log("form", formData, id)
     try {
-      const res = axios.put(`/auth/reset/${id}`, formData)
+      const res = await axios.put(`/auth/reset/${id}`, formData)
       dispatch({
         type: CHANGE_PASSWORD_SUCCESS,
         payload: res.data
@@ -296,6 +295,14 @@ const AuthState = props => {
         payload: error.response.data.msg
       })
     }
+  }
+
+  const getDay = day => {
+    //console.log(day, state)
+    dispatch({
+      type: GET_DAY,
+      payload: day
+    })
   }
 
   //wrap the app with the auth provider
@@ -309,6 +316,7 @@ const AuthState = props => {
         loading: state.loading,
         error: state.error,
         current_category: state.current_category,
+        currentDay: state.currentDay,
         register,
         logout,
         getUser,
@@ -325,7 +333,8 @@ const AuthState = props => {
         updateCategory,
         deleteCategory,
         updateProfile,
-        changePassword
+        changePassword,
+        getDay
       }}
     >
       {props.children}

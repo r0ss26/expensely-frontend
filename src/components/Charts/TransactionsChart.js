@@ -1,11 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import AuthContext from '../../context/auth/authContext';
-import './transactionsChart.css'
+import './chartStyle.css'
 
 
 const TransactionsChart = (props) => {
-    console.log("type", props.type)
     const authContext = useContext(AuthContext);
     const { user } = authContext
 
@@ -31,7 +30,7 @@ const TransactionsChart = (props) => {
         let result = []
         type.forEach(item => {
             allCategories.forEach(cat => {
-                if (item.category == cat._id) {
+                if (item.category === cat._id) {
                     if (newObj.hasOwnProperty(cat.name)) {
                         result[newObj[cat.name]].amount += Number(item.amount)
                     } else {
@@ -94,7 +93,9 @@ const TransactionsChart = (props) => {
                     <div className="card white darken-1">
                         <div className="card-content black-text">
                             <span className="card-title">{props.type.charAt(0).toUpperCase() + props.type.slice(1)}</span>
-                            <Doughnut data={data} options={chartOptions} />
+                            {categoryItems.length === 0 ? 'No data available' : <Doughnut data={data} options={chartOptions} />}
+
+
                         </div>
                         <div className="card-action">
                             {categoryItems.map((item, i) =>
