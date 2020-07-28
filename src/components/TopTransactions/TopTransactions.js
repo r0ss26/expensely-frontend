@@ -41,7 +41,7 @@ const TopTransactions = () => {
       let categoryArray = [];
       Object.keys(categoryAmounts).forEach((category) => {
         categoryArray.push({
-          name: category,
+          id: category,
           amount: categoryAmounts[category],
         });
       });
@@ -157,10 +157,14 @@ const TopTransactions = () => {
               </tr>
             </thead>
             <tbody>
-              {topCategories.map((category) => (
+              {topCategories.map((categoryObj) => (
                 <tr>
-                  <td>{capitalize(category.name)}</td>
-                  <td>{category.amount}</td>
+                  <td>{capitalize(
+                        user.categories.find(
+                          (category) => category._id === categoryObj.id
+                        ).name
+                      ) || ''}</td>
+                  <td>{categoryObj.amount}</td>
                 </tr>
               ))}
             </tbody>
