@@ -133,7 +133,13 @@ const TopTransactions = () => {
                   <tr key={transaction._id}>
                     <td>{moment(transaction.date).format('Do MMM YYYY')}</td>
                     <td>{capitalize(transaction.transactionType)}</td>
-                    <td>{capitalize(transaction.category)}</td>
+                    <td>
+                      {capitalize(
+                        user.categories.find(
+                          (category) => category._id === transaction.category
+                        ).name
+                      ) || ''}
+                    </td>
                     <td className={transaction.transactionType}>
                       {transaction.amount}
                     </td>

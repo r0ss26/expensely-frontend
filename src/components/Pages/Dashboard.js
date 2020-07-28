@@ -21,13 +21,13 @@ const Dashboard = () => {
         <div className="col s12 l3">
           <TransactionsChart type="income" />
         </div>
-        <div className="row">
-          <div className="col s12 l5">
-            <TopTransactions />
-          </div>
-          <div className="col s12 l5">
-            <LineChart />
-          </div>
+      </div>
+      <div className="row">
+        <div className="col s12 l5">
+          <TopTransactions />
+        </div>
+        <div className="col s12 l5">
+          <LineChart />
         </div>
       </div>
     </>
