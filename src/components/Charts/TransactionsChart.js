@@ -85,85 +85,85 @@ const TransactionsChart = (props) => {
                 }
             }
         }
-      });
-    });
+    }
 
-    result.sort((a, b) => {
-      let catA = a.name.toLowerCase();
-      let catB = b.name.toLowerCase();
-      return catA < catB ? -1 : catA > catB ? 1 : 0;
-    });
 
-    let sum = result.reduce((acc, cur) => acc + cur.amount, 0);
-    setCategoryItems(result);
-    setCategories(
-      result.map(
-        (item) => item.name.charAt(0).toUpperCase() + item.name.slice(1)
-      )
-    );
-    setColor(result.map((item) => item.color));
-    setAmount(result.map((item) => item.amount));
-    setPercent(result.map((item) => ((item.amount / sum) * 100).toFixed(1)));
-  }, [type]);
+    //     result.sort((a, b) => {
+    //         let catA = a.name.toLowerCase();
+    //         let catB = b.name.toLowerCase();
+    //         return catA < catB ? -1 : catA > catB ? 1 : 0;
+    //     });
 
-  //data for chart
-  const data = {
-    labels: categories,
-    datasets: [
-      {
-        data: amount,
-        categories,
-        percentage: percent,
-        backgroundColor: color,
-        hoverBackgroundColor: color,
-      },
-    ],
-  };
+    //     let sum = result.reduce((acc, cur) => acc + cur.amount, 0);
+    //     setCategoryItems(result);
+    //     setCategories(
+    //         result.map(
+    //             (item) => item.name.charAt(0).toUpperCase() + item.name.slice(1)
+    //         )
+    //     );
+    //     setColor(result.map((item) => item.color));
+    //     setAmount(result.map((item) => item.amount));
+    //     setPercent(result.map((item) => ((item.amount / sum) * 100).toFixed(1)));
+    // }, [type]);
 
-  //customise tooltips
-  const chartOptions = {
-    tooltips: {
-      mode: 'label',
-      callbacks: {
-        title: function (tooltipItem, data) {
-          return data.labels[tooltipItem[0].index];
-        },
-        label: function (tooltipItem, data) {
-          return (
-            data.datasets[tooltipItem.datasetIndex].percentage[
-              tooltipItem.index
-            ] + '%'
-          );
-        },
-      },
-    },
-  };
-  return (
-    <>
-      <div className="card white darken-1">
-        <div className="card-content black-text">
-          <span className="card-title">
-            {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
-          </span>
-          <Doughnut data={data} options={chartOptions} />
-        </div>
-        <div className="card-action">
-          {categoryItems.map((item, i) => (
-            <li key={i}>
-              <span
-                className="dot"
-                style={{ backgroundColor: `${item.color}` }}
-              ></span>
-              <span>
-                {item.name.charAt(0).toUpperCase() + item.name.slice(1)} $
+    // //data for chart
+    // const data = {
+    //     labels: categories,
+    //     datasets: [
+    //         {
+    //             data: amount,
+    //             categories,
+    //             percentage: percent,
+    //             backgroundColor: color,
+    //             hoverBackgroundColor: color,
+    //         },
+    //     ],
+    // };
+
+    // //customise tooltips
+    // const chartOptions = {
+    //     tooltips: {
+    //         mode: 'label',
+    //         callbacks: {
+    //             title: function (tooltipItem, data) {
+    //                 return data.labels[tooltipItem[0].index];
+    //             },
+    //             label: function (tooltipItem, data) {
+    //                 return (
+    //                     data.datasets[tooltipItem.datasetIndex].percentage[
+    //                     tooltipItem.index
+    //                     ] + '%'
+    //                 );
+    //             },
+    //         },
+    //     },
+    // };
+    return (
+        <>
+            <div className="card white darken-1">
+                <div className="card-content black-text">
+                    <span className="card-title">
+                        {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
+                    </span>
+                    {categoryItems.length === 0 ? 'No Data available' : (<Doughnut data={data} options={chartOptions} />)}
+                </div>
+                <div className="card-action">
+                    {categoryItems.map((item, i) => (
+                        <li key={i}>
+                            <span
+                                className="dot"
+                                style={{ backgroundColor: `${item.color}` }}
+                            ></span>
+                            <span>
+                                {item.name.charAt(0).toUpperCase() + item.name.slice(1)} $
                 {item.amount}
-              </span>
-            </li>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+                            </span>
+                        </li>
+                    ))}
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default TransactionsChart;

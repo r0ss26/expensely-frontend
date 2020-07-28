@@ -32,7 +32,7 @@ const SignupForm = (props) => {
     clearErrors()
     // eslint-disable-next-line
 
-  }, [isAuthenticated, props.history, error, clearErrors])
+  }, [isAuthenticated, props.history, error])
 
 
   const handleInput = e => setUser({ ...user, [e.target.name]: e.target.value })

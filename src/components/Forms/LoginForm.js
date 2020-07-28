@@ -18,7 +18,7 @@ const LoginForm = (props) => {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
     }
     clearErrors()
-  }, [isAuthenticated, props.history, error, clearErrors])
+  }, [isAuthenticated, props.history, error])
 
 
   const [email, setEmail] = useState('')
