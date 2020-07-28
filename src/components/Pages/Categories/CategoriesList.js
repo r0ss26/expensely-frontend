@@ -4,7 +4,7 @@ import '../pageStyle.css';
 import M from 'materialize-css/dist/js/materialize.min.js'
 import EditCategoryModel from '../../Modals/EditCategoryModel';
 import capitalize from '../../../utils/capitalize';
-import ConfirmationModal from '../../Modals/ConfirmationModal'
+import ConfirmationModal from '../../Modals/ConfirmationModal/ConfirmationModal'
 
 
 const CategoriesList = () => {
@@ -95,7 +95,7 @@ const CategoriesList = () => {
               </td>
               <td>
                 <a
-                  href="#!"
+                  href="#confirmationModal"
                   className="waves-effect waves-light btn modal-trigger"
                   onClick={() => setToDelete(item._id)}
                 >
