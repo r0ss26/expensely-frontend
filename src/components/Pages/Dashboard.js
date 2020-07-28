@@ -3,7 +3,7 @@ import AuthContext from '../../context/auth/authContext';
 import TransactionsChart from '../Charts/TransactionsChart';
 import TopTransactions from '../TopTransactions/TopTransactions';
 import LineChart from '../Charts/LineChart';
-import styles from './Dashboad.module.css'
+// import styles from './Dashboad.module.css'
 
 const Dashboard = () => {
 
