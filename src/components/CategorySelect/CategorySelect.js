@@ -40,12 +40,10 @@ const CategorySelect = (props) => {
         <option value="" className="colorIcon">Choose a category</option>
         {categories &&
           categories.map((category) => (
-            <>
-              <option key={category._id} value={category._id} style={{ backgroundColor: `${category.color}` }}>
-                {capitalize(category.name)}
-                {/* <span className='dot' style={{ backgroundColor: `${category.color}` }}></span> */}
-              </option>
-            </>
+            <option key={category._id} value={category._id} style={{ backgroundColor: `${category.color}` }}>
+              {capitalize(category.name)}
+              {/* <span className='dot' style={{ backgroundColor: `${category.color}` }}></span> */}
+            </option>
           ))}
       </select>
       <label>Category</label>

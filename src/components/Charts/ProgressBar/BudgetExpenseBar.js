@@ -68,22 +68,20 @@ const BudgetExpenseBar = () => {
 
         setItems(result)
 
-    }, [allCategories, allBudgets, allExpenses])
+    }, [allCategories, allBudgets, allExpenses, currentDay])
 
     return (
         <>
             {items.map(item => (
-                <>
-                    <div className="bar-wrapper">
-                        <ProgressBar items={item} />
-                    </div>
-                </>
+                <div key={item.name} className="bar-wrapper">
+                    <ProgressBar items={item} />
+                </div>
+
             ))}
 
         </>
     )
 }
-
 
 export default BudgetExpenseBar
 

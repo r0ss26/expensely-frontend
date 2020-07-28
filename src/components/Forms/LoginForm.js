@@ -8,7 +8,7 @@ const LoginForm = (props) => {
 
   const authContext = useContext(AuthContext)
 
-  const { isAuthenticated, login, error } = authContext
+  const { isAuthenticated, login, error, clearErrors } = authContext
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -17,7 +17,8 @@ const LoginForm = (props) => {
     if (error) {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
     }
-  }, [isAuthenticated, props.history, error])
+    clearErrors()
+  }, [isAuthenticated, props.history, error, clearErrors])
 
 
   const [email, setEmail] = useState('')

@@ -4,45 +4,86 @@ import AuthContext from '../../context/auth/authContext';
 import './chartStyle.css';
 
 const TransactionsChart = (props) => {
-  console.log('type', props.type);
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
 
-  const [allTransactions, setAllTransactions] = useState([]);
-  const [type, setType] = useState([]);
-  const [allCategories, setAllCategories] = useState([]);
-  const [categoryItems, setCategoryItems] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [amount, setAmount] = useState([]);
-  const [percent, setPercent] = useState([]);
-  const [color, setColor] = useState([]);
+    const authContext = useContext(AuthContext);
+    const { user } = authContext
 
-  useEffect(() => {
-    if (user) setAllTransactions(user.transactions);
-    if (user) setAllCategories(user.categories);
+    const [allTransactions, setAllTransactions] = useState([]);
+    const [type, setType] = useState([])
+    const [allCategories, setAllCategories] = useState([])
+    const [categoryItems, setCategoryItems] = useState([])
+    const [categories, setCategories] = useState([])
+    const [amount, setAmount] = useState([])
+    const [percent, setPercent] = useState([])
+    const [color, setColor] = useState([])
 
-    const type = allTransactions.filter(
-      (item) => item.transactionType === props.type
-    );
-    setType(type);
-  }, [user, allTransactions, props.type]);
+    useEffect(() => {
+        if (user) setAllTransactions(user.transactions)
+        if (user) setAllCategories(user.categories)
 
-  useEffect(() => {
-    let newObj = {};
-    let result = [];
-    type.forEach((item) => {
-      allCategories.forEach((cat) => {
-        if (item.category == cat._id) {
-          if (newObj.hasOwnProperty(cat.name)) {
-            result[newObj[cat.name]].amount += Number(item.amount);
-          } else {
-            newObj[cat.name] = result.length;
-            result.push({
-              name: cat.name,
-              color: cat.color,
-              amount: item.amount,
-            });
-          }
+        const type = allTransactions.filter(item => item.transactionType === props.type)
+        setType(type)
+    }, [user, allTransactions, props.type])
+
+    useEffect(() => {
+        let newObj = {}
+        let result = []
+        type.forEach(item => {
+            allCategories.forEach(cat => {
+                if (item.category === cat._id) {
+                    if (newObj.hasOwnProperty(cat.name)) {
+                        result[newObj[cat.name]].amount += Number(item.amount)
+                    } else {
+                        newObj[cat.name] = result.length
+                        result.push({
+                            'name': cat.name,
+                            'color': cat.color,
+                            'amount': item.amount
+                        })
+                    }
+                }
+            })
+        })
+
+        result.sort((a, b) => {
+            let catA = a.name.toLowerCase()
+            let catB = b.name.toLowerCase()
+            return (catA < catB) ? -1 : (catA > catB) ? 1 : 0;
+        })
+
+        let sum = result.reduce((acc, cur) => acc + cur.amount, 0)
+        setCategoryItems(result)
+        setCategories(result.map(item => item.name.charAt(0).toUpperCase() + item.name.slice(1)))
+        setColor(result.map(item => item.color))
+        setAmount(result.map(item => item.amount))
+        setPercent(result.map(item => ((item.amount / sum) * 100).toFixed(1)))
+
+    }, [type, allCategories])
+
+    //data for chart
+    const data = {
+
+        labels: categories,
+        datasets: [{
+            data: amount, categories,
+            percentage: percent,
+            backgroundColor: color,
+            hoverBackgroundColor: color
+        }]
+    };
+
+    //customise tooltips
+    const chartOptions = {
+        "tooltips": {
+            mode: 'label',
+            callbacks: {
+                title: function (tooltipItem, data) {
+                    return data.labels[tooltipItem[0].index];
+                },
+                label: function (tooltipItem, data) {
+                    return data.datasets[tooltipItem.datasetIndex].percentage[tooltipItem.index] + '%'
+                }
+            }
         }
       });
     });

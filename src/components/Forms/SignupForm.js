@@ -9,7 +9,7 @@ const SignupForm = (props) => {
 
   const authContext = useContext(AuthContext)
 
-  const { register, isAuthenticated, error } = authContext
+  const { register, isAuthenticated, error, clearErrors } = authContext
 
   const [user, setUser] = useState({
     firstName: '',
@@ -29,7 +29,10 @@ const SignupForm = (props) => {
     if (error) {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
     }
-  }, [isAuthenticated, props.history, error])
+    clearErrors()
+    // eslint-disable-next-line
+
+  }, [isAuthenticated, props.history, error, clearErrors])
 
 
   const handleInput = e => setUser({ ...user, [e.target.name]: e.target.value })

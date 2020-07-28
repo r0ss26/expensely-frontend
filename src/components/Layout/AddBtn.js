@@ -8,7 +8,7 @@ const AddBtn = () => {
   return (
     <>
       <div className="fixed-action-btn">
-        <a className="btn-floating btn-large red darken-2 modal-trigger">
+        <a href="#!" className="btn-floating btn-large red darken-2 modal-trigger">
           <i className="large material-icons">add</i>
         </a>
         <ul>

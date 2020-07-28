@@ -8,31 +8,31 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 //pass in components
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  useEffect(() => {
-    //initialize materialize JS
-    M.AutoInit();
-  }, []);
 
-  const authContext = useContext(AuthContext);
-  //console.log(authContext)
-  const { isAuthenticated, loading, getUser, user } = authContext;
 
-  useEffect(() => {
-    //Check for token and update application state if required
-    const token = localStorage.getItem('token');
-    if (token && !isAuthenticated) {
-      getUser();
-    }
-  }, [isAuthenticated, getUser]);
+    useEffect(() => {
+        //initialize materialize JS
+        M.AutoInit()
+    }, [])
 
-  return (
-    // Show the component only when the user is authenticated
-    // Otherwise, redirect the user to /login page
-    <Route
-      {...rest}
-      render={(props) =>
-        !isAuthenticated && loading ? (
-          <Redirect to="/login" />
+
+    const authContext = useContext(AuthContext)
+    //console.log(authContext)
+    const { isAuthenticated, loading, getUser } = authContext;
+
+    useEffect(() => {
+        //Check for token and update application state if required
+        const token = localStorage.getItem('token');
+        if (token && !isAuthenticated) {
+            getUser();
+        }
+    }, [isAuthenticated, getUser]);
+
+    return (
+        // Show the component only when the user is authenticated
+        // Otherwise, redirect the user to /login page
+        <Route {...rest} render={props => (!isAuthenticated && loading) ? (
+            <Redirect to='/login' />
         ) : (
           <>
             <AddBtn />
