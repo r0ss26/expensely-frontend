@@ -12,20 +12,20 @@ const Dashboard = () => {
     <>
       <h4>Dashboard</h4>
       <div className="row">
-        <div className="col s12 l4">
-          <Quotes />
-        </div>
-        <div className="col s12 l4">
+        <div className="col s12 l3">
           <TransactionsChart type="expense" />
         </div>
-        <div className="col s12 l4">
+        <div className="col s12 l3">
+          <Quotes />
+        </div>
+        <div className="col s12 l3">
           <TransactionsChart type="income" />
         </div>
         <div className="row">
-          <div className="col s12 l4">
+          <div className="col s12 l5">
             <TopTransactions />
           </div>
-          <div className="col s12 l4">
+          <div className="col s12 l5">
             <LineChart />
           </div>
         </div>

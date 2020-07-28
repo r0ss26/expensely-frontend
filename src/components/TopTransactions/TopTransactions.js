@@ -76,7 +76,7 @@ const TopTransactions = () => {
   }, [isAmount, timePeriod, user]);
 
   return (
-    <div style={{ maxWidth: '500px' }} className="card  center-align">
+    <div className="card center-align">
       <div className="card-tabs">
         <ul className="tabs tabs-fixed-width">
           <li onClick={() => setIsAmount(true)} className="tab">

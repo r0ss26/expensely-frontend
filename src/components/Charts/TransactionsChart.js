@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import AuthContext from '../../context/auth/authContext';
-import './transactionsChart.css';
+import './chartStyle.css';
 
 const TransactionsChart = (props) => {
   console.log('type', props.type);

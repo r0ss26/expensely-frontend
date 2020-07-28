@@ -4,8 +4,8 @@ import BudgetsTable from '../BudgetsTable/BudgetsTable';
 
 const Budget = () => {
   return (
-    <div className="container-wrapper">
-      <h1>This is show all budget page</h1>
+    <div>
+      <h4 className="center-align">Budgets</h4>
       <BudgetsTable />
     </div>
   );
