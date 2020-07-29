@@ -24,7 +24,7 @@ const Home = () => {
 
     const slider = document.querySelectorAll('#slider');
     M.Slider.init(slider);
-  }, [getUser]);
+  }, [getUser, user]);
 
   const onLogout = () => {
     logout();
