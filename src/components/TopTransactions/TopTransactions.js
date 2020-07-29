@@ -152,8 +152,19 @@ const TopTransactions = () => {
             <>
               <thead>
                 <tr>
+<<<<<<< HEAD
                   <th>Category</th>
                   <th>Amount</th>
+=======
+                  <td>
+                    {capitalize(
+                      user.categories.find(
+                        (category) => category._id === categoryObj.id
+                      ).name
+                    ) || ''}
+                  </td>
+                  <td>{categoryObj.amount}</td>
+>>>>>>> Setup cypress
                 </tr>
               </thead>
               <tbody>
