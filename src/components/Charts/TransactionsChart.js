@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import capitalize from '../../utils/capitalize';
 import { Doughnut } from 'react-chartjs-2';
 import AuthContext from '../../context/auth/authContext';
 import './chartStyle.css';
@@ -53,7 +54,7 @@ const TransactionsChart = (props) => {
 
         let sum = result.reduce((acc, cur) => acc + cur.amount, 0)
         setCategoryItems(result)
-        setCategories(result.map(item => item.name.charAt(0).toUpperCase() + item.name.slice(1)))
+        setCategories(result.map(item => capitalize(item.name)))
         setColor(result.map(item => item.color))
         setAmount(result.map(item => item.amount))
         setPercent(result.map(item => ((item.amount / sum) * 100).toFixed(1)))
@@ -63,7 +64,7 @@ const TransactionsChart = (props) => {
     //data for chart
     const data = {
 
-        labels: categories,
+        // labels: categories,
         datasets: [{
             data: amount, categories,
             percentage: percent,
@@ -88,56 +89,6 @@ const TransactionsChart = (props) => {
     }
 
 
-    //     result.sort((a, b) => {
-    //         let catA = a.name.toLowerCase();
-    //         let catB = b.name.toLowerCase();
-    //         return catA < catB ? -1 : catA > catB ? 1 : 0;
-    //     });
-
-    //     let sum = result.reduce((acc, cur) => acc + cur.amount, 0);
-    //     setCategoryItems(result);
-    //     setCategories(
-    //         result.map(
-    //             (item) => item.name.charAt(0).toUpperCase() + item.name.slice(1)
-    //         )
-    //     );
-    //     setColor(result.map((item) => item.color));
-    //     setAmount(result.map((item) => item.amount));
-    //     setPercent(result.map((item) => ((item.amount / sum) * 100).toFixed(1)));
-    // }, [type]);
-
-    // //data for chart
-    // const data = {
-    //     labels: categories,
-    //     datasets: [
-    //         {
-    //             data: amount,
-    //             categories,
-    //             percentage: percent,
-    //             backgroundColor: color,
-    //             hoverBackgroundColor: color,
-    //         },
-    //     ],
-    // };
-
-    // //customise tooltips
-    // const chartOptions = {
-    //     tooltips: {
-    //         mode: 'label',
-    //         callbacks: {
-    //             title: function (tooltipItem, data) {
-    //                 return data.labels[tooltipItem[0].index];
-    //             },
-    //             label: function (tooltipItem, data) {
-    //                 return (
-    //                     data.datasets[tooltipItem.datasetIndex].percentage[
-    //                     tooltipItem.index
-    //                     ] + '%'
-    //                 );
-    //             },
-    //         },
-    //     },
-    // };
     return (
         <>
             <div className="card white darken-1">
@@ -155,7 +106,7 @@ const TransactionsChart = (props) => {
                                 style={{ backgroundColor: `${item.color}` }}
                             ></span>
                             <span>
-                                {item.name.charAt(0).toUpperCase() + item.name.slice(1)} $
+                                {capitalize(item.name)} $
                 {item.amount}
                             </span>
                         </li>

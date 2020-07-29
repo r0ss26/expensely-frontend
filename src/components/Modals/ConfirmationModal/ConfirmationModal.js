@@ -15,6 +15,7 @@ const ConfirmationModal = (props) => {
         </div>
         <div className="modal-footer">
           <button
+             data-tag='delete'
             onClick={props.onConfirm}
             className="modal-close waves-effect waves-green btn-flat"
           >

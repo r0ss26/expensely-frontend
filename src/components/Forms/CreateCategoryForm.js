@@ -74,17 +74,17 @@ const CreateCategoryForm = () => {
             <form>
                 <div className="input-field col s6">
                     <input
-                        name="input"
+                        name="categoryName"
                         type="text"
-                        className="category_name"
+                        className="categoryName"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <label htmlFor="input">Enter a category name</label>
+                    <label className="active" htmlFor="input">Enter a category name</label>
                 </div>
 
                 <div className="input-field col s6">
-                    <label htmlFor="color">Pick a color</label>
+                    <label className="active" htmlFor="color">Pick a color</label>
                     <SliderPicker
                         color={color}
                         onChangeComplete={handleColor}
@@ -95,6 +95,7 @@ const CreateCategoryForm = () => {
             <div className="modal-footer" >
                 <a
                     href="#!"
+                    data-tag="addCategory"
                     className="waves-effect waves-green btn-flat"
                     onClick={handleFormSubmit}
                 >
