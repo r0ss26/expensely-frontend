@@ -96,7 +96,7 @@ describe('edits the budget', () => {
 
 describe('deletes the budget', () => {
   it('opens the delete confirmation', () => {
-    cy.get('tr > :nth-child(6) > .waves-effect').click();
+    cy.get('tr > :nth-child(6) > .waves-effect').click({ force: true });
   });
 
   it('removes the budget', () => {
