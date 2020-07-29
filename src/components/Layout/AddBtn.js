@@ -1,14 +1,18 @@
 import React from 'react';
 import CreateTransactionModal from '../Modals/CreateTransactionModal/CreateTransactionModal';
 import CreateBudgetModal from '../Modals/CreateBudgetModal.js/CreateBudgetModal';
-import CreateCategoryModel from '../Modals/CreateCategoryModel'
+import CreateCategoryModel from '../Modals/CreateCategoryModel';
 import EditCategoryModel from '../Modals/EditCategoryModel';
 
 const AddBtn = () => {
   return (
     <>
       <div className="fixed-action-btn">
-        <a href="#!" data-tag='addBtn' className="btn-floating btn-large red darken-2 modal-trigger show">
+        <a
+          href="#!"
+          data-tag="addBtn"
+          className="btn-floating btn-large red darken-2 modal-trigger show"
+        >
           <i className="large material-icons">add</i>
         </a>
         <ul>
@@ -21,7 +25,10 @@ const AddBtn = () => {
             </a>
           </li>
           <li>
-            <a href="#create-category-modal" className="btn-floating green modal-trigger">
+            <a
+              href="#create-category-modal"
+              className="btn-floating green modal-trigger"
+            >
               <i className="medium material-icons">storage</i>
             </a>
           </li>
@@ -35,7 +42,6 @@ const AddBtn = () => {
       </div>
       <CreateCategoryModel />
       <CreateTransactionModal />
-      <EditCategoryModel />
       <CreateBudgetModal />
     </>
   );

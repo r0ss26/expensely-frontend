@@ -1,21 +1,25 @@
-// <reference types="crypress" />
+/// <reference types="cypress" />
 
 let token;
 
 before(function getUser() {
-  console.log(Cypress.env('testUser'));
-});
-
-beforeEach(function setUser() {
   cy.request('POST', 'http://localhost:5000/auth/login', {
     email: Cypress.env('testUser').email,
     password: Cypress.env('testUser').password,
   })
     .its('body')
     .then((res) => {
+      console.log(res);
       token = res.token;
     });
+});
+
+beforeEach(function setUser() {
   window.localStorage.setItem('token', token);
+});
+
+afterEach(function logout() {
+  window.localStorage.removeItem('token');
 });
 
 describe('authenticate test user', () => {
@@ -25,7 +29,9 @@ describe('authenticate test user', () => {
       headers: {
         authorization: window.localStorage.token,
       },
-    });
+    })
+      .its('status')
+      .should('equal', 200);
   });
 });
 
@@ -33,12 +39,13 @@ describe('access dashboard', () => {
   it('visits dashboard page', () => {
     cy.visit('http://localhost:3000/dashboard');
     cy.contains('Dashboard').should('be.visible');
+    cy.url().should('include', 'dashboard');
   });
 });
 
 describe('create new budget', () => {
   it('opens modal', () => {
-    cy.get('.orange').click({ force: true });
+    cy.get('a[href="#create-budget-modal"]').click({ force: true });
   });
 });
 
@@ -66,6 +73,7 @@ describe('saves the budget', () => {
     cy.get('.modal-overlay').click({ force: true });
     cy.get('.links > :nth-child(6) > a > p').click();
     cy.contains('Budgets').should('be.visible');
+    cy.url().should('include', 'budget');
   });
 
   it('displays the new transaction', () => {
@@ -88,7 +96,7 @@ describe('edits the budget', () => {
 
 describe('deletes the budget', () => {
   it('opens the delete confirmation', () => {
-    cy.get(':nth-child(6) > .waves-effect').click();
+    cy.get('tr > :nth-child(6) > .waves-effect').click();
   });
 
   it('removes the budget', () => {

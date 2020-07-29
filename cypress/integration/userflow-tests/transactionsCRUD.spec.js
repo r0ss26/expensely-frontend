@@ -1,20 +1,25 @@
-// <reference types="crypress" />
+/// <reference types="cypress" />
 
 let token;
 
-before(function getUser() {});
-
-beforeEach(function setUser() {
-  console.log(Cypress.env('testUser'));
+before(function getUser() {
   cy.request('POST', 'http://localhost:5000/auth/login', {
     email: Cypress.env('testUser').email,
     password: Cypress.env('testUser').password,
   })
     .its('body')
     .then((res) => {
+      console.log(res);
       token = res.token;
     });
+});
+
+beforeEach(function setUser() {
   window.localStorage.setItem('token', token);
+});
+
+afterEach(function logout() {
+  if (window.localStorage.token) window.localStorage.removeItem('token');
 });
 
 describe('authenticate test user', () => {
@@ -22,7 +27,7 @@ describe('authenticate test user', () => {
     cy.request({
       url: 'http://localhost:5000/auth',
       headers: {
-        authorization: window.localStorage.token,
+        authorization: token,
       },
     });
   });
@@ -75,7 +80,7 @@ describe('saves the transaction', () => {
 
 describe('edits the transaction', () => {
   it('opens the edit modal', () => {
-    cy.get(':nth-child(1) > :nth-child(6) > .waves-effect').click();
+    cy.get('tr > :nth-child(6) > .waves-effect').click();
   });
 
   it('edits the transaction', () => {

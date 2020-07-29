@@ -84,7 +84,7 @@ const CategoriesList = () => {
               <td>{capitalize(item.name)}</td>
               <td> {capitalize(item.transactionType)}</td>
               <td> <span className="dot" style={{ backgroundColor: `${item.color}` }}></span></td>
-              <td>
+              <td className="edit-category">
                 <a
                   className="waves-effect waves-light btn modal-trigger"
                   href="#edit-category-modal"

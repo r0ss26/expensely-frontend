@@ -94,6 +94,7 @@ const CreateCategoryForm = () => {
             </form>
             <div className="modal-footer" >
                 <a
+                    id="submit-category"
                     href="#!"
                     data-tag="addCategory"
                     className="waves-effect waves-green btn-flat"
