@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import AuthContext from '../../context/auth/authContext'
+import AuthContext from '../../context/auth/authContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import CategorySelect from '../CategorySelect/CategorySelect';
 
@@ -9,8 +9,8 @@ const CreateTransactionForm = () => {
   const { addTransaction } = authContext;
 
   // Form state
-  const [amount, setAmount] = useState('')
-  const [comment, setComment] = useState('')
+  const [amount, setAmount] = useState('');
+  const [comment, setComment] = useState('');
   const [transactionType, setTransactionType] = useState('expense'); // Default transaction type is expense
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
@@ -50,9 +50,9 @@ const CreateTransactionForm = () => {
       });
 
       dateInput.current.value = '';
-      setAmount('')
-      setCategory('')
-      setComment('')
+      setAmount('');
+      setCategory('');
+      setComment('');
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +65,7 @@ const CreateTransactionForm = () => {
         id="expense"
         className={`waves-effect waves-light btn ${
           transactionType === 'expense' ? 'disabled' : ''
-          }`}
+        }`}
         onClick={() => setTransactionType('expense')}
       >
         <i className="material-icons right">money_off</i>Expense
@@ -74,7 +74,7 @@ const CreateTransactionForm = () => {
         id="income"
         className={`waves-effect waves-light btn ${
           transactionType === 'income' ? 'disabled' : ''
-          }`}
+        }`}
         onClick={() => setTransactionType('income')}
       >
         <i className="material-icons left">attach_money</i>Income
@@ -93,8 +93,12 @@ const CreateTransactionForm = () => {
           <label htmlFor="date">Date</label>
         </div>
 
-        <div className="input-field col s6" >
-          <CategorySelect transactionType={transactionType} value={category} onSelect={setCategory} />
+        <div id="transaction-category" className="input-field col s6">
+          <CategorySelect
+            transactionType={transactionType}
+            value={category}
+            onSelect={setCategory}
+          />
         </div>
 
         <div className="input-field col s6">
@@ -114,7 +118,7 @@ const CreateTransactionForm = () => {
           <input
             value={comment}
             name="comment"
-            onChange={e => setComment(e.target.value)}
+            onChange={(e) => setComment(e.target.value)}
             id="comment"
             type="text"
             className="validate"
@@ -124,6 +128,7 @@ const CreateTransactionForm = () => {
       </form>
       <div className="modal-footer">
         <a
+          id="submit-new-transaction"
           href="#!"
           className="waves-effect waves-green btn-flat"
           onClick={handleFormSubmit}

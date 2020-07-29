@@ -112,6 +112,7 @@ const EditBudgetForm = (props) => {
       </form>
       <div className="modal-footer">
         <a
+        id="save-budget"
           href="#!"
           className="waves-effect waves-green btn-flat"
           onClick={handleFormSubmit}
