@@ -2,7 +2,9 @@
 
 let token;
 
-before(function getUser() {
+before(function getUser() {});
+
+beforeEach(function setUser() {
   console.log(Cypress.env('testUser'));
   cy.request('POST', 'http://localhost:5000/auth/login', {
     email: Cypress.env('testUser').email,
@@ -12,9 +14,6 @@ before(function getUser() {
     .then((res) => {
       token = res.token;
     });
-});
-
-beforeEach(function setUser() {
   window.localStorage.setItem('token', token);
 });
 
@@ -36,64 +35,67 @@ describe('access dashboard', () => {
   });
 });
 
-describe('create new budget', () => {
+describe('create new transaction', () => {
   it('opens modal', () => {
-    cy.get('.orange').click({ force: true });
+    cy.get('.blue').click({ force: true });
   });
 });
 
 describe('fills out the form', () => {
-  it('enters a name', () => {
-    cy.get('#budget-name').click({ force: true }).type('A test budget');
-  });
-  it('enters an amount', () => {
-    cy.get('#budget-amount').click({ force: true }).type('200');
-  });
-  it('selects a time period', () => {
-    cy.get('#budget-time-period').select('weekly', { force: true });
+  it('selects a date', () => {
+    cy.get('#create-transaction-date').click({ force: true });
+    cy.get('.is-today > .datepicker-day-button').click();
   });
   it('selects a category', () => {
-    cy.get('#budget-category').click();
-    cy.get('#budget-category ul li:nth-of-type(2)').click({ force: true });
+    cy.get('#transaction-category').click();
+    cy.get('#transaction-category ul li:nth-of-type(2)').click();
+  });
+  it('enters an amount', () => {
+    cy.get('#amount').click({ force: true }).type('100');
+  });
+  it('enters a comment', () => {
+    cy.get('#comment').click({ force: true }).type('This is a comment');
   });
   it('submits the form', () => {
-    cy.get('#submit-new-budget').click();
+    cy.get('#submit-new-transaction').click();
   });
 });
 
-describe('saves the budget', () => {
-  it('visits budgets page', () => {
+describe('saves the transaction', () => {
+  it('visits transactions page', () => {
     cy.get('.modal-overlay').click({ force: true });
-    cy.get('.links > :nth-child(6) > a > p').click();
-    cy.contains('Budgets').should('be.visible');
+    cy.get('.links > :nth-child(5) > a > p').click();
+    cy.contains('Transactions').should('be.visible');
   });
 
   it('displays the new transaction', () => {
-    cy.contains('A Test Budget').should('be.visible');
+    cy.contains('This is a comment').should('be.visible');
   });
 });
 
-describe('edits the budget', () => {
+describe('edits the transaction', () => {
   it('opens the edit modal', () => {
-    cy.get('tr > :nth-child(5) > .waves-effect').click();
+    cy.get(':nth-child(1) > :nth-child(6) > .waves-effect').click();
   });
 
   it('edits the transaction', () => {
-    cy.get('#edit-budget-name')
+    cy.get(
+      '#edit-transaction-modal > .center-align > form > :nth-child(4) > #comment'
+    )
       .click()
       .type(' edited');
-    cy.get('#save-budget').click();
+    cy.get('#save-transaction').click();
     cy.get('.modal-overlay').click({ force: true });
-    cy.contains('A Test Budget Edited').should('be.visible');
+    cy.contains('This is a comment edited').should('be.visible');
   });
 });
 
-describe('deletes the budget', () => {
+describe('deletes the transaction', () => {
   it('opens the delete confirmation', () => {
-    cy.get(':nth-child(6) > .waves-effect').click();
+    cy.get(':nth-child(1) > :nth-child(7) > .waves-effect').click();
   });
 
-  it('removes the budget', () => {
+  it('removes the transaction', () => {
     cy.get('#confirmationModal').contains('Delete').click();
     cy.contains('This is a comment edited').should('not.be.visible');
   });

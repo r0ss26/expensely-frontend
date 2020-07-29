@@ -3,6 +3,9 @@
 let token;
 
 before(function getUser() {
+});
+
+beforeEach(function setUser() {
   console.log(Cypress.env('testUser'));
   cy.request('POST', 'http://localhost:5000/auth/login', {
     email: Cypress.env('testUser').email,
@@ -12,9 +15,6 @@ before(function getUser() {
     .then((res) => {
       token = res.token;
     });
-});
-
-beforeEach(function setUser() {
   window.localStorage.setItem('token', token);
 });
 

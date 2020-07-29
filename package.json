@@ -28,12 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-<<<<<<< HEAD
     "cy:open": "cypress open",
     "cy:run": "cypress run --headless"
-=======
-    "cypress": "cypress open"
->>>>>>> Setup cypress
   },
   "eslintConfig": {
     "extends": "react-app"
