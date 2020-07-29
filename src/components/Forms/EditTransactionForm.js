@@ -152,6 +152,7 @@ const EditTransactionForm = (props) => {
       </form>
       <div className="modal-footer">
         <a
+        id="save-transaction"
           href="#!"
           className="waves-effect waves-green btn-flat"
           onClick={handleFormSubmit}

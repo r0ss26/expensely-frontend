@@ -15,10 +15,8 @@ const CreateTransactionForm = () => {
   const [category, setCategory] = useState('');
 
   const handleFormSubmit = async (event) => {
-
     event.preventDefault();
 
-  
     if (!name || !amount || !timePeriod || !category) {
       M.toast({
         html: 'Please enter all required fields',
@@ -95,7 +93,7 @@ const CreateTransactionForm = () => {
           <label>Time Period</label>
         </div>
 
-        <div className="input-field col s6">
+        <div id="budget-category" className="input-field col s6">
           <CategorySelect
             transactionType="expense"
             value={category}
@@ -105,6 +103,7 @@ const CreateTransactionForm = () => {
       </form>
       <div className="modal-footer">
         <a
+          id="submit-new-budget"
           href="#!"
           className="waves-effect waves-green btn-flat"
           onClick={handleFormSubmit}
