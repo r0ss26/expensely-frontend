@@ -88,3 +88,7 @@
 .sidenav .logout {
   margin-top: 80px;
 }
+
+.btn-floating.show {
+  visibility: visible;
+}
