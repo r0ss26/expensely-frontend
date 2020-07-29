@@ -12,7 +12,7 @@ const BudgetExpenseBar = () => {
     const [allExpenses, setAllExpenses] = useState([])
     const [allCategories, setAllCategories] = useState([])
     const [currentDay, setCurrentDay] = useState(null)
-    // const [perDay, setPerDay] = useState(null)
+    const [spentAmount, setSpentAmount] = useState(0)
     const [items, setItems] = useState([])
 
     useEffect(() => {
@@ -24,9 +24,11 @@ const BudgetExpenseBar = () => {
         if (user) setAllExpenses(user.transactions.filter(item => item.transactionType === 'expense'))
         if (user) setAllCategories(user.categories)
 
-    }, [user, currentDay])
+
+    }, [user])
 
     useEffect(() => {
+
         let newObj = {}
         let result = []
 
@@ -62,13 +64,48 @@ const BudgetExpenseBar = () => {
                             }
                         }
                     })
+                } else {
+                    allBudgets.forEach(bud => {
+                        allCategories.map(cat => {
+                            if (bud.category === cat._id) {
+                                if (newObj.hasOwnProperty(cat.name)) {
+                                    result[newObj[cat.name]].spentAmount += Number(spentAmount)
+                                    result[newObj[cat.name]].budgetLeft -= Number(spentAmount)
+                                    result[newObj[cat.name]].percentSpent += Number(spentAmount / bud.amount)
+                                    result[newObj[cat.name]].percentLeft -= Number(spentAmount / bud.amount)
+                                    result[newObj[cat.name]].perDayLeft -= Number(spentAmount / 8 - currentDay)
+                                    result[newObj[cat.name]].dayLeft -= Number(1)
+
+                                } else {
+                                    newObj[cat.name] = result.length
+                                    result.push({
+                                        'name': cat.name,
+                                        'color': cat.color,
+                                        'budgetName': bud.name,
+                                        'budgetAmount': bud.amount,
+                                        'spentAmount': spentAmount,
+                                        'duration': bud.timePeriod,
+                                        'payDayLeft': (bud.amount - spentAmount) / (8 - currentDay),
+                                        'dayLeft': 8 - currentDay,
+                                        'perDay': bud.amount / 7,
+                                        "budgetLeft": bud.amount - spentAmount,
+                                        "percentSpent": (spentAmount / bud.amount),
+                                        "percentLeft": ((bud.amount - spentAmount) / bud.amount)
+                                    })
+                                }
+                            }
+                        })
+                    })
+
                 }
             })
         })
 
         setItems(result)
+       
+    }, [allCategories, allBudgets, allExpenses])
 
-    }, [allCategories, allBudgets, allExpenses, currentDay])
+    console.log(items)
 
     return (
         <>
