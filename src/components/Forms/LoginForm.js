@@ -16,8 +16,8 @@ const LoginForm = (props) => {
     }
     if (error) {
       M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
+      clearErrors()
     }
-    clearErrors()
   }, [isAuthenticated, props.history, error, clearErrors])
 
 
