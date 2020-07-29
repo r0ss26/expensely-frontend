@@ -19,6 +19,11 @@ const Nav = () => {
 
   const onLogout = () => {
     logout();
+    M.toast({
+      html: 'You have successfully logout',
+      displayLength: 4000,
+      classes: 'green',
+    });
   };
 
   const navLinks = (
@@ -70,7 +75,7 @@ const Nav = () => {
           {navLinks}
         </ul>
         <div className="logout">
-          <Link to="/login" onClick={onLogout}>
+          <Link to="/" onClick={onLogout}>
             <i className="medium material-icons">exit_to_app</i>
             <p>Logout</p>
           </Link>
@@ -85,7 +90,7 @@ const Nav = () => {
           {navLinks}
           <li></li>
           <div className="logout">
-            <Link to="/login" onClick={onLogout}>
+            <Link to="/" onClick={onLogout}>
               <i className="small material-icons">exit_to_app</i>
               <p>Logout</p>
             </Link>

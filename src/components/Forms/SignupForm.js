@@ -62,30 +62,30 @@ const SignupForm = (props) => {
         <form onSubmit={handleSignupFormSubmit} className="col s12">
           <div className="row">
             <div className="input-field col s6">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="firstName" className="active">First Name</label>
               <input required value={firstName} onChange={handleInput} type="text" name="firstName" className="validate" />
             </div>
             <div className="input-field col s6">
               <input required value={lastName} onChange={handleInput} name="lastName" type="text" className="validate" />
-              <label htmlFor="last_name">Last Name</label>
+              <label className="active" htmlFor="last_name">Last Name</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <input required value={email} onChange={handleInput} name="email" type="email" className="validate" />
-              <label htmlFor="email">Email</label>
+              <label className="active" htmlFor="email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <input required value={password} onChange={handleInput} name="password" type="password" className="validate" minLength='6' />
-              <label htmlFor="password">Password</label>
+              <label className="active" htmlFor="password">Password</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <input required value={confirmPassword} onChange={handleInput} name="confirmPassword" type="password" className="validate" />
-              <label htmlFor="confirm-password">Confirm Password</label>
+              <label className="active" htmlFor="confirm-password">Confirm Password</label>
             </div>
           </div>
           <button className="btn waves-effect waves-light right" name="action">Signup

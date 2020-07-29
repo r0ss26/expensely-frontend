@@ -46,13 +46,13 @@ const LoginForm = (props) => {
           <div className="row">
             <div className="input-field col s12">
               <input onChange={(event) => handleInput(event, setEmail)} value={email} name="email" type="email" className="validate" />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="active">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <input onChange={(event) => handleInput(event, setPassword)} value={password} name="password" type="password" className="validate" />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" className="active">Password</label>
             </div>
           </div>
           <div>
