@@ -14,7 +14,9 @@ const Home = () => {
   const { isAuthenticated, user, logout, getUser } = authContext;
 
   useEffect(() => {
-    getUser();
+    if (!user) {
+      getUser();
+    }
 
     const homeNav = document.querySelectorAll('#home-nav');
     M.Sidenav.init(homeNav);
