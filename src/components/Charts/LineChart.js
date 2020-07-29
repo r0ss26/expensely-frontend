@@ -56,7 +56,7 @@ const LineChart = () => {
         ]
       })
     }
-  }, [user]);
+  }, [user, data]);
 
   return (
     <div>

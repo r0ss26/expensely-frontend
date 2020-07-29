@@ -22,7 +22,7 @@ const Home = () => {
 
     const slider = document.querySelectorAll('#slider');
     M.Slider.init(slider);
-  }, []);
+  }, [getUser]);
 
   const onLogout = () => {
     logout();
@@ -63,10 +63,8 @@ const Home = () => {
       <nav>
         <div class="nav-wrapper blue lighten-4">
           <div className="container">
-            <a href="#" class="brand-logo">
-              <img height="60" src={Logo} />
-            </a>{' '}
-            <a href="#" data-target="home-nav" class="sidenav-trigger">
+            <img alt="Logo" height="60" src={Logo} />
+            <a href="/#" data-target="home-nav" class="sidenav-trigger">
               <i class="material-icons">menu</i>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -84,7 +82,7 @@ const Home = () => {
         <div id="slider" class="slider">
           <ul class="slides">
             <li>
-              <img src={graphImage} />
+              <img alt="" src={graphImage} />
               <span
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
                 class="caption center-align"
@@ -96,7 +94,7 @@ const Home = () => {
               </span>
             </li>
             <li>
-              <img height="250" src={financeImage} />
+              <img alt="" height="250" src={financeImage} />
               <span
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
                 class="caption black-text left-align"
@@ -108,7 +106,7 @@ const Home = () => {
               </span>
             </li>
             <li>
-              <img height="250" src={savingsImage} />
+              <img alt="" height="250" src={savingsImage} />
               <div
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
                 class="caption right-align black-text"
@@ -117,7 +115,7 @@ const Home = () => {
               </div>
             </li>
             <li>
-              <img height="250" src={timeImage} />
+              <img alt="" height="250" src={timeImage} />
               <div
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
                 class="caption black-text center-align"

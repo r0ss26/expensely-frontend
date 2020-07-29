@@ -138,6 +138,8 @@ const TopTransactions = () => {
                     <td>{categories.map(item => {
                       if (item._id === transaction.category) {
                         return capitalize(item.name)
+                      } else {
+                        return ''
                       }
                     })}</td>
                     <td className={transaction.transactionType}>
