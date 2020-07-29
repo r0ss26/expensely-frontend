@@ -42,7 +42,7 @@ const LineChart = () => {
     ],
   };
 
-  const [data, setData] = useState(initialChartData)
+  const [data, setData] = useState(initialChartData);
 
   useEffect(() => {
     if (user) {
@@ -51,12 +51,13 @@ const LineChart = () => {
         datasets: [
           {
             ...data.datasets[0],
-            data: getPrevious30DaysTotals(user.transactions)
-          }
-        ]
-      })
+            data: getPrevious30DaysTotals(user.transactions),
+          },
+        ],
+      });
     }
-  }, [user, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <div>
