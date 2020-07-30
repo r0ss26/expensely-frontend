@@ -74,8 +74,8 @@ const CategoriesList = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Color</th>
             <th>Type</th>
+            <th>Color</th>
           </tr>
         </thead>
         <tbody>
