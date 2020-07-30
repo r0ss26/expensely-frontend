@@ -5,21 +5,32 @@ import M from 'materialize-css';
 import './categorySelectStyles.css'
 
 const CategorySelect = (props) => {
+
   const authContext = useContext(AuthContext);
   const { user } = authContext;
 
   let categories = [];
+
   if (user)
     categories = user.categories.filter(
       (category) => category.transactionType === props.transactionType
     );
-  //console.log(categories)
-  // console.log(categories)
+
+  let budgetsID = []
+  if (user) {
+    user.budgets.forEach(budget => {
+      if (user.categories.filter(category => budget.category.includes(category._id))) {
+        budgetsID.push(budget.category)
+      }
+    })
+  }
+
   // Needed to overwrite materilize-css initializer, which resets dynamic elements
   useEffect(() => {
     const select = document.querySelectorAll('.category-select');
     M.FormSelect.init(select);
-  }, [categories]);
+
+  }, [categories, budgetsID]);
 
   useEffect(() => {
     // Required by materialize to initialize the Select
@@ -40,9 +51,11 @@ const CategorySelect = (props) => {
         <option value="" className="colorIcon">Choose a category</option>
         {categories &&
           categories.map((category) => (
-            <option key={category._id} value={category._id} style={{ backgroundColor: `${category.color}` }}>
+            <option
+              key={category._id}
+              value={category._id}
+              disabled={props.canBeDisabled && budgetsID.includes(category._id) ? true : false} >
               {capitalize(category.name)}
-              {/* <span className='dot' style={{ backgroundColor: `${category.color}` }}></span> */}
             </option>
           ))}
       </select>

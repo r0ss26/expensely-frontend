@@ -98,6 +98,7 @@ const CreateTransactionForm = () => {
             transactionType={transactionType}
             value={category}
             onSelect={setCategory}
+            canBeDisabled={false}
           />
         </div>
 
