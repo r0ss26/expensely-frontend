@@ -28,8 +28,7 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL,
-  GET_DAY
+  CHANGE_PASSWORD_FAIL
 } from '../types';
 
 //create initial state
@@ -284,11 +283,12 @@ const AuthState = props => {
   const changePassword = async (formData, id) => {
     //console.log("form", formData, id)
     try {
-      const res = await axios.put(`/auth/reset/${id}`, formData)
+      await axios.put(`/auth/reset/${id}`, formData)
       dispatch({
         type: CHANGE_PASSWORD_SUCCESS,
-        payload: res.data
+        // payload: res.data
       })
+      logout()
     } catch (error) {
       dispatch({
         type: CHANGE_PASSWORD_FAIL,
@@ -297,13 +297,6 @@ const AuthState = props => {
     }
   }
 
-  const getDay = day => {
-    //console.log(day, state)
-    dispatch({
-      type: GET_DAY,
-      payload: day
-    })
-  }
 
   //wrap the app with the auth provider
   return (
@@ -332,8 +325,7 @@ const AuthState = props => {
         updateCategory,
         deleteCategory,
         updateProfile,
-        changePassword,
-        getDay
+        changePassword
       }}
     >
       {props.children}

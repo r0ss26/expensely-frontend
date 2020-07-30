@@ -200,20 +200,25 @@ export default (state, action) => {
         error: action.payload
       }
     case CHANGE_PASSWORD_SUCCESS:
-      // localStorage.removeItem('token');
+      localStorage.removeItem('token');
       // console.log("changed success payload", action.payload)
       // return Object.assign({}, state.user, { user: action.payload })
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
+       // error: action.payload,
+      }
+    case CHANGE_PASSWORD_FAIL:
+      console.log("changed fail payload", action.payload)
 
       return {
         ...state,
         user: {
           ...state.user
-        }
-      }
-    case CHANGE_PASSWORD_FAIL:
-     // console.log("changed fail payload", action.payload)
-      return {
-        ...state,
+        },
         error: action.payload
       };
 
