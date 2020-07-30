@@ -42,14 +42,15 @@ const ChangePasswordForm = (props) => {
         
         changePassword(formData, id)
 
-        // if (error)
-        //     // logout()
-        //     // register(formData)
-        //     // if (!error) {
-        //     //     logout()
-        //     //     M.toast({ html: "Password successfully changed. Please login with new password", displayLength: 4000, classes: "green" })
-        //     // }
+        // if (error) {
+
         // }
+            // logout()
+            // register(formData)
+            // if (!error) {
+            //     logout()
+            //     M.toast({ html: "Password successfully changed. Please login with new password", displayLength: 4000, classes: "green" })
+            // }
 
     }
     return (

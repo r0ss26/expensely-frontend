@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
-// import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './formStyle.css';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 const SignupForm = (props) => {
   const authContext = useContext(AuthContext);
@@ -57,6 +57,9 @@ const SignupForm = (props) => {
 
   return (
     <div className="auth-form-container">
+      <div className="logo-img center">
+        <Link to="/"><img src={logo} alt="logo" /></Link>
+      </div>
       <h2>Account Register </h2>
       <div className="row">
         <form onSubmit={handleSignupFormSubmit} className="col s12">

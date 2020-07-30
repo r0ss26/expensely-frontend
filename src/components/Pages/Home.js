@@ -7,6 +7,7 @@ import graphImage from '../../assets/undraw_laptop_graph.png';
 import financeImage from '../../assets/undraw_personal_finance.png';
 import savingsImage from '../../assets/undraw_savings.png';
 import timeImage from '../../assets/undraw_time.png';
+import capitalize from '../../utils/capitalize';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -24,7 +25,7 @@ const Home = () => {
 
     const slider = document.querySelectorAll('#slider');
     M.Slider.init(slider);
-  }, [getUser, user]);
+  }, [user]);
 
   const onLogout = () => {
     logout();
@@ -32,7 +33,7 @@ const Home = () => {
 
   const authLinks = (
     <>
-      <li>Hello {user && user.firstName}</li>
+      <li>Hello {user && capitalize(user.firstName)}</li>
       <li>
         <Link className="btn" to="/dashboard">
           Dashboard
@@ -63,11 +64,11 @@ const Home = () => {
   return (
     <>
       <nav>
-        <div class="nav-wrapper blue lighten-4">
+        <div className="nav-wrapper blue lighten-4">
           <div className="container">
             <img alt="Logo" height="60" src={Logo} />
             <a href="/#" data-target="home-nav" class="sidenav-trigger">
-              <i class="material-icons">menu</i>
+              <i className="material-icons">menu</i>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               {isAuthenticated ? authLinks : publicLinks}
@@ -76,21 +77,21 @@ const Home = () => {
         </div>
       </nav>
 
-      <ul class="sidenav" id="home-nav">
+      <ul className="sidenav" id="home-nav">
         {isAuthenticated ? authLinks : publicLinks}
       </ul>
 
       <div style={{ padding: '20px 0' }} className="container">
         <div id="slider" class="slider">
-          <ul class="slides">
+          <ul className="slides">
             <li>
               <img alt="" src={graphImage} />
               <span
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
-                class="caption center-align"
+                className="caption center-align"
               >
-                <h3 class="black-text">Expense.ly</h3>
-                <h5 class="light black-text text-lighten-3">
+                <h3 className="black-text">Expense.ly</h3>
+                <h5 className="light black-text text-lighten-3">
                   Take control of your finances.
                 </h5>
               </span>
@@ -99,10 +100,10 @@ const Home = () => {
               <img alt="" height="250" src={financeImage} />
               <span
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
-                class="caption black-text left-align"
+                className="caption black-text left-align"
               >
                 <h3>Track your spending.</h3>
-                <h5 class="light black-text text-lighten-3">
+                <h5 className="light black-text text-lighten-3">
                   Better understand your finances.
                 </h5>
               </span>
@@ -111,7 +112,7 @@ const Home = () => {
               <img alt="" height="250" src={savingsImage} />
               <div
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
-                class="caption right-align black-text"
+                className="caption right-align black-text"
               >
                 <h3>Reach your savings goals faster.</h3>
               </div>
@@ -120,10 +121,10 @@ const Home = () => {
               <img alt="" height="250" src={timeImage} />
               <div
                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
-                class="caption black-text center-align"
+                className="caption black-text center-align"
               >
                 <h3>Save time!</h3>
-                <h5 class="light black-text text-lighten-3">
+                <h5 className="light black-text text-lighten-3">
                   No more spreadsheets, manage all your expenses in a single
                   place.
                 </h5>
@@ -135,12 +136,12 @@ const Home = () => {
 
       <div className="row">
         <div className="col s12 l2 offset-l3">
-          <div class="card center-align">
-            <span class="card-title">
+          <div className="card center-align">
+            <span className="card-title">
               {' '}
               <i className="material-icons medium">attach_money</i>
             </span>
-            <div class="card-content">
+            <div className="card-content">
               <p>
                 Do you want to make personal finance a priority? Expense.ly
                 allows you to improve your finances by giving you insight into
@@ -150,12 +151,12 @@ const Home = () => {
           </div>
         </div>
         <div className="col s12 l2">
-          <div class="card center-align">
-            <span class="card-title">
+          <div className="card center-align">
+            <span className="card-title">
               {' '}
               <i className="material-icons medium">all_inclusive</i>
             </span>
-            <div class="card-content">
+            <div className="card-content">
               <p>
                 <strong>Expense.ly</strong> allows you to track your
                 transactions, spending categories, budget goals and more.
@@ -164,12 +165,12 @@ const Home = () => {
           </div>
         </div>
         <div className="col s12 l2">
-          <div class="card center-align">
-            <span class="card-title">
+          <div className="card center-align">
+            <span className="card-title">
               {' '}
               <i className="material-icons medium">alarm</i>
             </span>
-            <div class="card-content">
+            <div className="card-content">
               <p>
                 Use <strong>expense.ly</strong> to save time! The app includes a
                 simple and easy-to-use interface. Graphical statistics and data
