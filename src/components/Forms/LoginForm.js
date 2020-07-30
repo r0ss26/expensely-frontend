@@ -3,6 +3,7 @@ import AuthContext from '../../context/auth/authContext'
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './formStyle.css'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/logo.png';
 
 const LoginForm = (props) => {
 
@@ -41,6 +42,9 @@ const LoginForm = (props) => {
   return (
     <div className="auth-form-container">
       <div className="row">
+        <div className="logo-img center">
+          <Link to="/"><img src={logo} alt="logo" /></Link>
+        </div>
         <h2>Account Login </h2>
         <form onSubmit={handleSubmit} className="col s12">
           <div className="row">

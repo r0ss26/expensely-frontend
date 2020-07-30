@@ -5,6 +5,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 import AuthContext from '../../context/auth/authContext';
 import logo from '../../assets/logo.png';
+import capitalize from '../../utils/capitalize';
 
 const Nav = () => {
   const authContext = useContext(AuthContext);
@@ -68,10 +69,10 @@ const Nav = () => {
       </Link>
       <div className="navigation hide-on-med-and-down">
         <ul className="links">
-          <li className="logo-img">
+          <Link to="/" className="logo-img">
             <img src={logo} alt="logo" />
-          </li>
-          <li>Hello {user && user.firstName}</li>
+          </Link>
+          <li>Hello {user && capitalize(user.firstName)}</li>
           {navLinks}
         </ul>
         <div className="logout">
