@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TransactionsChart from '../Charts/TransactionsChart';
 import TopTransactions from '../TopTransactions/TopTransactions';
-// import BudgetExpenseBar from '../Charts/ProgressBar/BudgetExpenseBar';
+import BudgetExpenseBar from '../Charts/ProgressBar/BudgetExpenseBar';
 import LineChart from '../Charts/LineChart';
 import Quotes from '../Quotes/Quotes';
 import AuthContext from '../../context/auth/authContext';
@@ -20,6 +20,9 @@ const Dashboard = () => {
       {loading ? <LinearBar /> : (
         <>
           <div className="row">
+            <div className="col s12 l3">
+              <BudgetExpenseBar />
+            </div>
             <div className="col s12 l3">
               <TransactionsChart type="expense" />
             </div>

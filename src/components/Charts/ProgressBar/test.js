@@ -31,15 +31,13 @@ const BudgetExpenseBar = () => {
         let newObj = {}
         let result = []
 
-
         allBudgets.forEach(bud => {
-            allCategories.map(cat => {
-                if (allExpenses.filter(expense => expense.category === cat._id).length > 0) {
-                    allExpenses.map(exp => {
+            allExpenses.map(exp => {
+                if (exp.category.includes(bud.category)) {
+                    allCategories.map(cat => {
                         if (bud.category === cat._id) {
                             if (newObj.hasOwnProperty(cat.name)) {
                                 result[newObj[cat.name]].spentAmount += Number(exp.amount)
-
                                 result[newObj[cat.name]].budgetLeft -= Number(exp.amount)
                                 result[newObj[cat.name]].percentSpent += Number(exp.amount / bud.amount)
                                 result[newObj[cat.name]].percentLeft -= Number(exp.amount / bud.amount)
@@ -105,25 +103,19 @@ const BudgetExpenseBar = () => {
 
     }, [allCategories, allBudgets, allExpenses])
 
+    console.log(items)
+
     return (
-        <>{items.length === 0 ? (<div className="noBudget">
-            <h5 className="center">Your Budget Plan</h5>
-            <p className="center">No data available</p>
-        </div>) : <>
-                {items.map(item => (
-                    <div key={item.name} className="bar-wrapper">
-                        <ProgressBar items={item} />
-                    </div>
+        <>
+            {items.map(item => (
+                <div key={item.name} className="bar-wrapper">
+                    <ProgressBar items={item} />
+                </div>
 
-                ))}
-            </>
-        }
-
+            ))}
 
         </>
     )
 }
 
 export default BudgetExpenseBar
-
-
