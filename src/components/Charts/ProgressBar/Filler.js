@@ -6,7 +6,7 @@ const Filler = ({ items }) => {
 
     return (
         <>
-            <div className="filler" style={{ width: `${items.percentLeft * 100}%`, background: `${items.color}` }}>
+            <div className="filler" style={{ width: `${items.percentLeft*100}%`, background: `${items.color}` }}>
             </div>
         </>
     )
