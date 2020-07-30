@@ -38,15 +38,18 @@ const ChangePasswordForm = (props) => {
 
         if (password !== confirmPassword) {
             M.toast({ html: "Passwords do not match", displayLength: 4000, classes: "red" })
-        } else {
-            changePassword(formData, id)
-            // logout()
-            // register(formData)
-            // if (!error) {
-            //     logout()
-            //     M.toast({ html: "Password successfully changed. Please login with new password", displayLength: 4000, classes: "green" })
-            // }
-        }
+        } 
+        
+        changePassword(formData, id)
+
+        // if (error)
+        //     // logout()
+        //     // register(formData)
+        //     // if (!error) {
+        //     //     logout()
+        //     //     M.toast({ html: "Password successfully changed. Please login with new password", displayLength: 4000, classes: "green" })
+        //     // }
+        // }
 
     }
     return (

@@ -117,7 +117,6 @@ const EditProfileForm = () => {
                                         type="file"
                                         name=''
                                         onChange={e => setImage(e.target.files[0])}
-                                    // setProfileImage(e.target)}
                                     />
                                 </div>
                                 <div className="file-path-wrapper">
