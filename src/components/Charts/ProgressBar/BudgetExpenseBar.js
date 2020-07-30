@@ -35,7 +35,7 @@ const BudgetExpenseBar = () => {
         allBudgets.forEach(bud => {
             allCategories.map(cat => {
                 if (allExpenses.filter(expense => expense.category === cat._id).length > 0) {
-                    console.log(allExpenses)
+                    
                     allExpenses.map(exp => {
                         if (bud.category === cat._id && bud.category === exp.category) {
                             if (newObj.hasOwnProperty(cat.name)) {
@@ -107,7 +107,6 @@ const BudgetExpenseBar = () => {
         setItems(result)
 
     }, [allCategories, allBudgets, allExpenses])
-    console.log(items)
 
     return (
         <>{items.length === 0 ? (<div className="noBudget">
@@ -122,7 +121,6 @@ const BudgetExpenseBar = () => {
                 ))}
             </>
         }
-
 
         </>
     )
