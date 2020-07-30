@@ -1,1 +1,9 @@
-{}
+{
+  "testFiles": [
+    "unit-tests/auth.spec.js",
+    "userflow-tests/search.spec.js",
+    "userflow-tests/budgetsCRUD.spec.js",
+    "userflow-tests/transactionsCRUD.spec.js",
+    "userflow-tests/categoriesCRUD.spec.js"
+  ]
+}
