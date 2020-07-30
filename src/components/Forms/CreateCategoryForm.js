@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext'
 import M from 'materialize-css/dist/js/materialize.min.js';
-import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
-import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
 import { SliderPicker } from 'react-color';
 
 const CreateCategoryForm = () => {
