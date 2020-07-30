@@ -2,8 +2,11 @@ import React, { useEffect } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import ChangePasswordForm from '../../Forms/ChangePasswordForm';
 
+
 const ChangePasswordModal = (props) => {
     //console.log(props)
+
+   
     useEffect(() => {
         const modal = document.querySelectorAll('.editPasswordModal');
         M.Modal.init(modal);

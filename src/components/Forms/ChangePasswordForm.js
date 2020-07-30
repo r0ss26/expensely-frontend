@@ -6,7 +6,7 @@ const ChangePasswordForm = (props) => {
 
     const authContext = useContext(AuthContext)
 
-    const { error, changePassword } = authContext
+    const { error, changePassword, logout } = authContext
 
     const [currentPassword, setCurrentPassword] = useState('')
     const [password, setPassword] = useState('')
@@ -15,9 +15,10 @@ const ChangePasswordForm = (props) => {
 
 
     useEffect(() => {
-        if (error) {
+        if (error || error === 'invalid credentials') {
             M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
         }
+        // eslint-disable-next-line
     }, [error])
 
     useEffect(() => {
@@ -38,19 +39,22 @@ const ChangePasswordForm = (props) => {
 
         if (password !== confirmPassword) {
             M.toast({ html: "Passwords do not match", displayLength: 4000, classes: "red" })
-        } 
-        
-        changePassword(formData, id)
 
-        // if (error) {
+        } else {
+            changePassword(formData, id)
+            if (error || error === 'invalid credentials') {
+                M.toast({ html: `${error}`, displayLength: 4000, classes: 'red' })
+            } else {
+                M.toast({ html: "Password changed. Please login with new password", displayLength: 4000, classes: 'green' })
+                logout()
+            }
 
-        // }
-            // logout()
-            // register(formData)
-            // if (!error) {
-            //     logout()
-            //     M.toast({ html: "Password successfully changed. Please login with new password", displayLength: 4000, classes: "green" })
-            // }
+        }
+
+        setPassword('')
+        setConfirmPassword('')
+        setCurrentPassword('')
+
 
     }
     return (
