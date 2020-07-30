@@ -27,7 +27,7 @@ const CreateTransactionForm = () => {
     }
     try {
       addBudget({ name, amount, timePeriod, category });
-  
+
 
       M.toast({
         html: 'Budget Added',
@@ -98,6 +98,7 @@ const CreateTransactionForm = () => {
             transactionType="expense"
             value={category}
             onSelect={setCategory}
+            canBeDisabled={true}
           />
         </div>
       </form>
