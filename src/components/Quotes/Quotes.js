@@ -9,11 +9,11 @@ const Quotes = () => {
   }, []);
 
   return (
-    <div class="card-panel teal">
-      <span class="white-text">
+    <div className="card-panel teal">
+      <span className="white-text">
         {quotes && quotes[Math.floor(Math.random() * quotes.length)].text}
       </span>
-      <div class="black-text">
+      <div className="black-text">
         {' '}
         {quotes && quotes[Math.floor(Math.random() * quotes.length)].author}
       </div>
