@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
-import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
 import { SliderPicker } from 'react-color';
 
 const EditCategoryForm = () => {
@@ -69,7 +67,7 @@ const EditCategoryForm = () => {
         id="expense"
         className={`waves-effect waves-light btn ${
           transactionType === 'expense' ? 'disabled' : ''
-        }`}
+          }`}
         onClick={() => setTransactionType('expense')}
       >
         <i className="material-icons right">money_off</i>Expense
@@ -78,7 +76,7 @@ const EditCategoryForm = () => {
         id="income"
         className={`waves-effect waves-light btn ${
           transactionType === 'income' ? 'disabled' : ''
-        }`}
+          }`}
         onClick={() => setTransactionType('income')}
       >
         <i className="material-icons left">attach_money</i>Income
