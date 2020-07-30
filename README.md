@@ -155,8 +155,32 @@ Our apps purpose will be achieved by focusing on three different areas: **financ
 
 ## Libraries
 
-TODO - describe libraries used
+**Frontend - purpose**
+Axios - Javascript to make asynchronous HTTP requests
+React - Javascript library to build component-based interface
+React-Router - component-based library for routing of the app
+Chart.js/React-chartjs-2 - component-based library for displaying visual graphics eg. graphs and charts
+Materialize CSS - CSS framework for styling and responsive interfaces
+Moment - Javascript library for easy formatting of the Date object
+Cypress - Javascript-based end-to-end testing framework for unit and userflow testings
+React-transition-group - component-based library managing CSS transitions
+React-color - component-base library for color dropdown select menu
+Classnames - a simple Javascript tool for conditionally joining classNames together
 
+**Backend - purpose**
+Babel - Javascript complier to allow ES6 use in the Node.js environment
+Bcryptjs - allows passwords to be stored securely by hashing the raw passwords
+Jasonwebtoken - used to identify and authenticate user by sending sensitive information related to users securely in objects 
+Cors - a middleware for enabling Cross-Origin Resource Sharing (CORS) to allow for resources from different origin
+Dotenv - used to store sensitive information such as API keys and secrets and then accessed in the codes without revealing the original information
+Express - a lightweight server framework for Node.js
+Express validator - a middleware that allows for server-side data validation
+Mongoose - a Object Data Modeling library for used with MongoDB and Node.js which provides schema validation and managing and manipulating relationships between data 
+Multer - a middleware for handling image files 
+Multer-s3 - a middleware for storing image files on Amazon s3
+Aws-sdk - used for handling Amazon S2 buckets in Node.js environment
+Nodemon -  a tool for watching for changes in the files and restarting node application automatically 
+ 
 ## Dataflow Diagram
 
 In the web application, the data flow can be visualised at 3 levels. At the top level (Level 0, Figure 1) is an overview of data interaction between the external entity, ie., users and the web application processing system. The next level (Level 1, Figure 2) shows a further breakdown of the processing system. Finally, Level 2 (Figure 3) provides a more detailed look at each subprocesses shown at level 1.
